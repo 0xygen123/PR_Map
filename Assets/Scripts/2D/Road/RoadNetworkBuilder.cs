@@ -31,7 +31,8 @@ public class RoadNetworkBuilder : MonoBehaviour
     
     // double型に変更
     public const double METERS_PER_DEGREE_LAT = 111320.0; 
-    private double metersPerDegreeLon; 
+    private double metersPerDegreeLon;
+    public double MetersPerDegreeLon{ get{ return metersPerDegreeLon; } }
 
     void Awake()
     {
