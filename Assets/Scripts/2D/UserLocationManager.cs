@@ -12,8 +12,9 @@ public class UserLocationManager : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 1.5f; // スムーズ移動の速度
 
-    private Vector3 targetPosition; // 移動目標位置
-    private bool hasInitialPosition = false;
+    Vector3 targetPosition; // 移動目標位置
+    
+    bool hasInitialPosition = false;
 
     void Start()
     {
@@ -31,14 +32,14 @@ public class UserLocationManager : MonoBehaviour
     {
         // targetPositionに向かってスムーズに移動
         userTransform.position = Vector3.Lerp(
-            userTransform.position, 
-            targetPosition, 
+            userTransform.position,
+            targetPosition,
             Time.deltaTime * moveSpeed
         );
     }
 
     /// <summary>
-    /// 外部（GeoLocation APIのラッパーなど）から緯度・経度を受け取るメソッド
+    /// JSから緯度・経度を受け取るメソッド
     /// </summary>
     /// <param name="latLon"></param>
     public void SetLocation(string latLon)
@@ -50,6 +51,26 @@ public class UserLocationManager : MonoBehaviour
             {
                 UpdateLocation(latitude, longitude);
             }
+            else
+            {
+                Debug.Log("SetLocation: Failed Try Parse");
+            }
+        }
+    }
+
+    /// <summary>
+    /// JSから方位を受け取るメソッド
+    /// </summary>
+    /// <param name="direction"></param>
+    public void SetDirection(string direction)
+    {
+        if (float.TryParse(direction, out float angle))
+        {
+            UpdateDirection(angle);
+        }
+        else
+        {
+            Debug.Log("SetDirection: Failed Try Parse");
         }
     }
 
@@ -76,7 +97,23 @@ public class UserLocationManager : MonoBehaviour
             hasInitialPosition = true;
         }
     }
-    
+
+    /// <summary>
+    /// 向きを更新をするメソッド
+    /// </summary>
+    /// <param name="angle">方位(度数法)</param>
+    void UpdateDirection(float angle)
+    {
+        // オイラー角ver
+        // Vector3 currentRotation = transform.eulerAngles;
+        // currentRotation.z = angle;
+        // transform.eulerAngles = currentRotation;
+
+        // クオータニオンver
+        userTransform.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+
     Vector3 FindNearestPointOnRoadNetwork(Vector3 point)
     {
         var allEdges = roadNetworkBuilder.RuntimeEdges;

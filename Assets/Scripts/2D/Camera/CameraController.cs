@@ -1,67 +1,87 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections; // コルーチンのために追加
 
 // 1. 生成されたC#クラスのインターフェースを実装する
 public class CameraController : MonoBehaviour, CameraControls.ICameraControlActions
 {
     [Header("Camera Settings")]
     [SerializeField, Tooltip("カメラの移動速度")]
-    private float moveSpeed = 0.005f;
+    float moveSpeed = 0.005f;
 
     [SerializeField, Tooltip("マウスホイールでのズーム速度")]
-    private float scrollZoomSpeed = 0.5f;
+    float scrollZoomSpeed = 0.5f;
 
     [SerializeField, Tooltip("ピンチ操作でのズーム速度")]
-    private float pinchZoomSpeed = 0.008f;
+    float pinchZoomSpeed = 0.008f;
 
     [SerializeField, Tooltip("最小ズーム（Orthographic Size）")]
-    private float minZoom = 3f;
+    float minZoom = 10f;
 
     [SerializeField, Tooltip("最大ズーム（Orthographic Size）")]
-    private float maxZoom = 15f;
+    float maxZoom = 300f;
 
     [Header("Map Boundaries (Optional)")]
     [SerializeField, Tooltip("カメラ移動範囲の最小座標")]
-    private Vector2 minBounds = new Vector2(-20, -15);
+    Vector2 minBounds = new Vector2(-300, -300);
 
     [SerializeField, Tooltip("カメラ移動範囲の最大座標")]
-    private Vector2 maxBounds = new Vector2(20, 15);
+    Vector2 maxBounds = new Vector2(300, 300);
 
-    private Camera mainCamera;
+    [Header("Target Object Settings")]
+    [SerializeField, Tooltip("ユーザアイコンオブジェクト")]
+    Transform userObject;
+    [SerializeField, Tooltip("オブジェクトの基本スケール")]
+    float userBaseScale = 10.0f;
+    [SerializeField, Tooltip("オブジェクトの最小スケール")]
+    float minUserScale = 3f;
+    [SerializeField, Tooltip("オブジェクトの最大スケール")]
+    float maxUserScale = 10.0f;
 
-    // 2. 生成されたC#クラスのインスタンスを保持
-    private CameraControls controls;
+    Camera mainCamera;
+    CameraControls controls;
 
-    // 入力の状態を保持する変数
-    private Vector2 moveInput;
-    private bool isPrimaryContact = false;
-    private bool isPinching = false;
+    // --- 入力状態を保持する変数 ---
+    Vector2 moveInput;
+    bool isPrimaryContact = false;
+    bool isPinching = false;
 
-    private void Awake()
+    // --- カメラの状態を管理する変数 ---
+    bool isFollowingUser = false; // ユーザー追従モードか
+    bool isForceMoving = false;   // 強制移動中か
+
+    void Awake()
     {
         mainCamera = GetComponent<Camera>();
-
-        // 3. クラスをインスタンス化
         controls = new CameraControls();
-
-        // 4. このスクリプト自体をコールバックの受け手として登録
         controls.CameraControl.SetCallbacks(this);
     }
 
-    private void OnEnable()
+    void Start()
     {
-        // 5. ActionMapを有効化
+        AdjustUserObjectScale();
+    }
+
+    void OnEnable()
+    {
         controls.CameraControl.Enable();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         controls.CameraControl.Disable();
     }
 
-    private void Update()
+    void Update()
     {
-        // Updateでは、コールバックで更新された状態を見て、実際の処理を実行する
+        // 強制移動中は、ユーザーの操作を一切受け付けない
+        if (isForceMoving) return;
+
+        // ユーザーがカメラを操作したら、追従モードを解除する
+        if ((isPrimaryContact || isPinching) && isFollowingUser)
+        {
+            isFollowingUser = false;
+        }
 
         // ピンチ操作中でなく、ドラッグ/スワイプ中なら移動
         if (!isPinching && isPrimaryContact)
@@ -76,96 +96,93 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
         }
     }
 
-    #region ICampusMapActions Interface Implementations
-    // --- 以下は、ICampusMapActionsインターフェースによって実装が要求されるメソッド ---
+    // オブジェクトの移動処理が全て終わった後でカメラを動かすためにLateUpdateを使う
+    void LateUpdate()
+    {
+        // 追従モードが有効、かつ強制移動中でない場合
+        if (isFollowingUser && !isForceMoving && userObject != null)
+        {
+            // カメラの位置をユーザアイコンの位置に合わせる（Z軸は維持）
+            transform.position = new Vector3(userObject.position.x, userObject.position.y, transform.position.z);
+            ClampCameraPosition(); // 追従後もマップ境界内に収める
+        }
+    }
 
+    #region ICampusMapActions Interface Implementations
     public void OnMove(InputAction.CallbackContext context)
     {
-        // マウスや指の移動量を読み取り、変数に保持
+        if (isForceMoving) return; // 強制移動中は無効
         moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnPrimaryContact(InputAction.CallbackContext context)
     {
-        // context.ReadValueAsButton() は、押されている間trueを返す
+        if (isForceMoving) return; // 強制移動中は無効
         isPrimaryContact = context.ReadValueAsButton();
     }
 
     public void OnScroll(InputAction.CallbackContext context)
     {
-        // ピンチ操作中はホイールズームを無効化
-        if (isPinching) return;
+        if (isForceMoving || isPinching) return; // 強制移動中、ピンチ操作中は無効
 
         float scrollValue = context.ReadValue<Vector2>().y;
         if (Mathf.Abs(scrollValue) > 0.1f)
         {
-            // スクロール量に応じてズーム
+            // スクロール操作で追従を解除
+            isFollowingUser = false;
+
             Zoom(Mathf.Sign(scrollValue) * -scrollZoomSpeed);
-            ClampCameraPosition(); // ズーム後にはみ出さないように位置を再調整
+            ClampCameraPosition();
         }
     }
 
     public void OnSecondaryContact(InputAction.CallbackContext context)
     {
-        // 2本目の指が触れた/離れたタイミングで isPinching フラグを切り替える
-        if (context.started)
-        {
-            isPinching = true;
-        }
-        else if (context.canceled)
-        {
-            isPinching = false;
-        }
+        if (isForceMoving) return; // 強制移動中は無効
+        if (context.started) isPinching = true;
+        else if (context.canceled) isPinching = false;
     }
 
-    // 今回は使用しないが、インターフェースの一部として定義が必要なメソッド
     public void OnPoint(InputAction.CallbackContext context) { }
     public void OnSecondaryPoint(InputAction.CallbackContext context) { }
-
     #endregion
 
-    #region Private Methods
-    // --- 実際のカメラ操作を行うメソッド ---
-
-    private void HandleMove()
+    #region Private Camera Control Methods
+    void HandleMove()
     {
-        // moveInput（OnMoveコールバックで更新）を使ってカメラを移動
         transform.position -= new Vector3(moveInput.x, moveInput.y, 0) * moveSpeed * mainCamera.orthographicSize;
-        //Debug.Log($"{moveInput.x}, {moveInput.y}");
         ClampCameraPosition();
     }
 
-    private void HandlePinchZoom()
+    void HandlePinchZoom()
     {
-        // controls.[ActionMap名].[Action名] で直接Actionにアクセスできる
+        // ピンチ操作で追従を解除
+        if (isFollowingUser) isFollowingUser = false;
+
         Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
         Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
 
-        // 前のフレームでの2点間距離を、現在の座標と移動量から計算
         float previousDistance = Vector2.Distance(pos1 - moveInput, pos2 - moveInput);
         float currentDistance = Vector2.Distance(pos1, pos2);
 
-        // ゼロ除算を防止
         if (Mathf.Approximately(previousDistance, 0)) return;
 
-        // 距離の変化量に応じてズーム
         float deltaDistance = currentDistance - previousDistance;
         Zoom(deltaDistance * -pinchZoomSpeed);
         ClampCameraPosition();
     }
 
-    private void Zoom(float delta)
+    void Zoom(float delta)
     {
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize + delta, minZoom, maxZoom);
+        AdjustUserObjectScale();
     }
 
-    private void ClampCameraPosition()
+    void ClampCameraPosition()
     {
         float camHeight = mainCamera.orthographicSize;
-        float camWidth = mainCamera.orthographicSize;
-        //float camWidth = mainCamera.orthographicSize * mainCamera.aspect;
+        float camWidth = mainCamera.orthographicSize * mainCamera.aspect; // アスペクト比を考慮
 
-        // カメラの表示領域を考慮した、移動可能な境界を動的に計算
         float dynamicMinX = minBounds.x + camWidth;
         float dynamicMaxX = maxBounds.x - camWidth;
         float dynamicMinY = minBounds.y + camHeight;
@@ -173,35 +190,149 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
 
         Vector3 pos = transform.position;
 
-        //Debug.Log($"{dynamicMinX}, {dynamicMinY}, {dynamicMaxX}, {dynamicMaxY}");
-
-        // X軸のクランプ処理
-        // マップの幅より、カメラの表示幅が広いか？
         if (dynamicMinX > dynamicMaxX)
         {
-            // 広い場合は、カメラ位置をマップのX軸中央に固定
             pos.x = (minBounds.x + maxBounds.x) / 2;
         }
         else
         {
-            // 狭い（通常）場合は、計算した移動範囲内で位置を制限
             pos.x = Mathf.Clamp(pos.x, dynamicMinX, dynamicMaxX);
         }
 
-        // Y軸のクランプ処理
-        // マップの高さより、カメラの表示高さが広いか？
         if (dynamicMinY > dynamicMaxY)
         {
-            // 広い場合は、カメラ位置をマップのY軸中央に固定
             pos.y = (minBounds.y + maxBounds.y) / 2;
         }
         else
         {
-            // 狭い（通常）場合は、計算した移動範囲内で位置を制限
             pos.y = Mathf.Clamp(pos.y, dynamicMinY, dynamicMaxY);
         }
 
         transform.position = pos;
+    }
+    #endregion
+
+    #region User Object size Adjustment
+    void AdjustUserObjectScale()
+    {
+        if (userObject != null)
+        {
+            float normalizedZoom = (mainCamera.orthographicSize - minZoom) / (maxZoom - minZoom);
+            float newScale = userBaseScale * normalizedZoom;
+            float clampedScale = Mathf.Lerp(minUserScale, maxUserScale, Mathf.Clamp01(normalizedZoom));
+            userObject.localScale = new Vector3(clampedScale, clampedScale, userObject.localScale.z);
+            // --- デバッグ用のログ出力 ---
+            Debug.Log($"カメラ倍率: {mainCamera.orthographicSize}, " +
+                $"計算スケール: {newScale}, " +
+                $"最終スケール (クランプ後): {clampedScale}"
+            );
+        }
+    }
+    #endregion
+
+    // --- ここからが追加した機能 ---
+
+    #region Public Control Methods
+
+    /// <summary>
+    /// 現在地ボタンから呼び出すメソッド。
+    /// ユーザーの位置にカメラを移動し、追従モードを開始します。
+    /// </summary>
+    /// <param name="targetZoom">移動完了後のズームレベル</param>
+    public void CenterOnUserAndFollow(float targetZoom)
+    {
+        if (userObject == null)
+        {
+            Debug.LogError("UserObjectが設定されていません。");
+            return;
+        }
+
+        if (!isForceMoving)
+        {
+            Vector3 targetPos = new Vector3(userObject.position.x, userObject.position.y, transform.position.z);
+            // 以前のコルーチンの代わりに、新しいコルーチンを呼び出す
+            StartCoroutine(MoveLikeGoogleEarthCoroutine(targetPos, targetZoom, true));
+        }
+    }
+
+    /// <summary>
+    /// ユーザー追従モードを外部から設定します。
+    /// </summary>
+    /// <param name="follow">追従させる場合はtrue</param>
+    public void SetFollowUserMode(bool follow)
+    {
+        isFollowingUser = follow;
+        // ここで追従モードのUI（ボタンのハイライトなど）を更新する処理を入れても良い
+    }
+
+    #endregion
+
+    #region Coroutines for Smooth Movement
+
+    /// <summary>
+    /// Google Earthのように、ズームアウト・インをしながら目標地点へ移動するコルーチン
+    /// </summary>
+    /// <param name="targetPosition">目標座標</param>
+    /// <param name="targetZoom">目標ズームレベル</param>
+    /// <param name="followAfterMove">移動後に追従モードを開始するか</param>
+    private IEnumerator MoveLikeGoogleEarthCoroutine(Vector3 targetPosition, float targetZoom, bool followAfterMove)
+    {
+        isForceMoving = true;
+        isFollowingUser = false;
+
+        float startZoom = mainCamera.orthographicSize;
+        Vector3 startPosition = transform.position;
+        float journeyDistance = Vector3.Distance(startPosition, targetPosition);
+        float timer = 0f;
+
+        // --- 移動距離に応じて、最もズームアウトする際の高さを計算 ---
+        // 移動距離の半分を基準に、大きすぎず小さすぎないように調整
+        float peakZoom = Mathf.Clamp(journeyDistance * 0.5f, minZoom, maxZoom);
+        // ただし、開始・終了時のズームよりは必ずズームアウトするようにする
+        peakZoom = Mathf.Max(peakZoom, startZoom, targetZoom);
+
+        // 移動にかける時間（距離が長いほど少し長くする）
+        float duration = Mathf.Clamp(journeyDistance * 0.1f, 0.5f, 2.0f); // 0.5秒〜2.0秒の範囲
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, timer / duration);
+
+            // 位置を目的地まで滑らかに移動
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+            // ズームレベルを「山なり」に変化させる
+            // 前半(t < 0.5) はスタートからピークへ、後半(t > 0.5)はピークからターゲットへ
+            if (t < 0.5f)
+            {
+                // 0から1の範囲に変換してLerp
+                mainCamera.orthographicSize = Mathf.Lerp(startZoom, peakZoom, t * 2f);
+            }
+            else
+            {
+                // 0から1の範囲に変換してLerp
+                mainCamera.orthographicSize = Mathf.Lerp(peakZoom, targetZoom, (t - 0.5f) * 2f);
+            }
+
+            // 移動のたびに各種調整
+            Zoom(0); // ユーザアイコンのスケール調整などを呼ぶ
+            ClampCameraPosition();
+
+            yield return null;
+        }
+
+        // 処理の最後に最終値をピッタリ合わせる
+        transform.position = targetPosition;
+        mainCamera.orthographicSize = targetZoom;
+        Zoom(0);
+        ClampCameraPosition();
+
+        isForceMoving = false;
+        if (followAfterMove)
+        {
+            isFollowingUser = true;
+        }
     }
     #endregion
 }

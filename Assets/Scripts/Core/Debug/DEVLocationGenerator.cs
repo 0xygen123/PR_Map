@@ -56,9 +56,9 @@ public class DevLocationGenerator : MonoBehaviour
         }
         currentNode = nodes[Random.Range(0, nodes.Count)];
 
-        while (true) // ループ条件をシンプルに
+        while (true)
         {
-            // (この中の処理は変更なし)
+            // 直近のノード付近に適当な位置情報を設定
             Vector2 randomOffset = Random.insideUnitCircle * accuracyRadius;
             Vector2 generatedPosition = new Vector2(currentNode.position.x + randomOffset.x, currentNode.position.y + randomOffset.y);
 
@@ -73,6 +73,10 @@ public class DevLocationGenerator : MonoBehaviour
 
             Debug.Log($"[Dev] Generating new location near Node {currentNode.nodeId}. Sending Lat: {lat:F8}, Lon: {lon:F8}");
             userLocationManager.SetLocation($"{lat},{lon}");
+
+            float nextAngle = Random.Range(0f, 360f);
+            Debug.Log($"[Dev] Generating new direction {nextAngle}");
+            userLocationManager.SetDirection($"{nextAngle}");
 
             if (currentNode.connectedEdges.Count == 0)
             {
