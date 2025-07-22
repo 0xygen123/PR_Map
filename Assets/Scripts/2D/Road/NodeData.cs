@@ -8,17 +8,10 @@ public class NodeData
     [JsonProperty("node_id")]
     public int nodeId;
 
+    // JSONでは [経度, 緯度] の順
     [JsonProperty("coordinate")]
-    public double[] coordinate; // JSONでは [経度, 緯度] の順
+    public double[] coordinate;
 
     [JsonProperty("name")]
     public string name;
-    
-    // Position プロパティは RoadNetworkBuilder で変換するため削除
 }
-
-// EdgeData, RuntimeNode, RuntimeEdge クラスは変更なし
-// [System.Serializable]
-// public class EdgeData { ... }
-// public class RuntimeNode { ... }
-// public class RuntimeEdge { ... }

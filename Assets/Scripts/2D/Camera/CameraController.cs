@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
     bool isPinching = false;
 
     // --- カメラの状態を管理する変数 ---
-    bool isFollowingUser = false; // ユーザー追従モードか
+    [SerializeField] bool isFollowingUser = false; // ユーザー追従モードか
     bool isForceMoving = false;   // 強制移動中か
 
     void Awake()
@@ -78,7 +78,8 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
         if (isForceMoving) return;
 
         // ユーザーがカメラを操作したら、追従モードを解除する
-        if ((isPrimaryContact || isPinching) && isFollowingUser)
+        // if ((isPrimaryContact || isPinching) && isFollowingUser)
+        if (isPrimaryContact && isFollowingUser)
         {
             isFollowingUser = false;
         }
@@ -157,7 +158,7 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
     void HandlePinchZoom()
     {
         // ピンチ操作で追従を解除
-        if (isFollowingUser) isFollowingUser = false;
+        // if (isFollowingUser) isFollowingUser = false;
 
         Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
         Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
@@ -233,6 +234,24 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
     // --- ここからが追加した機能 ---
 
     #region Public Control Methods
+
+    /// <summary>
+    /// JSの'現在地'ボタン押下時に呼び出されるメソッド
+    /// </sumary>
+    /// <param name="targetZoom"></param>
+    public void OnUserFollow(string targetZoom)
+    {
+        if (float.TryParse(targetZoom, out float zoomMultiple))
+        {
+            // 画面比率などを考慮できるようにtargetZoomを受け取れるが特に意味ないかも
+            //float targetZoom = 70.0f;
+            CenterOnUserAndFollow(zoomMultiple);
+        }
+        else
+        {
+            Debug.Log("OnUserFollow: Failed Try Parse");
+        }
+    }
 
     /// <summary>
     /// 現在地ボタンから呼び出すメソッド。
