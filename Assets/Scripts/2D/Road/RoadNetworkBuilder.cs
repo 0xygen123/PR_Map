@@ -15,9 +15,9 @@ public class RoadNetworkBuilder : MonoBehaviour
     public float roadWidth = 0.5f;
 
     // --- データ管理用の変数 ---
-    private Dictionary<int, RuntimeNode> runtimeNodes = new Dictionary<int, RuntimeNode>();
-    private List<RuntimeEdge> runtimeEdges = new List<RuntimeEdge>();
-    private Dictionary<int, LineRenderer> roadRenderers = new Dictionary<int, LineRenderer>();
+    Dictionary<int, RuntimeNode> runtimeNodes = new Dictionary<int, RuntimeNode>();
+    List<RuntimeEdge> runtimeEdges = new List<RuntimeEdge>();
+    Dictionary<int, LineRenderer> roadRenderers = new Dictionary<int, LineRenderer>();
 
     public IReadOnlyDictionary<int, RuntimeNode> RuntimeNodes => runtimeNodes;
     public IReadOnlyList<RuntimeEdge> RuntimeEdges => runtimeEdges;
@@ -26,10 +26,10 @@ public class RoadNetworkBuilder : MonoBehaviour
     public double centerLatitude = 34.964962019263758;
     public double centerLongitude = 135.940185503739031;
     public const double METERS_PER_DEGREE_LAT = 111320.0;
-    private double metersPerDegreeLon;
+    double metersPerDegreeLon;
     public double MetersPerDegreeLon => metersPerDegreeLon;
 
-    private GameObject roadContainer;
+    GameObject roadContainer;
 
     void Awake()
     {

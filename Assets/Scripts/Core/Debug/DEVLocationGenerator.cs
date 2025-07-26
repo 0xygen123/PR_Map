@@ -4,7 +4,7 @@ using System.Collections;
 using System.Linq;
 
 #if UNITY_EDITOR
-public class DevLocationGenerator : MonoBehaviour
+public class DEVLocationGenerator : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] UserLocationManager userLocationManager;
@@ -12,15 +12,15 @@ public class DevLocationGenerator : MonoBehaviour
 
     [Header("Settings")]
     [Tooltip("このチェックボックスでGPS生成のON/OFFを切り替えます")]
-    [SerializeField] private bool executeGeneration; // Inspectorで操作するフラグ
+    [SerializeField] bool executeGeneration; // Inspectorで操作するフラグ
     [Tooltip("位置情報を更新する間隔（秒）")]
     [SerializeField] float updateInterval = 10.0f;
     [Tooltip("生成される座標に加える誤差の半径")]
     [SerializeField] float accuracyRadius = 5.0f;
 
     // 実行中のコルーチンを保存する変数
-    private Coroutine _generatorCoroutine;
-    private RuntimeNode currentNode;
+    Coroutine _generatorCoroutine;
+    RuntimeNode currentNode;
 
     // UpdateメソッドでInspectorのチェック状態を監視する
     void Update()

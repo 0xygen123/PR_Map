@@ -45,6 +45,7 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
     Vector2 moveInput;
     bool isPrimaryContact = false;
     bool isPinching = false;
+    float lastPinchDistance;
 
     // --- カメラの状態を管理する変数 ---
     [SerializeField] bool isFollowingUser = false; // ユーザー追従モードか
@@ -140,8 +141,20 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
     public void OnSecondaryContact(InputAction.CallbackContext context)
     {
         if (isForceMoving) return; // 強制移動中は無効
-        if (context.started) isPinching = true;
-        else if (context.canceled) isPinching = false;
+        // if (context.started) isPinching = true;
+
+        if (context.started)
+        {
+            isPinching = true;
+            // ピンチ開始時の2点間の距離を記録する
+            Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
+            Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
+            lastPinchDistance = Vector2.Distance(pos1, pos2);
+        }
+        else if (context.canceled)
+        {
+            isPinching = false;
+        }
     }
 
     public void OnPoint(InputAction.CallbackContext context) { }
@@ -158,19 +171,31 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
     void HandlePinchZoom()
     {
         // ピンチ操作で追従を解除
-        // if (isFollowingUser) isFollowingUser = false;
+        if (isFollowingUser) isFollowingUser = false;
 
         Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
         Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
 
-        float previousDistance = Vector2.Distance(pos1 - moveInput, pos2 - moveInput);
+        // float previousDistance = Vector2.Distance(pos1 - moveInput, pos2 - moveInput);
+        // float currentDistance = Vector2.Distance(pos1, pos2);
+
+        // if (Mathf.Approximately(previousDistance, 0)) return;
+
+        // float deltaDistance = currentDistance - previousDistance;
+        // Zoom(deltaDistance * -pinchZoomSpeed);
+        // ClampCameraPosition();
+        // 現在の2点間の距離を計算
         float currentDistance = Vector2.Distance(pos1, pos2);
 
-        if (Mathf.Approximately(previousDistance, 0)) return;
+        // 前のフレームの距離との差分を計算
+        float deltaDistance = currentDistance - lastPinchDistance;
 
-        float deltaDistance = currentDistance - previousDistance;
+        // 差分を使ってズーム処理
         Zoom(deltaDistance * -pinchZoomSpeed);
         ClampCameraPosition();
+
+        // 次のフレームのために、現在の距離を保存しておく
+        lastPinchDistance = currentDistance;
     }
 
     void Zoom(float delta)
@@ -294,7 +319,7 @@ public class CameraController : MonoBehaviour, CameraControls.ICameraControlActi
     /// <param name="targetPosition">目標座標</param>
     /// <param name="targetZoom">目標ズームレベル</param>
     /// <param name="followAfterMove">移動後に追従モードを開始するか</param>
-    private IEnumerator MoveLikeGoogleEarthCoroutine(Vector3 targetPosition, float targetZoom, bool followAfterMove)
+    IEnumerator MoveLikeGoogleEarthCoroutine(Vector3 targetPosition, float targetZoom, bool followAfterMove)
     {
         isForceMoving = true;
         isFollowingUser = false;
