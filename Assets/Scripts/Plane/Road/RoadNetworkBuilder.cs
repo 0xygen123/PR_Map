@@ -6,13 +6,13 @@ using Newtonsoft.Json;
 public class RoadNetworkBuilder : MonoBehaviour
 {
     [Header("JSON Data Files")]
-    public TextAsset nodesJsonFile;
-    public TextAsset edgesJsonFile;
+    [SerializeField] TextAsset nodesJsonFile;
+    [SerializeField] TextAsset edgesJsonFile;
 
     [Header("Road Visualization Settings")]
-    public Material roadMaterial;   // ★ 通常の道路のマテリアル
-    public Material pathMaterial;   // ★ 経路表示用のマテリアル (新規追加)
-    public float roadWidth = 0.5f;
+    [SerializeField] Material roadMaterial;
+    [SerializeField] Material pathMaterial;
+    [SerializeField] float roadWidth = 0.5f;
 
     // --- データ管理用の変数 ---
     Dictionary<int, RuntimeNode> runtimeNodes = new Dictionary<int, RuntimeNode>();
@@ -28,6 +28,9 @@ public class RoadNetworkBuilder : MonoBehaviour
     public const double METERS_PER_DEGREE_LAT = 111320.0;
     double metersPerDegreeLon;
     public double MetersPerDegreeLon => metersPerDegreeLon;
+
+    [Header("Object Layer Settings")]
+    [SerializeField] string roadLayerName = "2DMap";
 
     GameObject roadContainer;
 
@@ -142,7 +145,7 @@ public class RoadNetworkBuilder : MonoBehaviour
         if (roadContainer != null) Destroy(roadContainer);
 
         roadContainer = new GameObject("Roads");
-        roadContainer.transform.SetParent(this.transform);
+        roadContainer.transform.SetParent(transform);
 
         if (roadMaterial == null)
         {
@@ -150,10 +153,19 @@ public class RoadNetworkBuilder : MonoBehaviour
             return;
         }
 
+        int roadLayer = LayerMask.NameToLayer(roadLayerName);
+        if (roadLayer == -1) // レイヤーが存在しない場合のエラーチェック
+        {
+            Debug.LogError($"Layer '{roadLayerName}' not found. Please create it in the Tag and Layers settings.");
+            roadLayer = 0;
+            return;
+        }
+
         foreach (var edge in runtimeEdges)
         {
             GameObject roadSegment = new GameObject($"Edge_{edge.edgeId}");
             roadSegment.transform.SetParent(roadContainer.transform);
+            roadSegment.layer = roadLayer;
             LineRenderer lineRenderer = roadSegment.AddComponent<LineRenderer>();
 
             lineRenderer.material = roadMaterial;
@@ -161,7 +173,7 @@ public class RoadNetworkBuilder : MonoBehaviour
             lineRenderer.endWidth = roadWidth;
 
             lineRenderer.SetPositions(new Vector3[] { edge.fromNode.position, edge.toNode.position });
-            
+
             // Sorting Orderを設定して、他のオブジェクトに隠れないようにする
             lineRenderer.sortingOrder = 1;
 

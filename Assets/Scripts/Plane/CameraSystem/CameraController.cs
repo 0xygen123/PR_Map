@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections; // コルーチンのために追加
 
-namespace Assets.Scripts.Plane.CameraSystem
+namespace Assets.Scripts.Plane
 {
     public class CameraController : MonoBehaviour, CameraControls.ICameraControlActions
     {
