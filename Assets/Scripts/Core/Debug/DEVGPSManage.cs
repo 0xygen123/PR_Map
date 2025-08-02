@@ -1,10 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 using TMPro;
-#if UNITY_ANDROID
-using UnityEngine.Android; // Androidのパーミッション機能を使うために必要
-#endif
 
 public class DEVGPSManager : MonoBehaviour
 {
@@ -21,18 +17,6 @@ public class DEVGPSManager : MonoBehaviour
 
     IEnumerator GetLocation()
     {
-        #if UNITY_ANDROID
-            if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
-            {
-                Permission.RequestUserPermission(Permission.FineLocation);
-
-                // ユーザーが応答するまで待つ
-                while (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
-                {
-                    yield return new WaitForSeconds(1);
-                }
-            }
-        #endif
         // まず、ユーザーが位置情報サービスを有効にしているかチェック
         if (!Input.location.isEnabledByUser)
         {

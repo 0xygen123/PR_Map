@@ -1,5 +1,3 @@
-// UserLocationManager.cs
-
 using UnityEngine;
 using System.Linq;
 
