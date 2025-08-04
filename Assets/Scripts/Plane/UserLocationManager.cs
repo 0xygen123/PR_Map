@@ -4,14 +4,16 @@ using System.Linq;
 public class UserLocationManager : MonoBehaviour
 {
     [Header("Dependencies")]
-    public RoadNetworkBuilder roadNetworkBuilder; // InspectorでRoadNetworkBuilderを持つオブジェクトをアサイン
-    public Transform userTransform; // Inspectorでユーザーを表すオブジェクトをアサイン
+    [SerializeField] RoadNetworkBuilder roadNetworkBuilder; // InspectorでRoadNetworkBuilderを持つオブジェクトをアサイン
+    [SerializeField] Transform userTransform; // Inspectorでユーザーを表すオブジェクトをアサイン
 
     [Header("Movement Settings")]
-    public float moveSpeed = 1.5f; // スムーズ移動の速度
+    [SerializeField] float moveSpeed = 1.5f; // スムーズ移動の速度
+    RuntimeEdge currentEdge;
+    public RuntimeEdge CurrentEdge => currentEdge;
+
 
     Vector3 targetPosition; // 移動目標位置
-    
     bool hasInitialPosition = false;
 
     void Start()
@@ -83,10 +85,12 @@ public class UserLocationManager : MonoBehaviour
         Vector3 rawUnityPosition = roadNetworkBuilder.ConvertLatLonToUnityPosition(latitude, longitude);
 
         // 最も近い道路上の点（スナップする座標）を見つける
-        Vector3 snappedPosition = FindNearestPointOnRoadNetwork(rawUnityPosition);
+        // Vector3 snappedPosition = FindNearestPointOnRoadNetwork(rawUnityPosition);
+        var (snappedPosition, nearestEdge) = FindNearestPointOnRoadNetwork(rawUnityPosition);
 
         // 移動目標位置を更新
         targetPosition = snappedPosition;
+        currentEdge = nearestEdge;
 
         // 最初の位置情報を受け取った場合、ワープ感をなくすために即座に位置を反映
         if (!hasInitialPosition)
@@ -111,20 +115,49 @@ public class UserLocationManager : MonoBehaviour
         userTransform.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
+    /// <summary>
+    /// 経路探索の開始ノードを決定します。
+    /// 現在スナップしているエッジの両端のうち、ユーザーの現在位置に近い方のノードを返します。
+    /// </summary>
+    /// <returns>経路探索の開始ノード。見つからない場合はnull。</returns>
+    public RuntimeNode GetStartNodeForPathfinding()
+    {
+        if (CurrentEdge == null)
+        {
+            Debug.LogWarning("Cannot determine start node because user is not snapped to any edge.");
+            return null;
+        }
 
-    Vector3 FindNearestPointOnRoadNetwork(Vector3 point)
+        // ユーザーの現在位置とエッジの両端ノードとの距離を比較
+        float distToFromNode = Vector3.Distance(userTransform.position, CurrentEdge.fromNode.position);
+        float distToToNode = Vector3.Distance(userTransform.position, CurrentEdge.toNode.position);
+
+        // より近い方のノードを返す
+        if (distToFromNode < distToToNode)
+        {
+            return CurrentEdge.fromNode;
+        }
+        else
+        {
+            return CurrentEdge.toNode;
+        }
+    }
+
+    (Vector3, RuntimeEdge) FindNearestPointOnRoadNetwork(Vector3 point)
     {
         var allEdges = roadNetworkBuilder.RuntimeEdges;
         if (allEdges == null || !allEdges.Any())
         {
             Debug.LogWarning("No road network edges found.");
-            return point;
+            return (point, null);
         }
 
         Vector3 nearestPoint = Vector3.zero;
+        RuntimeEdge nearestEdge = null;
         float minDistanceSquared = float.MaxValue;
 
         // 全てのエッジをチェックして、最も近い点を探す
+        // >> DEV REFACTORING すべてのエッジは激重にならんか?.
         foreach (var edge in allEdges)
         {
             Vector3 closestPointOnEdge = FindNearestPointOnLineSegment(edge.fromNode.position, edge.toNode.position, point);
@@ -134,13 +167,14 @@ public class UserLocationManager : MonoBehaviour
             {
                 minDistanceSquared = distanceSquared;
                 nearestPoint = closestPointOnEdge;
+                nearestEdge = edge;
             }
         }
 
         // Z座標をuserTransformの現在のZ座標に合わせる（必要に応じて）
         nearestPoint.z = userTransform.position.z;
 
-        return nearestPoint;
+        return (nearestPoint, nearestEdge);
     }
 
     /// <summary>

@@ -5,6 +5,7 @@ public class PathTester : MonoBehaviour
 {
     public RoadNetworkBuilder roadNetwork;
 
+    [SerializeField] UserLocationManager user;
     [SerializeField] int startNodeId = 1;
     [SerializeField] int goalNodeId = 92;
     [SerializeField] bool exeFindTest = false;
@@ -17,6 +18,7 @@ public class PathTester : MonoBehaviour
         {
             return;
         }
+        startNodeId = user.GetStartNodeForPathfinding().nodeId;
         if (preStartNodeId != startNodeId || preGoalNodeId != goalNodeId)
         {
             if (roadNetwork != null)

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections; // コルーチンのために追加
+using System.Collections;
+using Assets.Scripts.Core; // コルーチンのために追加
 
 namespace Assets.Scripts.Plane
 {
@@ -31,7 +32,7 @@ namespace Assets.Scripts.Plane
 
         [Header("Target Object Settings")]
         [SerializeField, Tooltip("ユーザアイコンオブジェクト")]
-        Transform userObject;
+        GameObject userObject;
         [SerializeField, Tooltip("オブジェクトの基本スケール")]
         float userBaseScale = 10.0f;
         [SerializeField, Tooltip("オブジェクトの最小スケール")]
@@ -106,7 +107,7 @@ namespace Assets.Scripts.Plane
             if (isFollowingUser && !isForceMoving && userObject != null)
             {
                 // カメラの位置をユーザアイコンの位置に合わせる（Z軸は維持）
-                transform.position = new Vector3(userObject.position.x, userObject.position.y, transform.position.z);
+                transform.position = new Vector3(userObject.transform.position.x, userObject.transform.position.y, transform.position.z);
                 ClampCameraPosition(); // 追従後もマップ境界内に収める
             }
         }
@@ -247,7 +248,7 @@ namespace Assets.Scripts.Plane
                 float normalizedZoom = (mainCamera.orthographicSize - minZoom) / (maxZoom - minZoom);
                 float newScale = userBaseScale * normalizedZoom;
                 float clampedScale = Mathf.Lerp(minUserScale, maxUserScale, Mathf.Clamp01(normalizedZoom));
-                userObject.localScale = new Vector3(clampedScale, clampedScale, userObject.localScale.z);
+                userObject.transform.localScale = new Vector3(clampedScale, clampedScale, userObject.transform.localScale.z);
                 // --- デバッグ用のログ出力 ---
                 Debug.Log($"カメラ倍率: {mainCamera.orthographicSize}, " +
                     $"計算スケール: {newScale}, " +
@@ -257,8 +258,6 @@ namespace Assets.Scripts.Plane
         }
         #endregion
 
-        // --- ここからが追加した機能 ---
-
         #region Public Control Methods
 
         /// <summary>
@@ -267,6 +266,18 @@ namespace Assets.Scripts.Plane
         /// <param name="targetZoom"></param>
         public void OnUserFollow(string targetZoom)
         {
+            if (userObject == null)
+            {
+                Debug.LogError("UserObject is not assigned or does not exist in the scene!");
+                JSInterface.SendToJS(JSInterface.errorCalback, "予期しないエラーが発生しました (userObject is null.)");
+                return;
+            }
+            if (!userObject.activeSelf)
+            {
+                Debug.Log("UserObject is not Enabled!");
+                JSInterface.SendToJS(JSInterface.errorCalback, "位置情報が利用できません (can't use LocationAPI.)");
+                return;
+            }
             if (float.TryParse(targetZoom, out float zoomMultiple))
             {
                 // 画面比率などを考慮できるようにtargetZoomを受け取れるが特に意味ないかも
@@ -294,7 +305,7 @@ namespace Assets.Scripts.Plane
 
             if (!isForceMoving)
             {
-                Vector3 targetPos = new Vector3(userObject.position.x, userObject.position.y, transform.position.z);
+                Vector3 targetPos = new Vector3(userObject.transform.position.x, userObject.transform.position.y, transform.position.z);
                 // 以前のコルーチンの代わりに、新しいコルーチンを呼び出す
                 StartCoroutine(MoveLikeGoogleEarthCoroutine(targetPos, targetZoom, true));
             }
@@ -309,11 +320,10 @@ namespace Assets.Scripts.Plane
             isFollowingUser = follow;
             // ここで追従モードのUI（ボタンのハイライトなど）を更新する処理を入れても良い
         }
-
         #endregion
 
-        #region Coroutines for Smooth Movement
 
+        #region Coroutines for Smooth Movement
         /// <summary>
         /// Google Earthのように、ズームアウト・インをしながら目標地点へ移動するコルーチン
         /// </summary>
