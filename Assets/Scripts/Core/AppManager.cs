@@ -21,6 +21,9 @@ namespace Assets.Scripts.Core
         [Header("マップオブジェクト")]
         [SerializeField] GameObject buildingObject;
 
+        [Header("AddressableDB")]
+        [SerializeField] BuildingAddressMap buildingAddressMap;
+
         [Header("マップカメラ")]
         [SerializeField] GameObject planeCamera;
         [SerializeField] GameObject solidCamera;
@@ -33,7 +36,6 @@ namespace Assets.Scripts.Core
 
         GameObject currentBuildingInstance;
         AsyncOperationHandle<GameObject> loadHandle;
-
 
         /// <summary>
         /// アプリ終了時にリソース解放
@@ -53,7 +55,7 @@ namespace Assets.Scripts.Core
         {
             if (viewType == ViewType.Plane)
             {
-                // RoadBuildingObject("");
+                LoadBuildingObject("DEV");
 
                 planeCamera.SetActive(false);
                 solidCamera.SetActive(true);
@@ -62,6 +64,12 @@ namespace Assets.Scripts.Core
             }
             else if (viewType == ViewType.Solid)
             {
+                if (currentBuildingInstance != null)
+                {
+                    Addressables.ReleaseInstance(currentBuildingInstance);
+                    currentBuildingInstance = null;
+                }
+
                 planeCamera.SetActive(true);
                 solidCamera.SetActive(false);
 
@@ -73,7 +81,7 @@ namespace Assets.Scripts.Core
         /// Addressavkesを使用して建物をロードして表示
         /// </summary>
         /// <param name="buildingName"></param>
-        async void RoadBuildingObject(string buildingName)
+        async void LoadBuildingObject(string buildingName)
         {
             // ロード中UI表示
             if (loadingUI != null)
@@ -81,7 +89,15 @@ namespace Assets.Scripts.Core
                 loadingUI.SetActive(true);
             }
 
-            string buildingAddress = TranslateNameToKey(buildingName);
+            AssetReference buildingReference = buildingAddressMap.GetAssetFromName(buildingName);
+
+            if (buildingReference == null)
+            {
+                Debug.LogError($"ロード対象のアセット参照が見つかりません: {buildingName}");
+                // ローディングUIを消すなどのエラー処理
+                loadingUI.SetActive(false);
+                return;
+            }
 
             // すでに別の建物が読み込まれている場合解放
             if (currentBuildingInstance != null)
@@ -93,7 +109,7 @@ namespace Assets.Scripts.Core
             try
             {
                 // Addressables.InstantiateAsyncでアセットロードとインスタンス化
-                loadHandle = Addressables.InstantiateAsync(buildingAddress, parent: buildingObject.transform);
+                loadHandle = buildingReference.InstantiateAsync(parent: buildingObject.transform);
 
                 // ロードとインスタンス化の完了を待つ
                 currentBuildingInstance = await loadHandle.Task;
@@ -111,7 +127,7 @@ namespace Assets.Scripts.Core
             }
             catch (System.Exception e)
             {
-                Debug.Log($"建物のロードに失敗しました: {buildingAddress}\n{e.Message}");
+                Debug.Log($"建物のロードに失敗しました: {buildingReference}\n{e.Message}");
             }
             finally
             {
@@ -120,17 +136,6 @@ namespace Assets.Scripts.Core
                     loadingUI.SetActive(false);
                 }
             }
-        }
-
-        /// <summary>
-        /// DBとAddressablesのキーの翻訳
-        /// </summary>
-        /// <param name="buildingName"></param>
-        /// <returns></returns>
-        string TranslateNameToKey(string buildingName)
-        {
-            string buildingAddressableKey = "DEV";
-            return buildingAddressableKey;
         }
     }
 }

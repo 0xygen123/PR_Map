@@ -1,34 +1,38 @@
 using UnityEngine;
 
-#if UNITY_EDITOR
-public class PathTester : MonoBehaviour
+
+namespace Assets.Scripts.Plane.Road
 {
-    public RoadNetworkBuilder roadNetwork;
-
-    [SerializeField] UserLocationManager user;
-    [SerializeField] int startNodeId = 1;
-    [SerializeField] int goalNodeId = 92;
-    [SerializeField] bool exeFindTest = false;
-    int preStartNodeId = 0;
-    int preGoalNodeId = 0;
-
-    void Update()
+    #if UNITY_EDITOR
+    public class PathTester : MonoBehaviour
     {
-        if (!exeFindTest)
+        public RoadNetworkBuilder roadNetwork;
+
+        [SerializeField] UserLocationManager user;
+        [SerializeField] int startNodeId = 1;
+        [SerializeField] int goalNodeId = 92;
+        [SerializeField] bool exeFindTest = false;
+        int preStartNodeId = 0;
+        int preGoalNodeId = 0;
+
+        void Update()
         {
-            return;
-        }
-        startNodeId = user.GetStartNodeForPathfinding().nodeId;
-        if (preStartNodeId != startNodeId || preGoalNodeId != goalNodeId)
-        {
-            if (roadNetwork != null)
+            if (!exeFindTest)
             {
-                Debug.Log($"Finding path from {startNodeId} to {goalNodeId}...");
-                roadNetwork.FindPath(startNodeId, goalNodeId);
+                return;
             }
-            preStartNodeId = startNodeId;
-            preGoalNodeId = goalNodeId;
+            startNodeId = user.GetStartNodeForPathfinding().nodeId;
+            if (preStartNodeId != startNodeId || preGoalNodeId != goalNodeId)
+            {
+                if (roadNetwork != null)
+                {
+                    Debug.Log($"Finding path from {startNodeId} to {goalNodeId}...");
+                    roadNetwork.FindPath(startNodeId, goalNodeId);
+                }
+                preStartNodeId = startNodeId;
+                preGoalNodeId = goalNodeId;
+            }
         }
     }
+    #endif
 }
-#endif

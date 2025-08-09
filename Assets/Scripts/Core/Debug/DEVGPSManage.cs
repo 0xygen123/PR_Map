@@ -2,13 +2,15 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 
+using Assets.Scripts.Plane;
+
 public class DEVGPSManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI latitudeText;
     [SerializeField] TextMeshProUGUI longitudeText;
     [SerializeField] TextMeshProUGUI altitudeText;
 
-    [SerializeField] UserLocationManager userLocationManager;
+    [SerializeField] JSInterface jSInterface;
 
     void Start()
     {
@@ -64,7 +66,7 @@ public class DEVGPSManager : MonoBehaviour
                 longitudeText.text = "経度: " + locationData.longitude.ToString();
                 altitudeText.text = "高度: " + locationData.altitude.ToString();
 
-                userLocationManager.SetLocation($"{locationData.latitude}, {locationData.longitude}");
+                jSInterface.SetLocation($"{locationData.latitude}, {locationData.longitude}");
 
                 // 5秒待ってから次の更新へ
                 yield return new WaitForSeconds(5);
