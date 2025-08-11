@@ -6,7 +6,7 @@ using System.Linq;
 using Assets.Scripts.Plane;
 using Assets.Scripts.Plane.Road;
 
-#if UNITY_EDITOR
+
 public class DEVLocationGenerator : MonoBehaviour
 {
     [Header("Dependencies")]
@@ -95,4 +95,3 @@ public class DEVLocationGenerator : MonoBehaviour
         }
     }
 }
-#endif
