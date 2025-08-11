@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Plane.Road
 {
-
+#if UNITY_EDITOR || UNITY_WEBGL
     public class PathTester : MonoBehaviour
     {
         public RoadNetworkBuilder roadNetwork;
@@ -34,5 +34,5 @@ namespace Assets.Scripts.Plane.Road
             }
         }
     }
-
+#endif
 }

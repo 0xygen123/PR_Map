@@ -33,7 +33,7 @@ public class JSInterface : MonoBehaviour
         if (string.IsNullOrEmpty(latLon))
         {
             Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
-            // SendToJS(errorCalback, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+            SendToJS("SetLocation", "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
             return;
         }
 
