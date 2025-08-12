@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using Assets.Scripts.Core; // コルーチンのために追加
 
 namespace Assets.Scripts.Plane
 {
@@ -269,13 +268,13 @@ namespace Assets.Scripts.Plane
             if (userObject == null)
             {
                 Debug.LogError("UserObject is not assigned or does not exist in the scene!");
-                JSInterface.SendToJS(JSInterface.errorCalback, "予期しないエラーが発生しました (userObject is null.)");
+                JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, "予期しないエラーが発生しました (userObject is null.)");
                 return;
             }
             if (!userObject.activeSelf)
             {
                 Debug.Log("UserObject is not Enabled!");
-                JSInterface.SendToJS(JSInterface.errorCalback, "位置情報が利用できません (can't use LocationAPI.)");
+                JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, "位置情報が利用できません (can't use LocationAPI.)");
                 return;
             }
             if (float.TryParse(targetZoom, out float zoomMultiple))

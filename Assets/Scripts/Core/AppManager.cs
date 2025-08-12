@@ -1,141 +1,185 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.AddressableAssets;
-using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 using Assets.Scripts.Solid;
+using System;
+using Unity.Loading;
 
-namespace Assets.Scripts.Core
+
+enum ViewType
 {
-    enum ViewType
+    Plane,
+    Solid
+}
+
+public class AppManager : MonoBehaviour
+{
+    [Header("3Dカメラの中心")]
+    [SerializeField] GameObject solidCameraTarget;
+
+    [Header("AddressableDB")]
+    [SerializeField] BuildingAddressMap buildingAddressMap;
+
+    [Header("マップカメラ")]
+    [SerializeField] GameObject planeCamera;
+    [SerializeField] GameObject solidCamera;
+
+    [Header("表示マップ")]
+    [SerializeField] ViewType viewType = ViewType.Plane;
+
+    [Header("UI")]
+    [SerializeField] GameObject loadingUI;
+
+    GameObject currentBuildingInstance;
+    AsyncOperationHandle<GameObject> loadHandle;
+
+
+    void Awake()
     {
-        Plane,
-        Solid
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public class AppManager : MonoBehaviour
+    /// <summary>
+    /// シーンのロード検出
+    /// </summary>
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
     {
-        [Header("マップオブジェクト")]
-        [SerializeField] GameObject buildingObject;
+        JSInterface.SendToJS(JSInterface.JSFunctionNoArg.OnUnityLoaded);
+    }
 
-        [Header("AddressableDB")]
-        [SerializeField] BuildingAddressMap buildingAddressMap;
+    /// <summary>
+    /// カメラの切り替え
+    /// </summary>
+    [Obsolete("代わりにSwitchToPlaneView, SwitchToSolidViewを使用", false)]
+    public void OnSwitchCamera()
+    {
+        if (viewType == ViewType.Plane)
+        {
+            LoadBuildingObject("DEV");
+            planeCamera.SetActive(false);
+            solidCamera.SetActive(true);
 
-        [Header("マップカメラ")]
-        [SerializeField] GameObject planeCamera;
-        [SerializeField] GameObject solidCamera;
-
-        [Header("表示マップ")]
-        [SerializeField] ViewType viewType = ViewType.Plane;
-
-        [Header("UI")]
-        [SerializeField] GameObject loadingUI;
-
-        GameObject currentBuildingInstance;
-        AsyncOperationHandle<GameObject> loadHandle;
-
-        /// <summary>
-        /// アプリ終了時にリソース解放
-        /// </summary>
-        void OnDestroy()
+            viewType = ViewType.Solid;
+        }
+        else if (viewType == ViewType.Solid)
         {
             if (currentBuildingInstance != null)
             {
                 Addressables.ReleaseInstance(currentBuildingInstance);
+                currentBuildingInstance = null;
             }
+
+            planeCamera.SetActive(true);
+            solidCamera.SetActive(false);
+
+            viewType = ViewType.Plane;
+        }
+    }
+
+    public void SwitchToPlaneView()
+    {
+        if (viewType == ViewType.Solid)
+        {
+            // 現在の建物を解放
+            if (currentBuildingInstance != null)
+            {
+                Addressables.ReleaseInstance(currentBuildingInstance);
+                currentBuildingInstance = null;
+            }
+
+            // カメラを2Dに切り替え
+            planeCamera.SetActive(true);
+            solidCamera.SetActive(false);
+
+            viewType = ViewType.Plane;
+        }
+    }
+
+    public void SwitchToSolidView()
+    {
+        if (viewType == ViewType.Plane)
+        {
+            planeCamera.SetActive(false);
+            solidCamera.SetActive(true);
+
+            viewType = ViewType.Solid;
+        }
+    }
+
+    public void ShowBuildingIn3D(string buildingName)
+    {
+        // すでに3D表示だった場合は無視
+        if (viewType == ViewType.Solid)
+        {
+            return;
         }
 
-        /// <summary>
-        /// カメラの切り替え
-        /// </summary>
-        public void OnSwitchCamera()
+        // 非同期で建物をロードし、完了後にカメラを切り替える
+        LoadBuildingObject(buildingName);
+    }
+
+    /// <summary>
+    /// Addressavkesを使用して建物をロードして表示
+    /// </summary>
+    /// <param name="buildingName"></param>
+    async void LoadBuildingObject(string buildingName)
+    {
+        // ロード中UI表示
+        if (loadingUI != null)
         {
-            if (viewType == ViewType.Plane)
-            {
-                LoadBuildingObject("DEV");
-
-                planeCamera.SetActive(false);
-                solidCamera.SetActive(true);
-
-                viewType = ViewType.Solid;
-            }
-            else if (viewType == ViewType.Solid)
-            {
-                if (currentBuildingInstance != null)
-                {
-                    Addressables.ReleaseInstance(currentBuildingInstance);
-                    currentBuildingInstance = null;
-                }
-
-                planeCamera.SetActive(true);
-                solidCamera.SetActive(false);
-
-                viewType = ViewType.Plane;
-            }
+            loadingUI.SetActive(true);
         }
 
-        /// <summary>
-        /// Addressavkesを使用して建物をロードして表示
-        /// </summary>
-        /// <param name="buildingName"></param>
-        async void LoadBuildingObject(string buildingName)
+        AssetReference buildingReference = buildingAddressMap.GetAssetFromName(buildingName);
+
+        if (buildingReference == null)
         {
-            // ロード中UI表示
+            Debug.LogError($"ロード対象のアセット参照が見つかりません: {buildingName}");
+            // ローディングUIを消すなどのエラー処理
+            loadingUI.SetActive(false);
+            return;
+        }
+
+        // すでに別の建物が読み込まれている場合解放
+        if (currentBuildingInstance != null)
+        {
+            // Addresstables.ReleaseInstanceで解放
+            Addressables.ReleaseInstance(currentBuildingInstance);
+        }
+
+        try
+        {
+            // Addressables.InstantiateAsyncでアセットロードとインスタンス化
+            loadHandle = buildingReference.InstantiateAsync(parent: solidCameraTarget.transform);
+
+            // ロードとインスタンス化の完了を待つ
+            currentBuildingInstance = await loadHandle.Task;
+            currentBuildingInstance.transform.localPosition = Vector3.zero;
+
+            SwitchToSolidView();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"建物のロードに失敗しました: {buildingReference}\n{e.Message}");
+            
+        }
+        finally
+        {
             if (loadingUI != null)
             {
-                loadingUI.SetActive(true);
-            }
-
-            AssetReference buildingReference = buildingAddressMap.GetAssetFromName(buildingName);
-
-            if (buildingReference == null)
-            {
-                Debug.LogError($"ロード対象のアセット参照が見つかりません: {buildingName}");
-                // ローディングUIを消すなどのエラー処理
                 loadingUI.SetActive(false);
-                return;
             }
+        }
+    }
 
-            // すでに別の建物が読み込まれている場合解放
-            if (currentBuildingInstance != null)
-            {
-                // Addresstables.ReleaseInstanceで解放
-                Addressables.ReleaseInstance(currentBuildingInstance);
-            }
-
-            try
-            {
-                // Addressables.InstantiateAsyncでアセットロードとインスタンス化
-                loadHandle = buildingReference.InstantiateAsync(parent: buildingObject.transform);
-
-                // ロードとインスタンス化の完了を待つ
-                currentBuildingInstance = await loadHandle.Task;
-
-                // 3Dカメラのコントローラーに新しい
-                var cameraController = solidCamera.GetComponent<CameraController>();
-                if (cameraController != null)
-                {
-                    cameraController.SetMapObject(currentBuildingInstance);
-                }
-                else
-                {
-                    Debug.Log("solidCameraにCameraControllerが見つかりません。");
-                }
-            }
-            catch (System.Exception e)
-            {
-                Debug.Log($"建物のロードに失敗しました: {buildingReference}\n{e.Message}");
-            }
-            finally
-            {
-                if (loadingUI != null)
-                {
-                    loadingUI.SetActive(false);
-                }
-            }
+    void OnDestroy()
+    {
+        if (currentBuildingInstance != null)
+        {
+            Addressables.ReleaseInstance(currentBuildingInstance);
         }
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 8867dfc81204c354ba4a66a7133b2179
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 02ca369cf53fb157ba3a4792abb2d88a
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
       - m_Id: ab4f0c752ca25b54bb1ef7afb538ffc3
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: f498148817773a940bd0d157c78ba658
-        m_Value: <undefined>
+        m_Value: 
     - m_InheritedParent: 
       m_Id: 9a104989d1f3b8641b0fb9d5da987dfe
       m_ProfileName: DEV

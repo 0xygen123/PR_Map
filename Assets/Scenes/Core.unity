@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c1478776ff895418ade0203f811605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingObject: {fileID: 1441498479}
+  solidCameraTarget: {fileID: 1441498479}
   buildingAddressMap: {fileID: 11400000, guid: 6ece2c4d6195c03468c91f69a65b2d45, type: 2}
   planeCamera: {fileID: 330585543}
   solidCamera: {fileID: 389186547}
@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 80337862}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.13427, y: 161.557, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1656,7 +1656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1441498480}
   m_Layer: 6
-  m_Name: BuildingObject
+  m_Name: BuildingObjectParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

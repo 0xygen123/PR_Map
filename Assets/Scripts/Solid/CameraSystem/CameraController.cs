@@ -145,12 +145,5 @@ namespace Assets.Scripts.Solid
         public void OnSecondaryContact(InputAction.CallbackContext context) { }
 
         #endregion
-
-        #region 3DmapObject
-        public void SetMapObject(GameObject mapObject)
-        {
-            target = mapObject.transform;
-        }
-        #endregion
     }
 }

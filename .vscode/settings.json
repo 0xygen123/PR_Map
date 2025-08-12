@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "PR_Map.sln"
+    "dotnet.defaultSolution": "ProjectResarch.sln"
 }

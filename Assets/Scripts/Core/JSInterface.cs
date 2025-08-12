@@ -2,13 +2,19 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 using System;
 using System.Globalization;
+using System.Collections.Generic;
 
 
 public class JSInterface : MonoBehaviour
 {
-    // JSの関数名
-    public static string errorCalback = "";
-    public static string errorCalbackNoArg = "";
+    public static class JSFunction
+    {
+        public const string OnShowError = "showError";
+    }
+    public static class JSFunctionNoArg
+    {
+        public const string OnUnityLoaded = "onUnityLoaded";
+    }
 
     // 位置情報の更新時に発行されるイベント
     public static event Action<double, double> OnLocationReceived;
@@ -33,7 +39,7 @@ public class JSInterface : MonoBehaviour
         if (string.IsNullOrEmpty(latLon))
         {
             Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
-            SendToJS("SetLocation", "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+            SendToJS(JSFunction.OnShowError, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
             return;
         }
 
