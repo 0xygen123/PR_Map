@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Buildings Remote Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Buildings Remote Group
+  m_GUID: 3b1f4f995ec6f304d83e22ef7ca3e20e
+  m_SerializeEntries:
+  - m_GUID: c9c84664319444e43b7701b6be1e81fd
+    m_Address: Assets/Objects/Unused/DEVObject.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f5b382b41e89687478410fa75957697d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: dc2eaa414458f274b8722e675af2e6e7, type: 2}
+    - {fileID: 11400000, guid: 40d6088eeb0a43e48ac777b632bb3ab5, type: 2}

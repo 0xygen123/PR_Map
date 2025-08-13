@@ -1,124 +1,128 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-/// <summary>
-/// A*アルゴリズムによる経路探索機能を提供します。
-/// </summary>
-public static class AStarFinder
+
+namespace Assets.Scripts.Plane.Road
 {
     /// <summary>
-    /// 指定されたノード間の最短経路を探索します。
+    /// A*アルゴリズムによる経路探索機能を提供します。
     /// </summary>
-    /// <returns>見つかった経路（RuntimeNodeのリスト）見つからない場合はnull。</returns>
-    public static List<RuntimeNode> FindPath(RoadNetworkBuilder network, int startNodeId, int goalNodeId)
+    public static class AStarFinder
     {
-        RuntimeNode startNode = network.GetNodeById(startNodeId);
-        RuntimeNode goalNode = network.GetNodeById(goalNodeId);
-
-        if (startNode == null || goalNode == null)
+        /// <summary>
+        /// 指定されたノード間の最短経路を探索します。
+        /// </summary>
+        /// <returns>見つかった経路（RuntimeNodeのリスト）見つからない場合はnull。</returns>
+        public static List<RuntimeNode> FindPath(RoadNetworkBuilder network, int startNodeId, int goalNodeId)
         {
-            Debug.LogError("Start or Goal node ID is not valid.");
-            return null;
-        }
+            RuntimeNode startNode = network.GetNodeById(startNodeId);
+            RuntimeNode goalNode = network.GetNodeById(goalNodeId);
 
-        List<RuntimeNode> openSet = new List<RuntimeNode>();
-        HashSet<RuntimeNode> closedSet = new HashSet<RuntimeNode>();
-        openSet.Add(startNode);
-
-        // 全ノードのコストを初期化
-        foreach (var node in network.RuntimeNodes.Values)
-        {
-            node.gCost = double.PositiveInfinity;
-            node.parent = null;
-        }
-
-        startNode.gCost = 0;
-        startNode.hCost = Heuristic(startNode, goalNode);
-
-        while (openSet.Count > 0)
-        {
-            // openSetの中でfCostが最も低いノードを取得（Linqを使わずにループで実装）
-            RuntimeNode currentNode = openSet[0];
-            for (int i = 1; i < openSet.Count; i++)
+            if (startNode == null || goalNode == null)
             {
-                if (openSet[i].FCost < currentNode.FCost ||
-                   (openSet[i].FCost == currentNode.FCost && openSet[i].hCost < currentNode.hCost))
-                {
-                    currentNode = openSet[i];
-                }
+                Debug.LogError("Start or Goal node ID is not valid.");
+                return null;
             }
 
-            // ゴールに到達
-            if (currentNode == goalNode)
+            List<RuntimeNode> openSet = new List<RuntimeNode>();
+            HashSet<RuntimeNode> closedSet = new HashSet<RuntimeNode>();
+            openSet.Add(startNode);
+
+            // 全ノードのコストを初期化
+            foreach (var node in network.RuntimeNodes.Values)
             {
-                return ReconstructPath(currentNode); // RuntimeNodeのリストを返す
+                node.gCost = double.PositiveInfinity;
+                node.parent = null;
             }
 
-            openSet.Remove(currentNode);
-            closedSet.Add(currentNode);
+            startNode.gCost = 0;
+            startNode.hCost = Heuristic(startNode, goalNode);
 
-            foreach (var neighborNode in GetNeighbors(currentNode))
+            while (openSet.Count > 0)
             {
-                if (closedSet.Contains(neighborNode)) continue;
-
-                double tentativeGCost = currentNode.gCost + (double)Cost(currentNode, neighborNode);
-
-                if (tentativeGCost < neighborNode.gCost)
+                // openSetの中でfCostが最も低いノードを取得（Linqを使わずにループで実装）
+                RuntimeNode currentNode = openSet[0];
+                for (int i = 1; i < openSet.Count; i++)
                 {
-                    neighborNode.parent = currentNode;
-                    neighborNode.gCost = tentativeGCost;
-                    neighborNode.hCost = Heuristic(neighborNode, goalNode);
-
-                    if (!openSet.Contains(neighborNode))
+                    if (openSet[i].FCost < currentNode.FCost ||
+                    (openSet[i].FCost == currentNode.FCost && openSet[i].hCost < currentNode.hCost))
                     {
-                        openSet.Add(neighborNode);
+                        currentNode = openSet[i];
+                    }
+                }
+
+                // ゴールに到達
+                if (currentNode == goalNode)
+                {
+                    return ReconstructPath(currentNode); // RuntimeNodeのリストを返す
+                }
+
+                openSet.Remove(currentNode);
+                closedSet.Add(currentNode);
+
+                foreach (var neighborNode in GetNeighbors(currentNode))
+                {
+                    if (closedSet.Contains(neighborNode)) continue;
+
+                    double tentativeGCost = currentNode.gCost + (double)Cost(currentNode, neighborNode);
+
+                    if (tentativeGCost < neighborNode.gCost)
+                    {
+                        neighborNode.parent = currentNode;
+                        neighborNode.gCost = tentativeGCost;
+                        neighborNode.hCost = Heuristic(neighborNode, goalNode);
+
+                        if (!openSet.Contains(neighborNode))
+                        {
+                            openSet.Add(neighborNode);
+                        }
                     }
                 }
             }
+
+            return null; // 経路が見つからなかった
         }
 
-        return null; // 経路が見つからなかった
-    }
-
-    // ヒューリスティック関数（ゴールまでの推定コスト）
-    static double Heuristic(RuntimeNode nodeA, RuntimeNode nodeB)
-    {
-        return Vector3.Distance(nodeA.position, nodeB.position);
-    }
-
-    // ２ノード間の移動コスト
-    static float Cost(RuntimeNode fromNode, RuntimeNode toNode)
-    {
-        foreach (var edge in fromNode.connectedEdges)
+        // ヒューリスティック関数（ゴールまでの推定コスト）
+        static double Heuristic(RuntimeNode nodeA, RuntimeNode nodeB)
         {
-            if (edge.toNode == toNode || edge.fromNode == toNode)
+            return Vector3.Distance(nodeA.position, nodeB.position);
+        }
+
+        // ２ノード間の移動コスト
+        static float Cost(RuntimeNode fromNode, RuntimeNode toNode)
+        {
+            foreach (var edge in fromNode.connectedEdges)
             {
-                return edge.cost;
+                if (edge.toNode == toNode || edge.fromNode == toNode)
+                {
+                    return edge.cost;
+                }
+            }
+            return float.PositiveInfinity;
+        }
+
+        // 隣接ノードを取得
+        static IEnumerable<RuntimeNode> GetNeighbors(RuntimeNode node)
+        {
+            foreach (var edge in node.connectedEdges)
+            {
+                yield return edge.fromNode == node ? edge.toNode : edge.fromNode;
             }
         }
-        return float.PositiveInfinity;
-    }
 
-    // 隣接ノードを取得
-    static IEnumerable<RuntimeNode> GetNeighbors(RuntimeNode node)
-    {
-        foreach (var edge in node.connectedEdges)
+        // ゴールから親をたどって経路を復元
+        static List<RuntimeNode> ReconstructPath(RuntimeNode endNode)
         {
-            yield return edge.fromNode == node ? edge.toNode : edge.fromNode;
+            List<RuntimeNode> path = new List<RuntimeNode>();
+            RuntimeNode currentNode = endNode;
+            while (currentNode != null)
+            {
+                path.Add(currentNode);
+                currentNode = currentNode.parent;
+            }
+            path.Reverse(); // スタートからゴールの順にする
+            return path;
         }
-    }
-
-    // ゴールから親をたどって経路を復元
-    static List<RuntimeNode> ReconstructPath(RuntimeNode endNode)
-    {
-        List<RuntimeNode> path = new List<RuntimeNode>();
-        RuntimeNode currentNode = endNode;
-        while (currentNode != null)
-        {
-            path.Add(currentNode);
-            currentNode = currentNode.parent;
-        }
-        path.Reverse(); // スタートからゴールの順にする
-        return path;
     }
 }

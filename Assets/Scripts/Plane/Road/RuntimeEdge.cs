@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class RuntimeEdge
+namespace Assets.Scripts.Plane.Road
 {
-    public int edgeId;
-    public RuntimeNode fromNode;
-    public RuntimeNode toNode;
-    public float cost;
+    public class RuntimeEdge
+    {
+        public int edgeId;
+        public RuntimeNode fromNode;
+        public RuntimeNode toNode;
+        public float cost;
+    }
 }

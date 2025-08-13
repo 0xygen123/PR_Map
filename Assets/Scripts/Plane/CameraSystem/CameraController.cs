@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections; // コルーチンのために追加
+using System.Collections;
 
 namespace Assets.Scripts.Plane
 {
@@ -31,7 +31,7 @@ namespace Assets.Scripts.Plane
 
         [Header("Target Object Settings")]
         [SerializeField, Tooltip("ユーザアイコンオブジェクト")]
-        Transform userObject;
+        GameObject userObject;
         [SerializeField, Tooltip("オブジェクトの基本スケール")]
         float userBaseScale = 10.0f;
         [SerializeField, Tooltip("オブジェクトの最小スケール")]
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Plane
         float maxUserScale = 10.0f;
 
         Camera mainCamera;
-        CameraControls controls;
+        CameraControls cameraControls;
 
         // --- 入力状態を保持する変数 ---
         Vector2 moveInput;
@@ -55,8 +55,8 @@ namespace Assets.Scripts.Plane
         void Awake()
         {
             mainCamera = GetComponent<Camera>();
-            controls = new CameraControls();
-            controls.CameraControl.SetCallbacks(this);
+            cameraControls = new CameraControls();
+            cameraControls.CameraControl.SetCallbacks(this);
         }
 
         void Start()
@@ -66,12 +66,12 @@ namespace Assets.Scripts.Plane
 
         void OnEnable()
         {
-            controls.CameraControl.Enable();
+            cameraControls.CameraControl.Enable();
         }
 
         void OnDisable()
         {
-            controls.CameraControl.Disable();
+            cameraControls.CameraControl.Disable();
         }
 
         void Update()
@@ -106,7 +106,7 @@ namespace Assets.Scripts.Plane
             if (isFollowingUser && !isForceMoving && userObject != null)
             {
                 // カメラの位置をユーザアイコンの位置に合わせる（Z軸は維持）
-                transform.position = new Vector3(userObject.position.x, userObject.position.y, transform.position.z);
+                transform.position = new Vector3(userObject.transform.position.x, userObject.transform.position.y, transform.position.z);
                 ClampCameraPosition(); // 追従後もマップ境界内に収める
             }
         }
@@ -148,8 +148,8 @@ namespace Assets.Scripts.Plane
             {
                 isPinching = true;
                 // ピンチ開始時の2点間の距離を記録する
-                Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
-                Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
+                Vector2 pos1 = cameraControls.CameraControl.Point.ReadValue<Vector2>();
+                Vector2 pos2 = cameraControls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
                 lastPinchDistance = Vector2.Distance(pos1, pos2);
             }
             else if (context.canceled)
@@ -174,8 +174,8 @@ namespace Assets.Scripts.Plane
             // ピンチ操作で追従を解除
             if (isFollowingUser) isFollowingUser = false;
 
-            Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
-            Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
+            Vector2 pos1 = cameraControls.CameraControl.Point.ReadValue<Vector2>();
+            Vector2 pos2 = cameraControls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
 
             // float previousDistance = Vector2.Distance(pos1 - moveInput, pos2 - moveInput);
             // float currentDistance = Vector2.Distance(pos1, pos2);
@@ -247,17 +247,15 @@ namespace Assets.Scripts.Plane
                 float normalizedZoom = (mainCamera.orthographicSize - minZoom) / (maxZoom - minZoom);
                 float newScale = userBaseScale * normalizedZoom;
                 float clampedScale = Mathf.Lerp(minUserScale, maxUserScale, Mathf.Clamp01(normalizedZoom));
-                userObject.localScale = new Vector3(clampedScale, clampedScale, userObject.localScale.z);
+                userObject.transform.localScale = new Vector3(clampedScale, clampedScale, userObject.transform.localScale.z);
                 // --- デバッグ用のログ出力 ---
-                Debug.Log($"カメラ倍率: {mainCamera.orthographicSize}, " +
-                    $"計算スケール: {newScale}, " +
-                    $"最終スケール (クランプ後): {clampedScale}"
-                );
+                //     Debug.Log($"カメラ倍率: {mainCamera.orthographicSize}, " +
+                //         $"計算スケール: {newScale}, " +
+                //         $"最終スケール (クランプ後): {clampedScale}"
+                //     );
             }
         }
         #endregion
-
-        // --- ここからが追加した機能 ---
 
         #region Public Control Methods
 
@@ -267,6 +265,18 @@ namespace Assets.Scripts.Plane
         /// <param name="targetZoom"></param>
         public void OnUserFollow(string targetZoom)
         {
+            if (userObject == null)
+            {
+                Debug.LogError("UserObject is not assigned or does not exist in the scene!");
+                JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, "予期しないエラーが発生しました (userObject is null.)");
+                return;
+            }
+            if (!userObject.activeSelf)
+            {
+                Debug.Log("UserObject is not Enabled!");
+                JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, "位置情報が利用できません (can't use LocationAPI.)");
+                return;
+            }
             if (float.TryParse(targetZoom, out float zoomMultiple))
             {
                 // 画面比率などを考慮できるようにtargetZoomを受け取れるが特に意味ないかも
@@ -294,7 +304,7 @@ namespace Assets.Scripts.Plane
 
             if (!isForceMoving)
             {
-                Vector3 targetPos = new Vector3(userObject.position.x, userObject.position.y, transform.position.z);
+                Vector3 targetPos = new Vector3(userObject.transform.position.x, userObject.transform.position.y, transform.position.z);
                 // 以前のコルーチンの代わりに、新しいコルーチンを呼び出す
                 StartCoroutine(MoveLikeGoogleEarthCoroutine(targetPos, targetZoom, true));
             }
@@ -309,11 +319,10 @@ namespace Assets.Scripts.Plane
             isFollowingUser = follow;
             // ここで追従モードのUI（ボタンのハイライトなど）を更新する処理を入れても良い
         }
-
         #endregion
 
-        #region Coroutines for Smooth Movement
 
+        #region Coroutines for Smooth Movement
         /// <summary>
         /// Google Earthのように、ズームアウト・インをしながら目標地点へ移動するコルーチン
         /// </summary>

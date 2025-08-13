@@ -3,10 +3,6 @@ using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.Solid
 {
-    /// <summary>
-    /// 3Dマップ用のカメラコントローラー（平行投影版）。
-    /// ICameraControlActionsインターフェースを実装して入力処理を行う。
-    /// </summary>
     public class CameraController : MonoBehaviour, CameraControls.ICameraControlActions
     {
         [Header("ターゲット設定")]
@@ -26,43 +22,42 @@ namespace Assets.Scripts.Solid
         [SerializeField] float initialOrthographicSize = 10.0f;
         [Tooltip("マウスホイールでのズーム速度")]
         [SerializeField] float zoomSpeed = 20.0f;
+        [Tooltip("ピンチ操作でのズーム感度")]
+        [SerializeField] float pinchZoomSensitivity = 0.05f; // ピンチの感度を調整できます
         [Tooltip("ズームできるOrthographic Sizeの範囲（最小, 最大）")]
         [SerializeField] Vector2 orthographicSizeMinMax = new Vector2(3f, 50f);
 
-        CameraControls cameraControls;
-        Camera mainCamera; // カメラコンポーネントへの参照
-        bool isRotating = false;
-        Vector2 rotationInput;
+        private CameraControls cameraControls;
+        private Camera mainCamera;
+        private Vector2 rotationInput;
 
-        float yaw = 0.0f;   // 水平方向の回転角度
-        float pitch = 20.0f; // 垂直方向の回転角度
+        // --- 状態を管理する変数 ---
+        private bool isRotating = false;
+        private bool isPinching = false;
+        private Vector2 touchPosition1;
+        private Vector2 touchPosition2;
+        private float previousPinchDistance;
+
+        private float yaw = 0.0f;
+        private float pitch = 20.0f;
 
         void Awake()
         {
-            // このオブジェクトにアタッチされているCameraコンポーネントを取得
             mainCamera = GetComponent<Camera>();
-            
-            // カメラを平行投影（Orthographic）に設定
             mainCamera.orthographic = true;
-            // 初期Orthographic Sizeを設定
             mainCamera.orthographicSize = initialOrthographicSize;
 
-            // Input System のコントロールクラスをインスタンス化
             cameraControls = new CameraControls();
-
-            // このクラスのインターフェース実装をコールバックとして登録する
             cameraControls.CameraControl.SetCallbacks(this);
         }
 
         void OnEnable()
         {
-            // このスクリプトが有効になったときに入力を有効化
             cameraControls.CameraControl.Enable();
         }
 
         void OnDisable()
         {
-            // このスクリプトが無効になったときに入力を無効化
             cameraControls.CameraControl.Disable();
         }
 
@@ -74,42 +69,57 @@ namespace Assets.Scripts.Solid
                 return;
             }
 
-            // isRotatingフラグがtrueの時だけカメラを回転させる
-            if (isRotating)
+            // 回転処理：isRotatingがtrueで、かつピンチ中でない時に実行
+            if (isRotating && !isPinching)
             {
-                // 入力値と時間経過、回転速度を元に回転角度を更新
                 yaw += rotationInput.x * rotationSpeed * Time.deltaTime;
                 pitch -= rotationInput.y * rotationSpeed * Time.deltaTime;
-
-                // pitch（上下の角度）が設定した範囲を超えないように制限
                 pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
             }
 
-            // オイラー角からQuaternion（回転）を計算
-            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+            // ピンチズーム処理：isPinchingがtrueの時に実行
+            if (isPinching)
+            {
+                HandlePinchZoom();
+            }
 
-            // カメラの位置を計算
-            // ターゲットの位置から、計算した回転と指定した半径分離れた位置にカメラを配置
+            // カメラの位置と向きを更新
+            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
             Vector3 targetOffset = new Vector3(0, 0, -rotationRadius);
             transform.position = target.position + rotation * targetOffset;
-
-            // カメラが常にターゲットの方向を向くように設定
             transform.LookAt(target.position);
         }
 
         /// <summary>
-        /// Orthographic Sizeを変更してズーム処理を行う
+        /// マウスホイールによるズーム処理
         /// </summary>
-        /// <param name="scrollValue">マウスホイールのY軸スクロール量</param>
         void Zoom(float scrollValue)
         {
-            // スクロール方向に応じてOrthographic Sizeを増減
-            // Sizeが小さいほどズームイン（表示範囲が狭くなる）
-            float newSize = mainCamera.orthographicSize - scrollValue * zoomSpeed * Time.deltaTime;
-            
-            // Orthographic Sizeが設定した範囲を超えないように制限
+            float newSize = mainCamera.orthographicSize - scrollValue; // Time.deltaTimeはOnScrollでは不要な場合が多い
             mainCamera.orthographicSize = Mathf.Clamp(newSize, orthographicSizeMinMax.x, orthographicSizeMinMax.y);
         }
+
+        /// <summary>
+        /// ピンチ操作によるズーム処理
+        /// </summary>
+        void HandlePinchZoom()
+        {
+            // 2つのタッチ座標間の現在の距離を計算
+            float currentDistance = Vector2.Distance(touchPosition1, touchPosition2);
+
+            // ピンチ開始フレームでは previousPinchDistance が 0 なので何もしない
+            // 2フレーム目以降、距離の変化を計算する
+            if (previousPinchDistance > 0)
+            {
+                float deltaDistance = currentDistance - previousPinchDistance;
+                float newSize = mainCamera.orthographicSize - deltaDistance * pinchZoomSensitivity;
+                mainCamera.orthographicSize = Mathf.Clamp(newSize, orthographicSizeMinMax.x, orthographicSizeMinMax.y);
+            }
+
+            // 現在の距離を次のフレームのために保存
+            previousPinchDistance = currentDistance;
+        }
+
 
         #region ICameraControlActions Interface Implementations
 
@@ -120,7 +130,8 @@ namespace Assets.Scripts.Solid
 
         public void OnPrimaryContact(InputAction.CallbackContext context)
         {
-            if (context.started)
+            // 2本目の指が触れていない（ピンチ中でない）場合のみ回転を開始/終了
+            if (context.started && !isPinching)
             {
                 isRotating = true;
             }
@@ -132,25 +143,44 @@ namespace Assets.Scripts.Solid
 
         public void OnScroll(InputAction.CallbackContext context)
         {
+            // ピンチ操作中はマウスホイールでのズームを無効にする
+            if (isPinching) return;
+
             if (context.performed)
             {
-                // Y軸のスクロール値（上下）をZoom関数に渡す
-                Zoom(context.ReadValue<Vector2>().y);
+                // Y軸のスクロール値に速度を掛けてZoom関数に渡す
+                Zoom(context.ReadValue<Vector2>().y * zoomSpeed * Time.deltaTime);
             }
         }
 
-        // --- 以下のアクションは今回使用しないため、中身は空のまま ---
-        public void OnPoint(InputAction.CallbackContext context) { }
-        public void OnSecondaryPoint(InputAction.CallbackContext context) { }
-        public void OnSecondaryContact(InputAction.CallbackContext context) { }
-
-        #endregion
-
-        #region 3DmapObject
-        public void SetMapObject(GameObject mapObject)
+        // 1本目の指の座標を更新し続ける
+        public void OnPoint(InputAction.CallbackContext context)
         {
-            target = mapObject.transform;
+            touchPosition1 = context.ReadValue<Vector2>();
         }
+
+        // 2本目の指の座標を更新し続ける
+        public void OnSecondaryPoint(InputAction.CallbackContext context)
+        {
+            touchPosition2 = context.ReadValue<Vector2>();
+        }
+
+        // 2本目の指のタッチ開始/終了を検知する
+        public void OnSecondaryContact(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                isPinching = true;
+                isRotating = false; // ピンチ開始と同時に回転は停止する
+            }
+            else if (context.canceled)
+            {
+                isPinching = false;
+                // ピンチ終了時にリセット
+                previousPinchDistance = 0f;
+            }
+        }
+
         #endregion
     }
 }

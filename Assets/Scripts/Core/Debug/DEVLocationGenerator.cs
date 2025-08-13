@@ -3,11 +3,14 @@ using Random = UnityEngine.Random;
 using System.Collections;
 using System.Linq;
 
-#if UNITY_EDITOR
+using Assets.Scripts.Plane;
+using Assets.Scripts.Plane.Road;
+
+#if UNITY_EDITOR || UNITY_WEBGL
 public class DEVLocationGenerator : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] UserLocationManager userLocationManager;
+    [SerializeField] JSInterface jSInterface;
     [SerializeField] RoadNetworkBuilder roadNetworkBuilder;
 
     [Header("Settings")]
@@ -72,11 +75,11 @@ public class DEVLocationGenerator : MonoBehaviour
             double lat = (generatedPosition.y / RoadNetworkBuilder.METERS_PER_DEGREE_LAT) + roadNetworkBuilder.centerLatitude;
 
             Debug.Log($"[Dev] Generating new location near Node {currentNode.nodeId}. Sending Lat: {lat:F8}, Lon: {lon:F8}");
-            userLocationManager.SetLocation($"{lat},{lon}");
+            jSInterface.SetLocation($"{lat},{lon}");
 
             float nextAngle = Random.Range(0f, 360f);
             Debug.Log($"[Dev] Generating new direction {nextAngle}");
-            userLocationManager.SetDirection($"{nextAngle}");
+            jSInterface.SetDirection($"{nextAngle}");
 
             if (currentNode.connectedEdges.Count == 0)
             {
