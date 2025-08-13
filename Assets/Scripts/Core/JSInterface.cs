@@ -20,6 +20,10 @@ public class JSInterface : MonoBehaviour
     public static event Action<double, double> OnLocationReceived;
     // 方位情報の更新時に発行されるイベント
     public static event Action<float> OnDirectionReceived;
+    // カメラの変更時に呼び出されるメソッド
+    public static event Action OnSwitchToPlaneView;
+    public static event Action OnSwitchToSlidView;
+    public static event Action<string> OnShowBuildingIn3D;
 
 #if UNITY_WEBGL
     [DllImport("__Internal")]
@@ -29,6 +33,33 @@ public class JSInterface : MonoBehaviour
     static extern void CallJavaScriptFunctionNoArg(string functionName);
 #endif
 
+
+    #region JS -> CSharp
+
+    /// <summary>
+    /// 2Dマップへカメラを切り替えるメソッド
+    /// </summary>
+    public void SwitchToPlaneView()
+    {
+        OnSwitchToPlaneView?.Invoke();
+    }
+
+    /// <summary>
+    /// 3Dマップへカメラを切り替えるメソッド
+    /// </summary>
+    public void SwitchToSolidView()
+    {
+        OnSwitchToSlidView?.Invoke();
+    }
+
+    /// <summary>
+    /// 建物オブジェクトを表示してカメラを切り替える
+    /// </summary>
+    /// <param name="buildingName"></param>
+    public void ShowBuildingIn3D(string buildingName)
+    {
+        OnShowBuildingIn3D?.Invoke(buildingName);
+    }
 
     /// <summary>
     /// JSから緯度経度を受け取りパースする
@@ -79,8 +110,11 @@ public class JSInterface : MonoBehaviour
             Debug.LogError($"[JSInterface] Failed to parse direction data: '{direction}'");
         }
     }
+    #endregion
 
 
+
+    #region CSharp -> JS
     /// <summary>
     /// JavaScriptの特定の関数を呼び出す
     /// </summary>
@@ -88,10 +122,12 @@ public class JSInterface : MonoBehaviour
     /// <param name="message">JavaScript関数に渡す引数 (文字列)</param>
     public static void SendToJS(string functionName, string message)
     {
-#if UNITY_WEBGL
+#if UNITY_EDITOR
+        Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
+#elif UNITY_WEBGL
         CallJavaScriptFunction(functionName, message);
 #else
-        Debug.LogWarning($"JSInterface: Not a WebGL build. Would call JS function '{functionName}' with message: '{message}'");
+        Debug.LogWarning($"[JSInterface] Not a WebGL build. Would call JS function '{functionName}' with message: '{message}'");
 #endif
     }
 
@@ -102,10 +138,13 @@ public class JSInterface : MonoBehaviour
     /// <param name="functionName">呼び出すJavaScriptの関数名</param>
     public static void SendToJS(string functionName)
     {
-#if UNITY_WEBGL
+#if UNITY_EDITOR
+        Debug.Log($"[JSInterface] '{functionName}'");
+#elif UNITY_WEBGL
         CallJavaScriptFunctionNoArg(functionName);
 #else
-        Debug.LogWarning($"JSInterface: Not a WebGL build. Would call JS function '{functionName}' (no arguments).");
+        Debug.LogWarning($"[JSInterface] Not a WebGL build. Would call JS function '{functionName}' (no arguments).");
 #endif
     }
 }
+#endregion

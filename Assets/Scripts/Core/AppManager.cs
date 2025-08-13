@@ -3,10 +3,7 @@ using System.Collections;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
-
-using Assets.Scripts.Solid;
 using System;
-using Unity.Loading;
 
 
 enum ViewType
@@ -34,18 +31,22 @@ public class AppManager : MonoBehaviour
     [SerializeField] GameObject loadingUI;
 
     GameObject currentBuildingInstance;
+    string currentBuildingName = null;
     AsyncOperationHandle<GameObject> loadHandle;
 
 
     void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        JSInterface.OnSwitchToPlaneView += SwitchToPlaneView;
+        JSInterface.OnSwitchToSlidView += SwitchToSolidView;
+        JSInterface.OnShowBuildingIn3D += ShowBuildingIn3D;
     }
 
     /// <summary>
     /// シーンのロード検出
     /// </summary>
-    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         JSInterface.SendToJS(JSInterface.JSFunctionNoArg.OnUnityLoaded);
     }
@@ -79,15 +80,21 @@ public class AppManager : MonoBehaviour
         }
     }
 
-    public void SwitchToPlaneView()
+    void SwitchToPlaneView()
     {
         if (viewType == ViewType.Solid)
         {
             // 現在の建物を解放
+            // if (currentBuildingInstance != null)
+            // {
+            //     Addressables.ReleaseInstance(currentBuildingInstance);
+            //     currentBuildingInstance = null;
+            // }
+
+            // 現在の建物を非表示
             if (currentBuildingInstance != null)
             {
-                Addressables.ReleaseInstance(currentBuildingInstance);
-                currentBuildingInstance = null;
+                currentBuildingInstance.SetActive(false);
             }
 
             // カメラを2Dに切り替え
@@ -98,10 +105,16 @@ public class AppManager : MonoBehaviour
         }
     }
 
-    public void SwitchToSolidView()
+    void SwitchToSolidView()
     {
         if (viewType == ViewType.Plane)
         {
+            // 建物がロード済みなら再表示
+            if (currentBuildingInstance != null)
+            {
+                currentBuildingInstance.SetActive(true);
+            }
+
             planeCamera.SetActive(false);
             solidCamera.SetActive(true);
 
@@ -109,7 +122,7 @@ public class AppManager : MonoBehaviour
         }
     }
 
-    public void ShowBuildingIn3D(string buildingName)
+    void ShowBuildingIn3D(string buildingName)
     {
         // すでに3D表示だった場合は無視
         if (viewType == ViewType.Solid)
@@ -117,12 +130,17 @@ public class AppManager : MonoBehaviour
             return;
         }
 
+        if (currentBuildingInstance != null && currentBuildingName == buildingName)
+        {
+            SwitchToSolidView();
+        }
+
         // 非同期で建物をロードし、完了後にカメラを切り替える
         LoadBuildingObject(buildingName);
     }
 
     /// <summary>
-    /// Addressavkesを使用して建物をロードして表示
+    /// Addressablesを使用して建物をロードして表示
     /// </summary>
     /// <param name="buildingName"></param>
     async void LoadBuildingObject(string buildingName)
@@ -139,7 +157,10 @@ public class AppManager : MonoBehaviour
         {
             Debug.LogError($"ロード対象のアセット参照が見つかりません: {buildingName}");
             // ローディングUIを消すなどのエラー処理
-            loadingUI.SetActive(false);
+            if (loadingUI != null)
+            {
+                loadingUI.SetActive(false);
+            }
             return;
         }
 

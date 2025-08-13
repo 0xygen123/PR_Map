@@ -40,7 +40,7 @@ namespace Assets.Scripts.Plane
         float maxUserScale = 10.0f;
 
         Camera mainCamera;
-        CameraControls controls;
+        CameraControls cameraControls;
 
         // --- 入力状態を保持する変数 ---
         Vector2 moveInput;
@@ -55,8 +55,8 @@ namespace Assets.Scripts.Plane
         void Awake()
         {
             mainCamera = GetComponent<Camera>();
-            controls = new CameraControls();
-            controls.CameraControl.SetCallbacks(this);
+            cameraControls = new CameraControls();
+            cameraControls.CameraControl.SetCallbacks(this);
         }
 
         void Start()
@@ -66,12 +66,12 @@ namespace Assets.Scripts.Plane
 
         void OnEnable()
         {
-            controls.CameraControl.Enable();
+            cameraControls.CameraControl.Enable();
         }
 
         void OnDisable()
         {
-            controls.CameraControl.Disable();
+            cameraControls.CameraControl.Disable();
         }
 
         void Update()
@@ -148,8 +148,8 @@ namespace Assets.Scripts.Plane
             {
                 isPinching = true;
                 // ピンチ開始時の2点間の距離を記録する
-                Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
-                Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
+                Vector2 pos1 = cameraControls.CameraControl.Point.ReadValue<Vector2>();
+                Vector2 pos2 = cameraControls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
                 lastPinchDistance = Vector2.Distance(pos1, pos2);
             }
             else if (context.canceled)
@@ -174,8 +174,8 @@ namespace Assets.Scripts.Plane
             // ピンチ操作で追従を解除
             if (isFollowingUser) isFollowingUser = false;
 
-            Vector2 pos1 = controls.CameraControl.Point.ReadValue<Vector2>();
-            Vector2 pos2 = controls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
+            Vector2 pos1 = cameraControls.CameraControl.Point.ReadValue<Vector2>();
+            Vector2 pos2 = cameraControls.CameraControl.SecondaryPoint.ReadValue<Vector2>();
 
             // float previousDistance = Vector2.Distance(pos1 - moveInput, pos2 - moveInput);
             // float currentDistance = Vector2.Distance(pos1, pos2);
@@ -249,10 +249,10 @@ namespace Assets.Scripts.Plane
                 float clampedScale = Mathf.Lerp(minUserScale, maxUserScale, Mathf.Clamp01(normalizedZoom));
                 userObject.transform.localScale = new Vector3(clampedScale, clampedScale, userObject.transform.localScale.z);
                 // --- デバッグ用のログ出力 ---
-                Debug.Log($"カメラ倍率: {mainCamera.orthographicSize}, " +
-                    $"計算スケール: {newScale}, " +
-                    $"最終スケール (クランプ後): {clampedScale}"
-                );
+                //     Debug.Log($"カメラ倍率: {mainCamera.orthographicSize}, " +
+                //         $"計算スケール: {newScale}, " +
+                //         $"最終スケール (クランプ後): {clampedScale}"
+                //     );
             }
         }
         #endregion
