@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Plane
 {
-    [CreateAssetMenu(menuName = "2Dマップ設定")]
+    [CreateAssetMenu(menuName = "2DMapSettings")]
     public class MapSettings : ScriptableObject
     {
         [Header("2DMap Settings")]

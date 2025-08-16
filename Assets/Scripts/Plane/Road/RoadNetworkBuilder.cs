@@ -66,7 +66,7 @@ namespace Assets.Scripts.Plane.Road
             return node;
         }
 
-        void VisualizePathByChangingMaterial(List<RuntimeNode> path)
+        public void VisualizePathByChangingMaterial(List<RuntimeNode> path)
         {
             // まず、全ての道路をデフォルトのマテリアルに戻す
             ResetAllRoadMaterials();
@@ -100,7 +100,7 @@ namespace Assets.Scripts.Plane.Road
             }
         }
 
-        void ResetAllRoadMaterials()
+        public void ResetAllRoadMaterials()
         {
             if (roadMaterial == null) return;
 

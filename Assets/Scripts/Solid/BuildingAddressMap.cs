@@ -8,9 +8,9 @@ using UnityEngine.AddressableAssets;
 [Serializable]
 public class BuildingInfo
 {
-    [Tooltip("React側から受け取る建物ID")]
-    [SerializeField] string buildigID;
-    public string BuildingID => buildigID;
+    [Tooltip("React側から受け取る建物キー")]
+    [SerializeField] string buildigkey;
+    public string BuildingKey => buildigkey;
 
     [Tooltip("Addressablesに設定したキー")]
     [SerializeField] AssetReference assetReference;
@@ -23,9 +23,9 @@ public class BuildingAddressMap : ScriptableObject
 {
     public List<BuildingInfo> buildingsMappings;
 
-    public AssetReference GetAssetFromName(string name)
+    public AssetReference GetAssetByKey(string buildingKey)
     {
-        BuildingInfo info = buildingsMappings.FirstOrDefault(b => b.BuildingID == name);
+        BuildingInfo info = buildingsMappings.FirstOrDefault(b => b.BuildingKey == buildingKey);
 
         if (info != null && info.AssetReference.RuntimeKeyIsValid())
         {
@@ -33,7 +33,7 @@ public class BuildingAddressMap : ScriptableObject
         }
         else
         {
-            Debug.LogWarning($"対応するAddressableキーが存在しません: {name}");
+            Debug.LogWarning($"対応するAddressableキーが存在しません: {buildingKey}");
             return null;
         }
     }
