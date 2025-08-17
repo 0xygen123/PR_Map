@@ -12,6 +12,11 @@ public class ViewController : MonoBehaviour
 
     private GameObject _currentBuilding;
 
+    void Awake()
+    {
+
+    }
+
     public void SwitchToPlaneView()
     {
         if (_currentBuilding != null) _currentBuilding.SetActive(false);

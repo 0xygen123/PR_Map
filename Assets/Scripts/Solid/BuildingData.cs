@@ -28,7 +28,6 @@ namespace Assets.Scripts.Solid
     [CreateAssetMenu(menuName = "BuildingData")]
     public class BuildingData : ScriptableObject
     {
-        public string buildingKey;
         public List<RoomInfo> rooms;
         public List<EntranceInfo> entrances;
 

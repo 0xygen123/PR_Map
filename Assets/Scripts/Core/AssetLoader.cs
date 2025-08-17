@@ -1,68 +1,65 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Assets.Scripts.Solid;
 
 namespace Assets.Scripts.Core
 {
     public class BuildingLoader : MonoBehaviour
     {
-        private readonly Dictionary<string, GameObject> _loadedInstances = new Dictionary<string, GameObject>();
-        private readonly Dictionary<string, ScriptableObject> _loadedData = new Dictionary<string, ScriptableObject>();
+        private readonly List<AsyncOperationHandle> _loadedHandles = new List<AsyncOperationHandle>();
 
-        public async Task<T> LoadDataAsync<T>(string key) where T : ScriptableObject
+        public async Task<BuildingData> LoadDataAsync(AssetReferenceT<BuildingData> reference)
         {
-            if (_loadedData.TryGetValue(key, out var data))
+            if (!reference.RuntimeKeyIsValid())
             {
-                return data as T;
+                Debug.LogError("無効なAssetReferenceです。");
+                return null;
             }
-
-            var handle = Addressables.LoadAssetAsync<T>(key);
-            var loadedData = await handle.Task;
-            if (loadedData != null)
-            {
-                _loadedData[key] = loadedData;
-            }
-            return loadedData;
+            var handle = Addressables.LoadAssetAsync<BuildingData>(reference);
+            _loadedHandles.Add(handle);
+            return await handle.Task;
         }
 
-        public async Task<GameObject> LoadGameObjectAsync(string key, Transform parent)
+        public async Task<GameObject> LoadGameObjectAsync(AssetReferenceGameObject reference, Transform parent)
         {
-            // 既存のインスタンスがあれば解放
-            if (_loadedInstances.ContainsKey(key))
+            if (!reference.RuntimeKeyIsValid())
             {
-                ReleaseGameObject(key);
+                Debug.LogError("無効なAssetReferenceです。");
+                return null;
             }
-
-            var handle = Addressables.InstantiateAsync(key, parent);
+            var handle = reference.InstantiateAsync(parent);
+            _loadedHandles.Add(handle);
             var instance = await handle.Task;
-            instance.transform.localPosition = Vector3.zero;
-            _loadedInstances[key] = instance;
+            if (instance != null)
+            {
+                instance.transform.localPosition = Vector3.zero;
+            }
             return instance;
         }
 
-        public void ReleaseGameObject(string key)
+        public void ReleaseGameObject(GameObject instance)
         {
-            if (_loadedInstances.TryGetValue(key, out var instance))
+            if (instance != null)
             {
                 Addressables.ReleaseInstance(instance);
-                _loadedInstances.Remove(key);
             }
         }
 
         private void OnDestroy()
         {
-            // シーン終了時にすべて解放
-            foreach (var key in _loadedInstances.Keys.ToList())
+            // シーン終了時にロードしたすべてのアセットを解放
+            foreach (var handle in _loadedHandles)
             {
-                ReleaseGameObject(key);
+                if (handle.IsValid())
+                {
+                    Addressables.Release(handle);
+                }
             }
-            foreach (var data in _loadedData.Values)
-            {
-                Addressables.Release(data);
-            }
-            _loadedData.Clear();
+            _loadedHandles.Clear();
         }
     }
 }

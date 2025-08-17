@@ -20,10 +20,13 @@ public class JSInterface : MonoBehaviour
     public static event Action<double, double> OnLocationReceived;
     // 方位情報の更新時に発行されるイベント
     public static event Action<float> OnDirectionReceived;
-    // カメラの変更時に呼び出されるメソッド
+    // 建物オブジェクトのロードリクエスト
+    public static event Action<string> OnPathfindingRequested2D;
+    public static event Action<string, string> OnPathfindingRequested3D;
+    // 2Dマップへの切り替え
     public static event Action OnSwitchToPlaneView;
-    public static event Action OnSwitchToSlidView;
-    public static event Action<string> OnShowBuildingIn3D;
+    public static event Action OnSwitchToSolidView;
+
 
 #if UNITY_WEBGL
     [DllImport("__Internal")]
@@ -49,16 +52,24 @@ public class JSInterface : MonoBehaviour
     /// </summary>
     public void SwitchToSolidView()
     {
-        OnSwitchToSlidView?.Invoke();
+        OnSwitchToSolidView?.Invoke();
     }
 
-    /// <summary>
-    /// 建物オブジェクトを表示してカメラを切り替える
-    /// </summary>
-    /// <param name="buildingName"></param>
-    public void ShowBuildingIn3D(string buildingName)
+
+    public void PathfindingRequested(string buildingKey, string roomKey)
     {
-        OnShowBuildingIn3D?.Invoke(buildingName);
+        if (buildingKey == null)
+        {
+            return;
+        }
+        if (roomKey == null)
+        {
+            OnPathfindingRequested2D?.Invoke(buildingKey);
+        }
+        else
+        {
+            OnPathfindingRequested3D?.Invoke(buildingKey, roomKey);
+        }
     }
 
     /// <summary>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.AddressableAssets;
+using Assets.Scripts.Solid;
 
 
 [Serializable]
@@ -12,9 +13,13 @@ public class BuildingInfo
     [SerializeField] string buildigkey;
     public string BuildingKey => buildigkey;
 
-    [Tooltip("Addressablesに設定したキー")]
-    [SerializeField] AssetReference assetReference;
-    public AssetReference AssetReference => assetReference;
+    [Tooltip("建物オブジェクト")]
+    [SerializeField] AssetReferenceGameObject gameObjectReference;
+    public AssetReferenceGameObject GameObjectReference => gameObjectReference;
+
+    [Tooltip("建物データのアセット参照")]
+    [SerializeField] AssetReferenceT<BuildingData> dataReference;
+    public AssetReferenceT<BuildingData> DataReference => dataReference;
 }
 
 
@@ -23,18 +28,12 @@ public class BuildingAddressMap : ScriptableObject
 {
     public List<BuildingInfo> buildingsMappings;
 
-    public AssetReference GetAssetByKey(string buildingKey)
+    public BuildingInfo GetBuildingByKey(string key)
     {
-        BuildingInfo info = buildingsMappings.FirstOrDefault(b => b.BuildingKey == buildingKey);
-
-        if (info != null && info.AssetReference.RuntimeKeyIsValid())
+        if (string.IsNullOrEmpty(key))
         {
-            return info.AssetReference;
-        }
-        else
-        {
-            Debug.LogWarning($"対応するAddressableキーが存在しません: {buildingKey}");
             return null;
         }
+        return buildingsMappings.FirstOrDefault(e => e.BuildingKey == key);
     }
 }

@@ -25,6 +25,11 @@ public class DEVLocationGenerator : MonoBehaviour
     Coroutine _generatorCoroutine;
     RuntimeNode currentNode;
 
+    public void SwitchSimulateLocation()
+    {
+        executeGeneration = !executeGeneration;
+    }
+
     // UpdateメソッドでInspectorのチェック状態を監視する
     void Update()
     {

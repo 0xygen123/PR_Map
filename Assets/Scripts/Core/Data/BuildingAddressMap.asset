@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: BuildingAddressMap
   m_EditorClassIdentifier: 
   buildingsMappings:
-  - buildigID: DEV
-    assetReference:
+  - buildigkey: DEV
+    gameObjectReference:
       m_AssetGUID: c9c84664319444e43b7701b6be1e81fd
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 2dc0816f5f474514b838a04286e6349f
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
