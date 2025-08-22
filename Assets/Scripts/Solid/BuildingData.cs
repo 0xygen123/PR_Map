@@ -11,7 +11,6 @@ namespace Assets.Scripts.Solid
     public class RoomInfo
     {
         public string roomKey;
-        public Vector3 roomPosition;
     }
 
     // 建物の入り口を表すクラス
@@ -21,8 +20,6 @@ namespace Assets.Scripts.Solid
         public string entranceKey;
         [Tooltip("屋外の2D道路ネットワークにおけるノードID")]
         public int outdoorNodeId;
-        [Tooltip("屋内の3D NavMesh上での座標")]
-        public Vector3 indoorPosition;
     }
 
     [CreateAssetMenu(menuName = "BuildingData")]
@@ -33,7 +30,17 @@ namespace Assets.Scripts.Solid
 
         public RoomInfo GetRoomByKey(string roomKey)
         {
+            Debug.Log(roomKey);
+            DEVWriteline();
             return rooms.FirstOrDefault(r => r.roomKey == roomKey);
+        }
+
+        void DEVWriteline()
+        {
+            foreach (RoomInfo room in rooms)
+            {
+                Debug.Log($"{room.roomKey}");
+            }
         }
     }
 }

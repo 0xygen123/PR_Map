@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 123a76c842c98274c9d2542bbf530a01, type: 3}
-  m_Name: BuildingAddressMap
+  m_Name: BuildingMap
   m_EditorClassIdentifier: 
   buildingsMappings:
-  - buildigkey: DEV
+  - buildigkey: student_hall
     gameObjectReference:
-      m_AssetGUID: c9c84664319444e43b7701b6be1e81fd
+      m_AssetGUID: f8745d784ed27a2498199b954e01decd
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

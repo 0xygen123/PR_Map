@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Assets.Scripts.Solid
-{    public class NavMeshController : MonoBehaviour
+{
+    public class NavMeshController : MonoBehaviour
     {
         public (List<Vector3> indoorCoords, float indoorCost) FindPathAndCost(Vector3 startPosition, Vector3 endPosition)
         {

@@ -44,33 +44,58 @@ public class PathfindingManager : MonoBehaviour
             return null;
         }
 
-        // 現在地のノードIDを取得
-        RuntimeNode startNode = userLocation.GetStartNodeForPathfinding();
-        if (startNode == null)
+        // 建物インスタンスから参照管理コンポーネントを取得
+        BuildingReferenceProvider referenceProvider = buildingInstance.GetComponent<BuildingReferenceProvider>();
+        if (referenceProvider == null)
         {
-            Debug.Log("現在地を取得できませんでした");
+            Debug.LogError("BuildingReferenceProviderが建物プレハブに見つかりません");
             return null;
         }
+
+        // 目標地点の座標を取得
+        Transform roomTransform = referenceProvider.GetReference(destinationRoom.roomKey);
+        if (roomTransform == null)
+        {
+            Debug.LogError($"建物プレハブ内に部屋オブジェクト '{destinationRoom.roomKey}' が見つかりません。");
+            return null;
+        }
+        // NavMesh探索用にワールド座標を取得
+        Vector3 roomWorldPos = roomTransform.position;
+
 
         // 各入り口までの合計コスト
         List<PathResult> results = new List<PathResult>();
         Transform buildingTransform = buildingInstance.transform;
 
-        List<Task<PathResult>> tasks = new List<Task<PathResult>>();
+        // Task.Run() をやめて、通常の foreach ループに変更します
         foreach (var entrance in buildingData.entrances)
         {
-            // 屋外経路
-            var outdoorPathNodes = AStarFinder.FindPath(roadNetwork, startNodeId, entrance.outdoorNodeId);
-            if (outdoorPathNodes == null || outdoorPathNodes.Count == 0) { continue; }
+            // 屋外経路の探索
+            List<RuntimeNode> outdoorPathNodes = AStarFinder.FindPath(roadNetwork, startNodeId, entrance.outdoorNodeId);
+            if (outdoorPathNodes == null || outdoorPathNodes.Count == 0)
+            {
+                continue; // この入り口はスキップ
+            }
             float outdoorCost = (float)outdoorPathNodes.Last().gCost;
 
-            // 屋内経路
-            Vector3 entranceWorldPos = buildingTransform.TransformPoint(entrance.indoorPosition);
-            Vector3 roomWorldPos = buildingTransform.TransformPoint(destinationRoom.roomPosition);
+            // ★★★ご指摘の必須コードは、このようにメインスレッドで実行します★★★
+            Transform entranceTransform = referenceProvider.GetReference(entrance.entranceKey);
+            if (entranceTransform == null)
+            {
+                Debug.LogWarning($"建物プレハブ内にエントランス '{entrance.entranceKey}' が見つかりません。");
+                continue;
+            }
+            // これでエラーなく Transform の position を取得できます
+            Vector3 entranceWorldPos = entranceTransform.position;
 
-            (List<Vector3> indoorCoords, float indoorCost) = navMeshController.FindPathAndCost(entrance.indoorPosition, destinationRoom.roomPosition);
-            if (indoorCost < 0) { return null; }
+            // 屋内経路の探索
+            (List<Vector3> indoorCoords, float indoorCost) = navMeshController.FindPathAndCost(entranceWorldPos, roomWorldPos);
+            if (indoorCost < 0)
+            {
+                continue;
+            }
 
+            // 結果をリストに追加
             results.Add(new PathResult
             {
                 Entrance = entrance,
@@ -80,12 +105,6 @@ public class PathfindingManager : MonoBehaviour
                 IndoorCost = indoorCost
             });
         }
-
-        // タスクの完了を待つ
-        PathResult[] completedResults = await Task.WhenAll(tasks);
-
-        // 非nullのデータをリストに追加
-        results = completedResults.Where(r => r != null).ToList();
 
         // 最小コストを計算
         if (results.Count == 0)

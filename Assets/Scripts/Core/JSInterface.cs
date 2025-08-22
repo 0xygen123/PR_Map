@@ -56,19 +56,24 @@ public class JSInterface : MonoBehaviour
     }
 
 
-    public void PathfindingRequested(string buildingKey, string roomKey)
+    //public void PathfindingRequested(string buildingKey, string roomKey)
+    public void PathfindingRequested(string buildingAndRoom)
     {
-        if (buildingKey == null)
+        if (string.IsNullOrEmpty(buildingAndRoom))
         {
+            Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+            SendToJS(JSFunction.OnShowError, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
             return;
         }
-        if (roomKey == null)
+
+        string[] keys = buildingAndRoom.Split(',');
+        if (keys.Length == 1)
         {
-            OnPathfindingRequested2D?.Invoke(buildingKey);
+            OnPathfindingRequested2D?.Invoke(keys[0]);
         }
-        else
+        else if (keys.Length == 2)
         {
-            OnPathfindingRequested3D?.Invoke(buildingKey, roomKey);
+            OnPathfindingRequested3D?.Invoke(keys[0], keys[1]);
         }
     }
 

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
-  m_Name: DEVBuilding
+  m_Name: student_hall
   m_EditorClassIdentifier: 
   rooms:
-  - roomKey: DEVRoom
-    roomPosition: {x: 0, y: 0, z: 0}
+  - roomKey: 1a
+  - roomKey: 1b
   entrances:
-  - entranceKey: DEVEntrance
-    outdoorNodeId: 10
-    indoorPosition: {x: 0, y: 0, z: 0}
+  - entranceKey: N
+    outdoorNodeId: 19
+  - entranceKey: S
+    outdoorNodeId: 12

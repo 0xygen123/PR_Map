@@ -7,9 +7,6 @@ using Assets.Scripts.Core;
 using Assets.Scripts.Plane;
 using Assets.Scripts.Solid;
 using Assets.Scripts.Plane.Road;
-using Unity.VisualScripting;
-using UnityEngine.AI;
-using UnityEditor.PackageManager.Requests;
 
 // --- 1. 統括役：全体の非同期フローを管理 ---
 public class AppManager : MonoBehaviour
@@ -45,16 +42,6 @@ public class AppManager : MonoBehaviour
         JSInterface.OnPathfindingRequested3D -= HandlePathfindingRequest;
         JSInterface.OnSwitchToPlaneView -= HandleSwitchToPlaneView;
         JSInterface.OnSwitchToSolidView -= HandleSwitchToSolidView;
-    }
-
-
-    public void TestPathfinding()
-    {
-        HandlePathfindingRequest("DEV");
-    }
-    public void TestPathfinding3D()
-    {
-        HandlePathfindingRequest("DEV", "DEVRoom");
     }
 
     /// <summary>
