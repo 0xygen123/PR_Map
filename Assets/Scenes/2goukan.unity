@@ -437,6 +437,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2GoukanS
       objectReference: {fileID: 0}
+    - target: {fileID: 2954623797417115657, guid: 6cacfcd501d3ffe41abd97d34a5a5168, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630023642086649672, guid: 6cacfcd501d3ffe41abd97d34a5a5168, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
