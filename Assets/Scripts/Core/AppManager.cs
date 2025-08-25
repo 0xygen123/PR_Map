@@ -55,7 +55,10 @@ public class AppManager : MonoBehaviour
 
         try
         {
-            ClearCache(buildingKey);
+            if (cachedBuildingInstance != null)
+            {
+                ClearCache(buildingKey);
+            }
 
             BuildingInfo entry = buildingAddressMap.GetBuildingByKey(buildingKey);
             if (entry == null)
@@ -133,7 +136,10 @@ public class AppManager : MonoBehaviour
 
         try
         {
-            ClearCache(buildingKey);
+            if (cachedBuildingInstance != null)
+            {
+                ClearCache(buildingKey);
+            }
 
             BuildingInfo entry = buildingAddressMap.GetBuildingByKey(buildingKey);
             if (entry == null)
@@ -189,16 +195,18 @@ public class AppManager : MonoBehaviour
     /// </summary>
     private void ClearCache(string newBuildingKey)
     {
+        Debug.Log("Cache Clear");
         // 違う建物を探索する場合のみ、古いインスタンスを解放する
         if (cachedBuildingKey != null && cachedBuildingKey != newBuildingKey && cachedBuildingInstance != null)
         {
+            Destroy(cachedBuildingInstance);
             assetLoader.ReleaseGameObject(cachedBuildingInstance);
         }
         cachedPathResult = null;
         cachedBuildingInstance = null;
         cachedBuildingKey = null;
     }
-    
+
     /// <summary>
     /// JSからの2Dビュー切り替えリクエストを処理します。
     /// </summary>

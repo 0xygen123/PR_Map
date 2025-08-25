@@ -15,7 +15,7 @@ MonoBehaviour:
   buildingsMappings:
   - buildigkey: student_hall
     gameObjectReference:
-      m_AssetGUID: f8745d784ed27a2498199b954e01decd
+      m_AssetGUID: 905d78b7d41b09f4bb459a9058e6733d
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

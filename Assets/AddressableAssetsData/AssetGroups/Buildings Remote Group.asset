@@ -27,12 +27,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 905d78b7d41b09f4bb459a9058e6733d
-    m_Address: Assets/Scripts/Core/Debug/student_hall].prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f5b382b41e89687478410fa75957697d, type: 2}
   m_SchemaSet:
