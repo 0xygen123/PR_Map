@@ -29,7 +29,7 @@ namespace Assets.Scripts.Solid
                     references[room.name] = room;
                 }
             }
-            DEVwriteline();
+            // DEVwriteline();
         }
 
         public Transform GetReference(string key)

@@ -12,6 +12,7 @@ public class PathfindingManager : MonoBehaviour
 {
     [SerializeField] RoadNetworkBuilder roadNetwork;
     [SerializeField] UserLocationManager userLocation;
+    [SerializeField] int IndoorCostMultiple = 3;
 
     // 計算結果を格納するクラス
     public class PathResult
@@ -25,7 +26,8 @@ public class PathfindingManager : MonoBehaviour
     }
 
 
-    public async Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
+    //public async Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
+    public Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
     {
         RoomInfo destinationRoom = buildingData.GetRoomByKey(roomKey);
         if (destinationRoom == null)
@@ -40,7 +42,9 @@ public class PathfindingManager : MonoBehaviour
         }
         if (buildingInstance == null)
         {
+#if UNITY_EDITOR
             Debug.LogError("建物オブジェクトのインスタンス化に失敗しました");
+#endif
             return null;
         }
 
@@ -48,7 +52,9 @@ public class PathfindingManager : MonoBehaviour
         BuildingReferenceProvider referenceProvider = buildingInstance.GetComponent<BuildingReferenceProvider>();
         if (referenceProvider == null)
         {
+#if UNITY_EDITOR
             Debug.LogError("BuildingReferenceProviderが建物プレハブに見つかりません");
+#endif
             return null;
         }
 
@@ -78,7 +84,7 @@ public class PathfindingManager : MonoBehaviour
             }
             float outdoorCost = (float)outdoorPathNodes.Last().gCost;
 
-            // ★★★ご指摘の必須コードは、このようにメインスレッドで実行します★★★
+            // メインスレッドで実行
             Transform entranceTransform = referenceProvider.GetReference(entrance.entranceKey);
             if (entranceTransform == null)
             {
@@ -95,6 +101,10 @@ public class PathfindingManager : MonoBehaviour
                 continue;
             }
 
+#if UNITY_EDITOR
+            Debug.Log($"{entrance.entranceKey}: [Costs]: {{ Indoor: {indoorCost}, Outdoor: {outdoorCost}, Total: {indoorCost + outdoorCost}}}");
+#endif
+
             // 結果をリストに追加
             results.Add(new PathResult
             {
@@ -102,7 +112,7 @@ public class PathfindingManager : MonoBehaviour
                 OutdoorPath = outdoorPathNodes,
                 IndoorPathCoordinates = indoorCoords,
                 OutdoorCost = outdoorCost,
-                IndoorCost = indoorCost
+                IndoorCost = indoorCost * IndoorCostMultiple
             });
         }
 
@@ -113,7 +123,9 @@ public class PathfindingManager : MonoBehaviour
             return null;
         }
 
-        return results.OrderBy(r => r.TotalCost).First();
+        var optimalResult = results.OrderBy(r => r.TotalCost).First();
+        //return optimalResult;
+        return Task.FromResult(optimalResult);
     }
 
     public PathResult FindOptimalPath(int startNodeId, BuildingData buildingData)
@@ -125,6 +137,10 @@ public class PathfindingManager : MonoBehaviour
             if (outdoorPathNodes == null || outdoorPathNodes.Count == 0) { continue; }
 
             float outdoorCost = (float)outdoorPathNodes.Last().gCost;
+
+#if UNITY_EDITOR
+            Debug.Log($"[Costs] Indoor: {0}, Outdoor: {outdoorCost}, Total: {outdoorCost}");
+#endif
 
             results.Add(new PathResult
             {

@@ -3,786 +3,786 @@
         "edge_id": 1001,
         "from_node_id": 1,
         "to_node_id": 108,
-        "cost": 0.0
+        "cost": 11.63
     },
     {
         "edge_id": 1002,
         "from_node_id": 2,
         "to_node_id": 106,
-        "cost": 0.0
+        "cost": 13.54
     },
     {
         "edge_id": 1003,
         "from_node_id": 3,
         "to_node_id": 117,
-        "cost": 0.0
+        "cost": 23.25
     },
     {
         "edge_id": 1004,
         "from_node_id": 3,
         "to_node_id": 4,
-        "cost": 0.0
+        "cost": 16.02
     },
     {
         "edge_id": 1005,
         "from_node_id": 5,
         "to_node_id": 9,
-        "cost": 0.0
+        "cost": 2.63
     },
     {
         "edge_id": 1006,
         "from_node_id": 6,
         "to_node_id": 105,
-        "cost": 0.0
+        "cost": 14.72
     },
     {
         "edge_id": 1007,
         "from_node_id": 7,
         "to_node_id": 8,
-        "cost": 0.0
+        "cost": 6.29
     },
     {
         "edge_id": 1008,
         "from_node_id": 7,
         "to_node_id": 9,
-        "cost": 0.0
+        "cost": 43.82
     },
     {
         "edge_id": 1009,
         "from_node_id": 8,
         "to_node_id": 118,
-        "cost": 0.0
+        "cost": 22.87
     },
     {
         "edge_id": 1010,
         "from_node_id": 8,
         "to_node_id": 88,
-        "cost": 0.0
+        "cost": 3.47
     },
     {
         "edge_id": 1011,
         "from_node_id": 9,
         "to_node_id": 10,
-        "cost": 0.0
+        "cost": 64.33
     },
     {
         "edge_id": 1012,
         "from_node_id": 9,
         "to_node_id": 104,
-        "cost": 0.0
+        "cost": 13.98
     },
     {
         "edge_id": 1013,
         "from_node_id": 10,
         "to_node_id": 11,
-        "cost": 0.0
+        "cost": 12.98
     },
     {
         "edge_id": 1014,
         "from_node_id": 10,
         "to_node_id": 33,
-        "cost": 0.0
+        "cost": 63.49
     },
     {
         "edge_id": 1015,
         "from_node_id": 11,
         "to_node_id": 12,
-        "cost": 0.0
+        "cost": 15.85
     },
     {
         "edge_id": 1016,
         "from_node_id": 11,
         "to_node_id": 13,
-        "cost": 0.0
+        "cost": 11.54
     },
     {
         "edge_id": 1017,
         "from_node_id": 13,
         "to_node_id": 14,
-        "cost": 0.0
+        "cost": 11.01
     },
     {
         "edge_id": 1018,
         "from_node_id": 13,
         "to_node_id": 15,
-        "cost": 0.0
+        "cost": 11.41
     },
     {
         "edge_id": 1019,
         "from_node_id": 15,
         "to_node_id": 16,
-        "cost": 0.0
+        "cost": 15.81
     },
     {
         "edge_id": 1020,
         "from_node_id": 15,
         "to_node_id": 17,
-        "cost": 0.0
+        "cost": 13.16
     },
     {
         "edge_id": 1021,
         "from_node_id": 17,
         "to_node_id": 18,
-        "cost": 0.0
+        "cost": 22.19
     },
     {
         "edge_id": 1022,
         "from_node_id": 19,
         "to_node_id": 20,
-        "cost": 0.0
+        "cost": 8.05
     },
     {
         "edge_id": 1023,
         "from_node_id": 20,
         "to_node_id": 21,
-        "cost": 0.0
+        "cost": 7.35
     },
     {
         "edge_id": 1024,
         "from_node_id": 20,
         "to_node_id": 28,
-        "cost": 0.0
+        "cost": 61.3
     },
     {
         "edge_id": 1025,
         "from_node_id": 21,
         "to_node_id": 22,
-        "cost": 0.0
+        "cost": 9.69
     },
     {
         "edge_id": 1026,
         "from_node_id": 23,
         "to_node_id": 24,
-        "cost": 0.0
+        "cost": 5.12
     },
     {
         "edge_id": 1027,
         "from_node_id": 23,
         "to_node_id": 25,
-        "cost": 0.0
+        "cost": 13.12
     },
     {
         "edge_id": 1028,
         "from_node_id": 23,
         "to_node_id": 26,
-        "cost": 0.0
+        "cost": 20.13
     },
     {
         "edge_id": 1029,
         "from_node_id": 24,
         "to_node_id": 83,
-        "cost": 0.0
+        "cost": 4.44
     },
     {
         "edge_id": 1030,
         "from_node_id": 25,
         "to_node_id": 66,
-        "cost": 0.0
+        "cost": 32.81
     },
     {
         "edge_id": 1031,
         "from_node_id": 25,
         "to_node_id": 29,
-        "cost": 0.0
+        "cost": 48.48
     },
     {
         "edge_id": 1032,
         "from_node_id": 26,
         "to_node_id": 27,
-        "cost": 0.0
+        "cost": 32.15
     },
     {
         "edge_id": 1033,
         "from_node_id": 27,
         "to_node_id": 28,
-        "cost": 0.0
+        "cost": 25.5
     },
     {
         "edge_id": 1034,
         "from_node_id": 29,
         "to_node_id": 40,
-        "cost": 0.0
+        "cost": 15.21
     },
     {
         "edge_id": 1035,
         "from_node_id": 29,
         "to_node_id": 36,
-        "cost": 0.0
+        "cost": 19.55
     },
     {
         "edge_id": 1036,
         "from_node_id": 30,
         "to_node_id": 35,
-        "cost": 0.0
+        "cost": 18.25
     },
     {
         "edge_id": 1037,
         "from_node_id": 31,
         "to_node_id": 32,
-        "cost": 0.0
+        "cost": 10.25
     },
     {
         "edge_id": 1038,
         "from_node_id": 31,
         "to_node_id": 33,
-        "cost": 0.0
+        "cost": 14.67
     },
     {
         "edge_id": 1039,
         "from_node_id": 33,
         "to_node_id": 34,
-        "cost": 0.0
+        "cost": 9.22
     },
     {
         "edge_id": 1040,
         "from_node_id": 34,
         "to_node_id": 35,
-        "cost": 0.0
+        "cost": 30.12
     },
     {
         "edge_id": 1041,
         "from_node_id": 34,
         "to_node_id": 38,
-        "cost": 0.0
+        "cost": 12.21
     },
     {
         "edge_id": 1042,
         "from_node_id": 35,
         "to_node_id": 36,
-        "cost": 0.0
+        "cost": 20.15
     },
     {
         "edge_id": 1043,
         "from_node_id": 35,
         "to_node_id": 37,
-        "cost": 0.0
+        "cost": 11.99
     },
     {
         "edge_id": 1044,
         "from_node_id": 38,
         "to_node_id": 39,
-        "cost": 0.0
+        "cost": 11.73
     },
     {
         "edge_id": 1045,
         "from_node_id": 38,
         "to_node_id": 119,
-        "cost": 0.0
+        "cost": 22.89
     },
     {
         "edge_id": 1046,
         "from_node_id": 40,
         "to_node_id": 43,
-        "cost": 0.0
+        "cost": 36.55
     },
     {
         "edge_id": 1047,
         "from_node_id": 40,
         "to_node_id": 41,
-        "cost": 0.0
+        "cost": 5.64
     },
     {
         "edge_id": 1048,
         "from_node_id": 40,
         "to_node_id": 42,
-        "cost": 0.0
+        "cost": 6.15
     },
     {
         "edge_id": 1049,
         "from_node_id": 43,
         "to_node_id": 46,
-        "cost": 0.0
+        "cost": 20.17
     },
     {
         "edge_id": 1050,
         "from_node_id": 43,
         "to_node_id": 45,
-        "cost": 0.0
+        "cost": 7.17
     },
     {
         "edge_id": 1051,
         "from_node_id": 43,
         "to_node_id": 44,
-        "cost": 0.0
+        "cost": 6.32
     },
     {
         "edge_id": 1052,
         "from_node_id": 46,
         "to_node_id": 47,
-        "cost": 0.0
+        "cost": 10.34
     },
     {
         "edge_id": 1053,
         "from_node_id": 46,
         "to_node_id": 65,
-        "cost": 0.0
+        "cost": 49.3
     },
     {
         "edge_id": 1054,
         "from_node_id": 47,
         "to_node_id": 48,
-        "cost": 0.0
+        "cost": 15.47
     },
     {
         "edge_id": 1055,
         "from_node_id": 48,
         "to_node_id": 50,
-        "cost": 0.0
+        "cost": 7.54
     },
     {
         "edge_id": 1056,
         "from_node_id": 48,
         "to_node_id": 49,
-        "cost": 0.0
+        "cost": 12.3
     },
     {
         "edge_id": 1057,
         "from_node_id": 50,
         "to_node_id": 52,
-        "cost": 0.0
+        "cost": 15.04
     },
     {
         "edge_id": 1058,
         "from_node_id": 50,
         "to_node_id": 51,
-        "cost": 0.0
+        "cost": 6.11
     },
     {
         "edge_id": 1059,
         "from_node_id": 52,
         "to_node_id": 53,
-        "cost": 0.0
+        "cost": 7.43
     },
     {
         "edge_id": 1060,
         "from_node_id": 53,
         "to_node_id": 55,
-        "cost": 0.0
+        "cost": 11.76
     },
     {
         "edge_id": 1061,
         "from_node_id": 53,
         "to_node_id": 54,
-        "cost": 0.0
+        "cost": 27.29
     },
     {
         "edge_id": 1062,
         "from_node_id": 55,
         "to_node_id": 57,
-        "cost": 0.0
+        "cost": 51.71
     },
     {
         "edge_id": 1063,
         "from_node_id": 55,
         "to_node_id": 56,
-        "cost": 0.0
+        "cost": 6.95
     },
     {
         "edge_id": 1064,
         "from_node_id": 57,
         "to_node_id": 58,
-        "cost": 0.0
+        "cost": 5.58
     },
     {
         "edge_id": 1065,
         "from_node_id": 58,
         "to_node_id": 59,
-        "cost": 0.0
+        "cost": 7.85
     },
     {
         "edge_id": 1066,
         "from_node_id": 59,
         "to_node_id": 60,
-        "cost": 0.0
+        "cost": 13.81
     },
     {
         "edge_id": 1067,
         "from_node_id": 59,
         "to_node_id": 61,
-        "cost": 0.0
+        "cost": 30.6
     },
     {
         "edge_id": 1068,
         "from_node_id": 61,
         "to_node_id": 63,
-        "cost": 0.0
+        "cost": 10.27
     },
     {
         "edge_id": 1069,
         "from_node_id": 61,
         "to_node_id": 62,
-        "cost": 0.0
+        "cost": 6.06
     },
     {
         "edge_id": 1070,
         "from_node_id": 61,
         "to_node_id": 64,
-        "cost": 0.0
+        "cost": 31.62
     },
     {
         "edge_id": 1071,
         "from_node_id": 64,
         "to_node_id": 68,
-        "cost": 0.0
+        "cost": 6.73
     },
     {
         "edge_id": 1072,
         "from_node_id": 64,
         "to_node_id": 65,
-        "cost": 0.0
+        "cost": 12.82
     },
     {
         "edge_id": 1073,
         "from_node_id": 65,
         "to_node_id": 66,
-        "cost": 0.0
+        "cost": 38.94
     },
     {
         "edge_id": 1074,
         "from_node_id": 66,
         "to_node_id": 67,
-        "cost": 0.0
+        "cost": 5.38
     },
     {
         "edge_id": 1075,
         "from_node_id": 68,
         "to_node_id": 69,
-        "cost": 0.0
+        "cost": 6.25
     },
     {
         "edge_id": 1076,
         "from_node_id": 69,
         "to_node_id": 70,
-        "cost": 0.0
+        "cost": 5.74
     },
     {
         "edge_id": 1077,
         "from_node_id": 70,
         "to_node_id": 71,
-        "cost": 0.0
+        "cost": 5.74
     },
     {
         "edge_id": 1078,
         "from_node_id": 71,
         "to_node_id": 72,
-        "cost": 0.0
+        "cost": 6.26
     },
     {
         "edge_id": 1079,
         "from_node_id": 72,
         "to_node_id": 73,
-        "cost": 0.0
+        "cost": 6.26
     },
     {
         "edge_id": 1080,
         "from_node_id": 73,
         "to_node_id": 74,
-        "cost": 0.0
+        "cost": 5.74
     },
     {
         "edge_id": 1081,
         "from_node_id": 74,
         "to_node_id": 75,
-        "cost": 0.0
+        "cost": 5.96
     },
     {
         "edge_id": 1082,
         "from_node_id": 75,
         "to_node_id": 76,
-        "cost": 0.0
+        "cost": 5.4
     },
     {
         "edge_id": 1083,
         "from_node_id": 76,
         "to_node_id": 77,
-        "cost": 0.0
+        "cost": 6.6
     },
     {
         "edge_id": 1084,
         "from_node_id": 76,
         "to_node_id": 86,
-        "cost": 0.0
+        "cost": 21.45
     },
     {
         "edge_id": 1085,
         "from_node_id": 77,
         "to_node_id": 78,
-        "cost": 0.0
+        "cost": 5.98
     },
     {
         "edge_id": 1086,
         "from_node_id": 78,
         "to_node_id": 79,
-        "cost": 0.0
+        "cost": 5.71
     },
     {
         "edge_id": 1087,
-        "from_node_id": 80,
-        "to_node_id": 79,
-        "cost": 0.0
+        "from_node_id": 79,
+        "to_node_id": 80,
+        "cost": 6.23
     },
     {
         "edge_id": 1088,
         "from_node_id": 80,
         "to_node_id": 81,
-        "cost": 0.0
+        "cost": 6.23
     },
     {
         "edge_id": 1089,
         "from_node_id": 81,
         "to_node_id": 82,
-        "cost": 0.0
+        "cost": 5.72
     },
     {
         "edge_id": 1090,
         "from_node_id": 82,
         "to_node_id": 83,
-        "cost": 0.0
+        "cost": 5.98
     },
     {
         "edge_id": 1091,
         "from_node_id": 84,
         "to_node_id": 94,
-        "cost": 0.0
+        "cost": 46.76
     },
     {
         "edge_id": 1092,
         "from_node_id": 84,
         "to_node_id": 86,
-        "cost": 0.0
+        "cost": 31.22
     },
     {
         "edge_id": 1093,
         "from_node_id": 84,
         "to_node_id": 85,
-        "cost": 0.0
+        "cost": 14.33
     },
     {
         "edge_id": 1094,
         "from_node_id": 86,
         "to_node_id": 87,
-        "cost": 0.0
+        "cost": 22.0
     },
     {
         "edge_id": 1095,
         "from_node_id": 89,
         "to_node_id": 116,
-        "cost": 0.0
+        "cost": 9.76
     },
     {
         "edge_id": 1096,
         "from_node_id": 90,
         "to_node_id": 125,
-        "cost": 0.0
+        "cost": 20.06
     },
     {
         "edge_id": 1097,
         "from_node_id": 90,
         "to_node_id": 91,
-        "cost": 0.0
+        "cost": 32.19
     },
     {
         "edge_id": 1098,
         "from_node_id": 91,
         "to_node_id": 92,
-        "cost": 0.0
+        "cost": 30.3
     },
     {
         "edge_id": 1099,
         "from_node_id": 92,
         "to_node_id": 93,
-        "cost": 0.0
+        "cost": 30.62
     },
     {
         "edge_id": 1100,
         "from_node_id": 93,
         "to_node_id": 94,
-        "cost": 0.0
+        "cost": 19.17
     },
     {
         "edge_id": 1101,
         "from_node_id": 94,
         "to_node_id": 95,
-        "cost": 0.0
+        "cost": 22.1
     },
     {
         "edge_id": 1102,
         "from_node_id": 95,
         "to_node_id": 96,
-        "cost": 0.0
+        "cost": 21.92
     },
     {
         "edge_id": 1103,
         "from_node_id": 96,
         "to_node_id": 97,
-        "cost": 0.0
+        "cost": 27.9
     },
     {
         "edge_id": 1104,
         "from_node_id": 97,
         "to_node_id": 98,
-        "cost": 0.0
+        "cost": 15.77
     },
     {
         "edge_id": 1105,
         "from_node_id": 98,
         "to_node_id": 99,
-        "cost": 0.0
+        "cost": 36.81
     },
     {
         "edge_id": 1106,
         "from_node_id": 99,
         "to_node_id": 100,
-        "cost": 0.0
+        "cost": 30.32
     },
     {
         "edge_id": 1107,
         "from_node_id": 100,
         "to_node_id": 101,
-        "cost": 0.0
+        "cost": 32.24
     },
     {
         "edge_id": 1108,
         "from_node_id": 101,
         "to_node_id": 102,
-        "cost": 0.0
+        "cost": 40.57
     },
     {
         "edge_id": 1109,
         "from_node_id": 102,
         "to_node_id": 103,
-        "cost": 0.0
+        "cost": 61.14
     },
     {
         "edge_id": 1110,
         "from_node_id": 103,
         "to_node_id": 104,
-        "cost": 0.0
+        "cost": 48.19
     },
     {
         "edge_id": 1111,
         "from_node_id": 104,
         "to_node_id": 105,
-        "cost": 0.0
+        "cost": 8.05
     },
     {
         "edge_id": 1112,
         "from_node_id": 105,
         "to_node_id": 106,
-        "cost": 0.0
+        "cost": 23.8
     },
     {
         "edge_id": 1113,
         "from_node_id": 106,
         "to_node_id": 107,
-        "cost": 0.0
+        "cost": 13.69
     },
     {
         "edge_id": 1114,
         "from_node_id": 107,
         "to_node_id": 108,
-        "cost": 0.0
+        "cost": 19.18
     },
     {
         "edge_id": 1115,
         "from_node_id": 108,
         "to_node_id": 109,
-        "cost": 0.0
+        "cost": 18.14
     },
     {
         "edge_id": 1116,
         "from_node_id": 109,
         "to_node_id": 110,
-        "cost": 0.0
+        "cost": 11.59
     },
     {
         "edge_id": 1117,
         "from_node_id": 110,
         "to_node_id": 111,
-        "cost": 0.0
+        "cost": 37.61
     },
     {
         "edge_id": 1118,
         "from_node_id": 111,
         "to_node_id": 112,
-        "cost": 0.0
+        "cost": 61.13
     },
     {
         "edge_id": 1119,
         "from_node_id": 112,
         "to_node_id": 113,
-        "cost": 0.0
+        "cost": 10.78
     },
     {
         "edge_id": 1120,
         "from_node_id": 113,
         "to_node_id": 114,
-        "cost": 0.0
+        "cost": 31.1
     },
     {
         "edge_id": 1121,
         "from_node_id": 114,
         "to_node_id": 115,
-        "cost": 0.0
+        "cost": 11.02
     },
     {
         "edge_id": 1122,
         "from_node_id": 115,
         "to_node_id": 116,
-        "cost": 0.0
+        "cost": 19.84
     },
     {
         "edge_id": 1123,
         "from_node_id": 116,
         "to_node_id": 117,
-        "cost": 0.0
+        "cost": 5.99
     },
     {
         "edge_id": 1124,
         "from_node_id": 117,
         "to_node_id": 118,
-        "cost": 0.0
+        "cost": 49.98
     },
     {
         "edge_id": 1125,
         "from_node_id": 118,
         "to_node_id": 119,
-        "cost": 0.0
+        "cost": 25.51
     },
     {
         "edge_id": 1126,
         "from_node_id": 119,
         "to_node_id": 120,
-        "cost": 0.0
+        "cost": 268.43
     },
     {
         "edge_id": 1127,
         "from_node_id": 120,
         "to_node_id": 121,
-        "cost": 0.0
+        "cost": 113.13
     },
     {
         "edge_id": 1128,
         "from_node_id": 121,
         "to_node_id": 122,
-        "cost": 0.0
+        "cost": 33.47
     },
     {
         "edge_id": 1129,
         "from_node_id": 123,
         "to_node_id": 122,
-        "cost": 0.0
+        "cost": 20.89
     },
     {
         "edge_id": 1130,
         "from_node_id": 123,
         "to_node_id": 124,
-        "cost": 0.0
+        "cost": 32.34
     },
     {
         "edge_id": 1131,
         "from_node_id": 124,
         "to_node_id": 125,
-        "cost": 0.0
+        "cost": 24.42
     }
 ]

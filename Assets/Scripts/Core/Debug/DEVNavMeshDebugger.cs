@@ -45,9 +45,14 @@ public class DEVNavMeshDebugger : MonoBehaviour
                 Debug.LogWarning("経路が見つかりませんでした。");
             }
         }
+        else
+        {
+            Debug.Log("NavMesh.CalculatePathに失敗しました");
+        }
     }
 
     // ギズモとして経路をレンダリング
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (pathFound && path != null && path.corners.Length > 1)
@@ -69,4 +74,5 @@ public class DEVNavMeshDebugger : MonoBehaviour
             Gizmos.DrawSphere(endPosition.position, 0.2f);
         }
     }
+    #endif
 }

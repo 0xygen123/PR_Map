@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Buildings Remote Group
   m_GUID: 3b1f4f995ec6f304d83e22ef7ca3e20e
   m_SerializeEntries:
+  - m_GUID: 2be77117e6535e349b60a2d4770a76a5
+    m_Address: Assets/Scripts/Core/Debug/student_hall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2dc0816f5f474514b838a04286e6349f
     m_Address: Assets/Scripts/Core/Debug/student_hall.asset
     m_ReadOnly: 0
@@ -28,7 +34,7 @@ MonoBehaviour:
     - default
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: f5b382b41e89687478410fa75957697d, type: 2}
+  m_Settings: {fileID: 11400000, guid: 4b5177ae67d446d4982fd62b2cddea68, type: 2}
   m_SchemaSet:
     m_Schemas:
     - {fileID: 11400000, guid: dc2eaa414458f274b8722e675af2e6e7, type: 2}

@@ -181,7 +181,7 @@ namespace Assets.Scripts.Plane.Road
 
                 roadRenderers.Add(edge.edgeId, lineRenderer);
             }
-            Debug.Log($"Roads visualized. {roadRenderers.Count} renderers stored.");
+            // Debug.Log($"Roads visualized. {roadRenderers.Count} renderers stored.");
         }
 
 #if UNITY_EDITOR

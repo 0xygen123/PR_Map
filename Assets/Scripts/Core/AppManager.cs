@@ -55,9 +55,9 @@ public class AppManager : MonoBehaviour
 
         try
         {
-            if (cachedBuildingInstance != null)
+            if (buildingKey != cachedBuildingKey)
             {
-                ClearCache(buildingKey);
+                ClearCache();
             }
 
             BuildingInfo entry = buildingAddressMap.GetBuildingByKey(buildingKey);
@@ -105,20 +105,28 @@ public class AppManager : MonoBehaviour
                 cachedBuildingKey = buildingKey;
                 cachedBuildingInstance = buildingInstance;
 
-                pathRenderer.ClearAllPaths();
                 pathRenderer.DrawPath(optimalPath);
                 viewController.SwitchToSolidView(buildingInstance);
             }
             else
             {
-                // >> DEV
+#if UNITY_EDITOR
                 viewController.SwitchToSolidView(buildingInstance);
                 Debug.LogWarning("有効な経路が見つかりませんでした。");
+#endif
+#if UNITY_WEBGL
+                JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, "有効な経路が見つかりませんでした");
+#endif
             }
         }
         catch (Exception e)
         {
+#if UNITY_EDITOR
             Debug.LogError($"経路探索プロセスでエラーが発生しました: {e.Message}");
+#endif
+#if UNITY_WEBGL
+            JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, $"経路探索プロセスでエラーが発生しました: {e.Message}");
+#endif
         }
         finally
         {
@@ -136,9 +144,9 @@ public class AppManager : MonoBehaviour
 
         try
         {
-            if (cachedBuildingInstance != null)
+            if (buildingKey != cachedBuildingKey)
             {
-                ClearCache(buildingKey);
+                ClearCache();
             }
 
             BuildingInfo entry = buildingAddressMap.GetBuildingByKey(buildingKey);
@@ -170,7 +178,6 @@ public class AppManager : MonoBehaviour
                 cachedPathResult = optimalPath;
                 cachedBuildingKey = buildingKey;
 
-                pathRenderer.ClearAllPaths();
                 pathRenderer.DrawPath(optimalPath);
                 viewController.SwitchToPlaneView();
             }
@@ -193,17 +200,17 @@ public class AppManager : MonoBehaviour
     /// <summary>
     /// 探索済みの経路情報と建物インスタンスをクリアします。
     /// </summary>
-    private void ClearCache(string newBuildingKey)
+    private void ClearCache()
     {
         Debug.Log("Cache Clear");
         // 違う建物を探索する場合のみ、古いインスタンスを解放する
-        if (cachedBuildingKey != null && cachedBuildingKey != newBuildingKey && cachedBuildingInstance != null)
+        if (cachedBuildingInstance != null)
         {
             Destroy(cachedBuildingInstance);
+            cachedBuildingInstance = null;
             assetLoader.ReleaseGameObject(cachedBuildingInstance);
         }
         cachedPathResult = null;
-        cachedBuildingInstance = null;
         cachedBuildingKey = null;
     }
 

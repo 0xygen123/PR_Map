@@ -72,18 +72,18 @@ public class DEVLocationGenerator : MonoBehaviour
 
             if (roadNetworkBuilder.MetersPerDegreeLon == 0)
             {
-                Debug.Log(roadNetworkBuilder.MetersPerDegreeLon);
+                // Debug.Log(roadNetworkBuilder.MetersPerDegreeLon);
                 break;
             }
 
             double lon = (generatedPosition.x / roadNetworkBuilder.MetersPerDegreeLon) + roadNetworkBuilder.centerLongitude;
             double lat = (generatedPosition.y / RoadNetworkBuilder.METERS_PER_DEGREE_LAT) + roadNetworkBuilder.centerLatitude;
 
-            Debug.Log($"[Dev] Generating new location near Node {currentNode.nodeId}. Sending Lat: {lat:F8}, Lon: {lon:F8}");
+            // Debug.Log($"[Dev] Generating new location near Node {currentNode.nodeId}. Sending Lat: {lat:F8}, Lon: {lon:F8}");
             jSInterface.SetLocation($"{lat},{lon}");
 
             float nextAngle = Random.Range(0f, 360f);
-            Debug.Log($"[Dev] Generating new direction {nextAngle}");
+            // Debug.Log($"[Dev] Generating new direction {nextAngle}");
             jSInterface.SetDirection($"{nextAngle}");
 
             if (currentNode.connectedEdges.Count == 0)

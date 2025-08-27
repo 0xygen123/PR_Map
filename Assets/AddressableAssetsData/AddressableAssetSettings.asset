@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: 8867dfc81204c354ba4a66a7133b2179
+  m_DefaultGroup: 3b1f4f995ec6f304d83e22ef7ca3e20e
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: bf14151a15d93a64387ed34b1673e769
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -94,6 +94,20 @@ MonoBehaviour:
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: f498148817773a940bd0d157c78ba658
         m_Value: 'http://localhost:8000/ServerData/[BuildTarget]'
+    - m_InheritedParent: 
+      m_Id: aceca1043bc544641951ad40f7016202
+      m_ProfileName: Test
+      m_Values:
+      - m_Id: 1c68090099b88784a9a44bcb916e5462
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 9a635313903f9ea43b713ac97f7835ad
+        m_Value: 'C:\Users\asato\Desktop\PR\TestBuilds\ServerData\[BuildTarget]'
+      - m_Id: a5fd70ea57cd38a4ba791acd90cb6998
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: ab4f0c752ca25b54bb1ef7afb538ffc3
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: f498148817773a940bd0d157c78ba658
+        m_Value: 'http://192.168.0.29:8000/ServerData/[BuildTarget]'
     m_ProfileEntryNames:
     - m_Id: 1c68090099b88784a9a44bcb916e5462
       m_Name: BuildTarget
@@ -123,7 +137,7 @@ MonoBehaviour:
     m_ClassName: 
   m_ActivePlayerDataBuilderIndex: 2
   m_DataBuilders:
-  - {fileID: 11400000, guid: 2221320dba13b1441991604c8386017a, type: 2}
-  - {fileID: 11400000, guid: 34233891c03a6c44e8de2d622a332d8c, type: 2}
-  - {fileID: 11400000, guid: 359a78213324670459cd2a97aa7c6ea2, type: 2}
+  - {fileID: 11400000, guid: 01e3e0c109bf2c940ad415e1a2f20844, type: 2}
+  - {fileID: 11400000, guid: 5762cdfa0d3dd094d8fef45e52b563f8, type: 2}
+  - {fileID: 11400000, guid: 9afe62c30f999f148a1b58e9003c45c6, type: 2}
   m_ActiveProfileId: 9a104989d1f3b8641b0fb9d5da987dfe
