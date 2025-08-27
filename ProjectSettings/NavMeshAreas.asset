@@ -70,6 +70,8 @@ NavMeshProjectSettings:
   - name: 
     cost: 1
   m_LastAgentTypeID: 1135425739
+  m_LastAgentTypeID: -749502095
+  m_LastAgentTypeID: -515339236
   m_Settings:
   - serializedVersion: 3
     agentTypeID: 0
@@ -200,6 +202,9 @@ NavMeshProjectSettings:
   - serializedVersion: 3
     agentTypeID: -749502095
     agentRadius: 0.1
+    agentHeight: 0.5
+    agentSlope: 60
+    agentClimb: 0.15
     agentHeight: 0.32
     agentSlope: 60
     agentClimb: 0.31
@@ -259,6 +264,7 @@ NavMeshProjectSettings:
   - zuikoukan
   - tikoukan
   - seiunkan
+  - seisikan
   - 7goukan
   - 8goukan
   - 3goukan
