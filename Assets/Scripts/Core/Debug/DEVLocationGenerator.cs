@@ -3,7 +3,7 @@ using Random = UnityEngine.Random;
 using System.Collections;
 using System.Linq;
 
-using Assets.Scripts.Plane;
+using Assets.Scripts.Core;
 using Assets.Scripts.Plane.Road;
 
 #if UNITY_EDITOR || UNITY_WEBGL

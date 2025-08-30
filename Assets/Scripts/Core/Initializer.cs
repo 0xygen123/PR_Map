@@ -1,12 +1,14 @@
 using UnityEngine;
 using System;
 using System.Collections;
-
-public class Initializer
+namespace Assets.Scripts.Core
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void InitializeBeforeSceneLoad()
+    public class Initializer
     {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void InitializeBeforeSceneLoad()
+        {
 
+        }
     }
 }

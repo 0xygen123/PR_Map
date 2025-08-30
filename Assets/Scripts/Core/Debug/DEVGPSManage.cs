@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 
+using Assets.Scripts.Core;
 using Assets.Scripts.Plane;
 
 public class DEVGPSManager : MonoBehaviour

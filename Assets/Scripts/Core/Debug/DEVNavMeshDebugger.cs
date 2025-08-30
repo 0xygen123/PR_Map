@@ -5,13 +5,13 @@ using System.Linq;
 
 public class DEVNavMeshDebugger : MonoBehaviour
 {
-    [SerializeField] private Transform startPosition;
-    [SerializeField] private Transform endPosition;
-    [SerializeField] private bool autoStartRouteSearch;
+    [SerializeField] Transform startPosition;
+    [SerializeField] Transform endPosition;
+    [SerializeField] bool autoStartRouteSearch;
 
-    private NavMeshPath path;
-    private float totalPathDistance;
-    private bool pathFound = false;
+    NavMeshPath path;
+    float totalPathDistance;
+    bool pathFound = false;
 
     void Start()
     {
@@ -53,7 +53,7 @@ public class DEVNavMeshDebugger : MonoBehaviour
 
     // ギズモとして経路をレンダリング
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         if (pathFound && path != null && path.corners.Length > 1)
         {

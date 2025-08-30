@@ -7,10 +7,10 @@ namespace Assets.Scripts.Solid
     public class BuildingReferenceProvider : MonoBehaviour
     {
         // Inspectorでわかりやすくするために親オブジェクトを指定
-        [SerializeField] private Transform entrancesParent;
-        [SerializeField] private Transform roomsParent;
+        [SerializeField] Transform entrancesParent;
+        [SerializeField] Transform roomsParent;
 
-        private Dictionary<string, Transform> references = new Dictionary<string, Transform>();
+        Dictionary<string, Transform> references = new Dictionary<string, Transform>();
 
         void Awake()
         {

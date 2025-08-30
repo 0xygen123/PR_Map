@@ -1,48 +1,51 @@
 using UnityEngine;
 using Assets.Scripts.Plane.Road;
 
-public class PathRenderer : MonoBehaviour
+namespace Assets.Scripts.Core
 {
-    // RoadNetworkBuilderを改名したものを参照
-    [SerializeField] private RoadNetworkBuilder roadNetworkBuilder; 
-    [SerializeField] private LineRenderer indoorPathRenderer;
-
-    public void DrawPath(PathfindingManager.PathResult result)
+    public class PathRenderer : MonoBehaviour
     {
-        ClearAllPaths();
+        // RoadNetworkBuilderを改名したものを参照
+        [SerializeField] RoadNetworkBuilder roadNetworkBuilder;
+        [SerializeField] LineRenderer indoorPathRenderer;
 
-        // 屋外経路の描画
-        if (result.OutdoorPath != null && result.OutdoorPath.Count > 0)
+        public void DrawPath(PathfindingManager.PathResult result)
         {
-            roadNetworkBuilder.VisualizePathByChangingMaterial(result.OutdoorPath);
-        }
+            ClearAllPaths();
 
-        // 屋内経路の描画
-        if (result.IndoorPathCoordinates != null && result.IndoorPathCoordinates.Count > 1)
-        {
-            if (indoorPathRenderer == null)
+            // 屋外経路の描画
+            if (result.OutdoorPath != null && result.OutdoorPath.Count > 0)
             {
-                Debug.Log("IndoorPathRenderer がアタッチされていません");
-                return;
+                roadNetworkBuilder.VisualizePathByChangingMaterial(result.OutdoorPath);
             }
 
-            // LineRenderer
-            indoorPathRenderer.gameObject.SetActive(true);
-            indoorPathRenderer.positionCount = result.IndoorPathCoordinates.Count;
-            indoorPathRenderer.SetPositions(result.IndoorPathCoordinates.ToArray());
-            indoorPathRenderer.enabled = true;
-        }
-    }
+            // 屋内経路の描画
+            if (result.IndoorPathCoordinates != null && result.IndoorPathCoordinates.Count > 1)
+            {
+                if (indoorPathRenderer == null)
+                {
+                    Debug.Log("IndoorPathRenderer がアタッチされていません");
+                    return;
+                }
 
-    public void ClearAllPaths()
-    {
-        // 屋外経路の表示リセット
-        roadNetworkBuilder.ResetAllRoadMaterials();
-        // 屋内経路を非表示に
-        if (indoorPathRenderer != null)
+                // LineRenderer
+                indoorPathRenderer.gameObject.SetActive(true);
+                indoorPathRenderer.positionCount = result.IndoorPathCoordinates.Count;
+                indoorPathRenderer.SetPositions(result.IndoorPathCoordinates.ToArray());
+                indoorPathRenderer.enabled = true;
+            }
+        }
+
+        public void ClearAllPaths()
         {
-            indoorPathRenderer.positionCount = 0;
-            indoorPathRenderer.enabled = false;
+            // 屋外経路の表示リセット
+            roadNetworkBuilder.ResetAllRoadMaterials();
+            // 屋内経路を非表示に
+            if (indoorPathRenderer != null)
+            {
+                indoorPathRenderer.positionCount = 0;
+                indoorPathRenderer.enabled = false;
+            }
         }
     }
 }

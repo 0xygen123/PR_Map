@@ -4,159 +4,161 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Assets.Scripts.Plane.Road;
-using Assets.Scripts.Core;
 using Assets.Scripts.Plane;
 using Assets.Scripts.Solid;
 
-public class PathfindingManager : MonoBehaviour
+namespace Assets.Scripts.Core
 {
-    [SerializeField] RoadNetworkBuilder roadNetwork;
-    [SerializeField] UserLocationManager userLocation;
-    [SerializeField] int IndoorCostMultiple = 3;
-
-    // 計算結果を格納するクラス
-    public class PathResult
+    public class PathfindingManager : MonoBehaviour
     {
-        public EntranceInfo Entrance { get; set; }
-        public List<RuntimeNode> OutdoorPath { get; set; }
-        public List<Vector3> IndoorPathCoordinates { get; set; }
-        public float OutdoorCost { get; set; }
-        public float IndoorCost { get; set; }
-        public float TotalCost => OutdoorCost + IndoorCost;
-    }
+        [SerializeField] RoadNetworkBuilder roadNetwork;
+        [SerializeField] UserLocationManager userLocation;
+        [SerializeField] int IndoorCostMultiple = 3;
 
-
-    //public async Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
-    public Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
-    {
-        RoomInfo destinationRoom = buildingData.GetRoomByKey(roomKey);
-        if (destinationRoom == null)
+        // 計算結果を格納するクラス
+        public class PathResult
         {
-            Debug.LogError($"部屋が見つかりません: {roomKey}");
-            return null;
-        }
-        if (navMeshController == null)
-        {
-            Debug.LogError("NavMeshControllerが見つかりません");
-            return null;
-        }
-        if (buildingInstance == null)
-        {
-#if UNITY_EDITOR
-            Debug.LogError("建物オブジェクトのインスタンス化に失敗しました");
-#endif
-            return null;
+            public EntranceInfo Entrance { get; set; }
+            public List<RuntimeNode> OutdoorPath { get; set; }
+            public List<Vector3> IndoorPathCoordinates { get; set; }
+            public float OutdoorCost { get; set; }
+            public float IndoorCost { get; set; }
+            public float TotalCost => OutdoorCost + IndoorCost;
         }
 
-        // 建物インスタンスから参照管理コンポーネントを取得
-        BuildingReferenceProvider referenceProvider = buildingInstance.GetComponent<BuildingReferenceProvider>();
-        if (referenceProvider == null)
+
+        //public async Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
+        public Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
         {
-#if UNITY_EDITOR
-            Debug.LogError("BuildingReferenceProviderが建物プレハブに見つかりません");
-#endif
-            return null;
-        }
-
-        // 目標地点の座標を取得
-        Transform roomTransform = referenceProvider.GetReference(destinationRoom.roomKey);
-        if (roomTransform == null)
-        {
-            Debug.LogError($"建物プレハブ内に部屋オブジェクト '{destinationRoom.roomKey}' が見つかりません。");
-            return null;
-        }
-        // NavMesh探索用にワールド座標を取得
-        Vector3 roomWorldPos = roomTransform.position;
-
-
-        // 各入り口までの合計コスト
-        List<PathResult> results = new List<PathResult>();
-        Transform buildingTransform = buildingInstance.transform;
-
-        // Task.Run() をやめて、通常の foreach ループに変更します
-        foreach (var entrance in buildingData.entrances)
-        {
-            // 屋外経路の探索
-            List<RuntimeNode> outdoorPathNodes = AStarFinder.FindPath(roadNetwork, startNodeId, entrance.outdoorNodeId);
-            if (outdoorPathNodes == null || outdoorPathNodes.Count == 0)
+            RoomInfo destinationRoom = buildingData.GetRoomByKey(roomKey);
+            if (destinationRoom == null)
             {
-                continue; // この入り口はスキップ
+                Debug.LogError($"部屋が見つかりません: {roomKey}");
+                return null;
             }
-            float outdoorCost = (float)outdoorPathNodes.Last().gCost;
-
-            // メインスレッドで実行
-            Transform entranceTransform = referenceProvider.GetReference(entrance.entranceKey);
-            if (entranceTransform == null)
+            if (navMeshController == null)
             {
-                Debug.LogWarning($"建物プレハブ内にエントランス '{entrance.entranceKey}' が見つかりません。");
-                continue;
+                Debug.LogError("NavMeshControllerが見つかりません");
+                return null;
             }
-            // これでエラーなく Transform の position を取得できます
-            Vector3 entranceWorldPos = entranceTransform.position;
-
-            // 屋内経路の探索
-            (List<Vector3> indoorCoords, float indoorCost) = navMeshController.FindPathAndCost(entranceWorldPos, roomWorldPos);
-            if (indoorCost < 0)
+            if (buildingInstance == null)
             {
-                continue;
+#if UNITY_EDITOR
+                Debug.LogError("建物オブジェクトのインスタンス化に失敗しました");
+#endif
+                return null;
             }
 
+            // 建物インスタンスから参照管理コンポーネントを取得
+            BuildingReferenceProvider referenceProvider = buildingInstance.GetComponent<BuildingReferenceProvider>();
+            if (referenceProvider == null)
+            {
 #if UNITY_EDITOR
-            Debug.Log($"{entrance.entranceKey}: [Costs]: {{ Indoor: {indoorCost}, Outdoor: {outdoorCost}, Total: {indoorCost + outdoorCost}}}");
+                Debug.LogError("BuildingReferenceProviderが建物プレハブに見つかりません");
+#endif
+                return null;
+            }
+
+            // 目標地点の座標を取得
+            Transform roomTransform = referenceProvider.GetReference(destinationRoom.roomKey);
+            if (roomTransform == null)
+            {
+                Debug.LogError($"建物プレハブ内に部屋オブジェクト '{destinationRoom.roomKey}' が見つかりません。");
+                return null;
+            }
+            // NavMesh探索用にワールド座標を取得
+            Vector3 roomWorldPos = roomTransform.position;
+
+
+            // 各入り口までの合計コスト
+            List<PathResult> results = new List<PathResult>();
+            Transform buildingTransform = buildingInstance.transform;
+
+            // Task.Run() をやめて、通常の foreach ループに変更します
+            foreach (var entrance in buildingData.entrances)
+            {
+                // 屋外経路の探索
+                List<RuntimeNode> outdoorPathNodes = AStarFinder.FindPath(roadNetwork, startNodeId, entrance.outdoorNodeId);
+                if (outdoorPathNodes == null || outdoorPathNodes.Count == 0)
+                {
+                    continue; // この入り口はスキップ
+                }
+                float outdoorCost = (float)outdoorPathNodes.Last().gCost;
+
+                // メインスレッドで実行
+                Transform entranceTransform = referenceProvider.GetReference(entrance.entranceKey);
+                if (entranceTransform == null)
+                {
+                    Debug.LogWarning($"建物プレハブ内にエントランス '{entrance.entranceKey}' が見つかりません。");
+                    continue;
+                }
+                // これでエラーなく Transform の position を取得できます
+                Vector3 entranceWorldPos = entranceTransform.position;
+
+                // 屋内経路の探索
+                (List<Vector3> indoorCoords, float indoorCost) = navMeshController.FindPathAndCost(entranceWorldPos, roomWorldPos);
+                if (indoorCost < 0)
+                {
+                    continue;
+                }
+
+#if UNITY_EDITOR
+                Debug.Log($"{entrance.entranceKey}: [Costs]: {{ Indoor: {indoorCost}, Outdoor: {outdoorCost}, Total: {indoorCost + outdoorCost}}}");
 #endif
 
-            // 結果をリストに追加
-            results.Add(new PathResult
+                // 結果をリストに追加
+                results.Add(new PathResult
+                {
+                    Entrance = entrance,
+                    OutdoorPath = outdoorPathNodes,
+                    IndoorPathCoordinates = indoorCoords,
+                    OutdoorCost = outdoorCost,
+                    IndoorCost = indoorCost * IndoorCostMultiple
+                });
+            }
+
+            // 最小コストを計算
+            if (results.Count == 0)
             {
-                Entrance = entrance,
-                OutdoorPath = outdoorPathNodes,
-                IndoorPathCoordinates = indoorCoords,
-                OutdoorCost = outdoorCost,
-                IndoorCost = indoorCost * IndoorCostMultiple
-            });
+                Debug.Log("有効なルートが存在しません");
+                return null;
+            }
+
+            var optimalResult = results.OrderBy(r => r.TotalCost).First();
+            //return optimalResult;
+            return Task.FromResult(optimalResult);
         }
 
-        // 最小コストを計算
-        if (results.Count == 0)
+        public PathResult FindOptimalPath(int startNodeId, BuildingData buildingData)
         {
-            Debug.Log("有効なルートが存在しません");
-            return null;
-        }
+            List<PathResult> results = new List<PathResult>();
+            foreach (EntranceInfo entrance in buildingData.entrances)
+            {
+                List<RuntimeNode> outdoorPathNodes = AStarFinder.FindPath(roadNetwork, startNodeId, entrance.outdoorNodeId);
+                if (outdoorPathNodes == null || outdoorPathNodes.Count == 0) { continue; }
 
-        var optimalResult = results.OrderBy(r => r.TotalCost).First();
-        //return optimalResult;
-        return Task.FromResult(optimalResult);
-    }
-
-    public PathResult FindOptimalPath(int startNodeId, BuildingData buildingData)
-    {
-        List<PathResult> results = new List<PathResult>();
-        foreach (EntranceInfo entrance in buildingData.entrances)
-        {
-            List<RuntimeNode> outdoorPathNodes = AStarFinder.FindPath(roadNetwork, startNodeId, entrance.outdoorNodeId);
-            if (outdoorPathNodes == null || outdoorPathNodes.Count == 0) { continue; }
-
-            float outdoorCost = (float)outdoorPathNodes.Last().gCost;
+                float outdoorCost = (float)outdoorPathNodes.Last().gCost;
 
 #if UNITY_EDITOR
-            Debug.Log($"[Costs] Indoor: {0}, Outdoor: {outdoorCost}, Total: {outdoorCost}");
+                Debug.Log($"[Costs] Indoor: {0}, Outdoor: {outdoorCost}, Total: {outdoorCost}");
 #endif
 
-            results.Add(new PathResult
+                results.Add(new PathResult
+                {
+                    Entrance = entrance,
+                    OutdoorPath = outdoorPathNodes,
+                    IndoorPathCoordinates = null,
+                    OutdoorCost = outdoorCost,
+                    IndoorCost = 0
+                });
+            }
+            if (results.Count == 0)
             {
-                Entrance = entrance,
-                OutdoorPath = outdoorPathNodes,
-                IndoorPathCoordinates = null,
-                OutdoorCost = outdoorCost,
-                IndoorCost = 0
-            });
-        }
-        if (results.Count == 0)
-        {
-            Debug.LogError("有効なルートが存在しません");
-            return null;
-        }
+                Debug.LogError("有効なルートが存在しません");
+                return null;
+            }
 
-        return results.OrderBy(r => r.TotalCost).First();
+            return results.OrderBy(r => r.TotalCost).First();
+        }
     }
 }

@@ -2,7 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+namespace Assets.Scripts.Core
 {
-    [SerializeField] GameObject loadingPanel;
+    public class UIManager : MonoBehaviour
+    {
+        [SerializeField] GameObject loadingPanel;
+    }
 }

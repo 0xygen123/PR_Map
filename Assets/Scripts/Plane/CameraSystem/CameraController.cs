@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
+using Assets.Scripts.Core;
+
 namespace Assets.Scripts.Plane
 {
     public class CameraController : MonoBehaviour, CameraControls.ICameraControlActions

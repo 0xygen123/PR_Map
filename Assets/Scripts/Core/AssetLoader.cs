@@ -10,7 +10,7 @@ namespace Assets.Scripts.Core
 {
     public class BuildingLoader : MonoBehaviour
     {
-        private readonly List<AsyncOperationHandle> _loadedHandles = new List<AsyncOperationHandle>();
+        readonly List<AsyncOperationHandle> _loadedHandles = new List<AsyncOperationHandle>();
 
         public async Task<BuildingData> LoadDataAsync(AssetReferenceT<BuildingData> reference)
         {
@@ -49,7 +49,7 @@ namespace Assets.Scripts.Core
             }
         }
 
-        private void OnDestroy()
+        void OnDestroy()
         {
             // シーン終了時にロードしたすべてのアセットを解放
             foreach (var handle in _loadedHandles)

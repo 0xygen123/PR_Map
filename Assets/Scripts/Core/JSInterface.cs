@@ -4,163 +4,192 @@ using System;
 using System.Globalization;
 using System.Collections.Generic;
 
-
-public class JSInterface : MonoBehaviour
+namespace Assets.Scripts.Core
 {
-    public static class JSFunction
+    public class JSInterface : MonoBehaviour
     {
-        public const string OnShowError = "showError";
-    }
-    public static class JSFunctionNoArg
-    {
-        public const string OnUnityLoaded = "onUnityLoaded";
-    }
+        public static class JSFunction
+        {
+            public const string OnShowError = "showError";
+        }
+        public static class JSFunctionNoArg
+        {
+            public const string OnUnityLoaded = "onUnityLoaded";
+        }
 
-    // 位置情報の更新時に発行されるイベント
-    public static event Action<double, double> OnLocationReceived;
-    // 方位情報の更新時に発行されるイベント
-    public static event Action<float> OnDirectionReceived;
-    // 建物オブジェクトのロードリクエスト
-    public static event Action<string> OnPathfindingRequested2D;
-    public static event Action<string, string> OnPathfindingRequested3D;
-    // 2Dマップへの切り替え
-    public static event Action OnSwitchToPlaneView;
-    public static event Action OnSwitchToSolidView;
+        // JSのGeoLocationのステータスコード受信時に発行されるイベント
+        public static event Action<int> OnGeolocationStatusReceived;
+
+        // 位置情報の更新時に発行されるイベント
+        public static event Action<double, double> OnLocationReceived;
+        // 方位情報の更新時に発行されるイベント
+        public static event Action<float> OnDirectionReceived;
+        // 建物オブジェクトのロードリクエスト
+        public static event Action<string> OnPathfindingRequested2D;
+        public static event Action<string, string> OnPathfindingRequested3D;
+        // 2Dマップへの切り替え
+        public static event Action OnSwitchToPlaneView;
+        public static event Action OnSwitchToSolidView;
 
 
 #if UNITY_WEBGL
-    [DllImport("__Internal")]
-    static extern void CallJavaScriptFunction(string functionName, string message);
+        [DllImport("__Internal")]
+        static extern void CallJavaScriptFunction(string functionName, string message);
 
-    [DllImport("__Internal")]
-    static extern void CallJavaScriptFunctionNoArg(string functionName);
+        [DllImport("__Internal")]
+        static extern void CallJavaScriptFunctionNoArg(string functionName);
 #endif
 
 
-    #region JS -> CSharp
+        #region JS -> CSharp
 
-    /// <summary>
-    /// 2Dマップへカメラを切り替えるメソッド
-    /// </summary>
-    public void SwitchToPlaneView()
-    {
-        OnSwitchToPlaneView?.Invoke();
-    }
-
-    /// <summary>
-    /// 3Dマップへカメラを切り替えるメソッド
-    /// </summary>
-    public void SwitchToSolidView()
-    {
-        OnSwitchToSolidView?.Invoke();
-    }
-
-
-    //public void PathfindingRequested(string buildingKey, string roomKey)
-    public void PathfindingRequested(string buildingAndRoom)
-    {
-        if (string.IsNullOrEmpty(buildingAndRoom))
+        /// <summary>
+        /// 2Dマップへカメラを切り替えるメソッド
+        /// </summary>
+        public void SwitchToPlaneView()
         {
-            Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
-            SendToJS(JSFunction.OnShowError, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
-            return;
+            OnSwitchToPlaneView?.Invoke();
         }
 
-        string[] keys = buildingAndRoom.Split(',');
-        if (keys.Length == 1)
+        /// <summary>
+        /// 3Dマップへカメラを切り替えるメソッド
+        /// </summary>
+        public void SwitchToSolidView()
         {
-            OnPathfindingRequested2D?.Invoke(keys[0]);
-        }
-        else if (keys.Length == 2)
-        {
-            OnPathfindingRequested3D?.Invoke(keys[0], keys[1]);
-        }
-    }
-
-    /// <summary>
-    /// JSから緯度経度を受け取りパースする
-    /// </summary>
-    /// <param name="latLon"></param>
-    public void SetLocation(string latLon)
-    {
-        if (string.IsNullOrEmpty(latLon))
-        {
-            Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
-            SendToJS(JSFunction.OnShowError, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
-            return;
+            OnSwitchToSolidView?.Invoke();
         }
 
-        string[] coord = latLon.Split(',');
-        if (coord.Length == 2 &&
-            double.TryParse(coord[0], NumberStyles.Any, CultureInfo.InvariantCulture, out double latitude) &&
-            double.TryParse(coord[1], NumberStyles.Any, CultureInfo.InvariantCulture, out double longitude)
-        )
+        /// <summary>
+        /// GeoLocationAPIのステータスコードを受け取る
+        /// </summary>
+        /// <param name="buildingAndRoom"></param>
+        public void SetGPSSTate(string gpsState)
         {
-            OnLocationReceived?.Invoke(latitude, longitude);
-        }
-        else
-        {
-            Debug.Log($"[JSInterface] Failed to parse location data: '{latLon}'");
-        }
-    }
+            if (string.IsNullOrEmpty(gpsState))
+            {
+                Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+                SendToJS(JSFunction.OnShowError, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+                return;
+            }
 
-    /// <summary>
-    /// JSから方位を受け取る
-    /// </summary>
-    /// <param name="direction"></param>
-    public void SetDirection(string direction)
-    {
-        if (string.IsNullOrEmpty(direction))
-        {
-            Debug.LogError("[JSInterface] ReceiveDirectionFromJS: Received null or empty string.");
-            return;
+            if (int.TryParse(gpsState, NumberStyles.Any, CultureInfo.InvariantCulture, out int state))
+            {
+                // パース成功。int型のデータをイベントで通知
+                OnGeolocationStatusReceived?.Invoke(state);
+            }
+            else
+            {
+                Debug.LogError($"[JSInterface] Failed to parse direction data: '{gpsState}'");
+            }
         }
 
-        if (float.TryParse(direction, NumberStyles.Any, CultureInfo.InvariantCulture, out float angle))
+
+        //public void PathfindingRequested(string buildingKey, string roomKey)
+        public void PathfindingRequested(string buildingAndRoom)
         {
-            // パース成功。float型のデータをイベントで通知
-            OnDirectionReceived?.Invoke(angle);
+            if (string.IsNullOrEmpty(buildingAndRoom))
+            {
+                Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+                SendToJS(JSFunction.OnShowError, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+                return;
+            }
+
+            string[] keys = buildingAndRoom.Split(',');
+            if (keys.Length == 1)
+            {
+                OnPathfindingRequested2D?.Invoke(keys[0]);
+            }
+            else if (keys.Length == 2)
+            {
+                OnPathfindingRequested3D?.Invoke(keys[0], keys[1]);
+            }
         }
-        else
+
+        /// <summary>
+        /// JSから緯度経度を受け取りパースする
+        /// </summary>
+        /// <param name="latLon"></param>
+        public void SetLocation(string latLon)
         {
-            Debug.LogError($"[JSInterface] Failed to parse direction data: '{direction}'");
+            if (string.IsNullOrEmpty(latLon))
+            {
+                Debug.Log("[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+                SendToJS(JSFunction.OnShowError, "[JSInterface] ReceiveLocationFromJS: Received null or empty string.");
+                return;
+            }
+
+            string[] coord = latLon.Split(',');
+            if (coord.Length == 2 &&
+                double.TryParse(coord[0], NumberStyles.Any, CultureInfo.InvariantCulture, out double latitude) &&
+                double.TryParse(coord[1], NumberStyles.Any, CultureInfo.InvariantCulture, out double longitude)
+            )
+            {
+                OnLocationReceived?.Invoke(latitude, longitude);
+            }
+            else
+            {
+                Debug.Log($"[JSInterface] Failed to parse location data: '{latLon}'");
+            }
         }
-    }
-    #endregion
+
+        /// <summary>
+        /// JSから方位を受け取る
+        /// </summary>
+        /// <param name="direction"></param>
+        public void SetDirection(string direction)
+        {
+            if (string.IsNullOrEmpty(direction))
+            {
+                Debug.LogError("[JSInterface] ReceiveDirectionFromJS: Received null or empty string.");
+                return;
+            }
+
+            if (float.TryParse(direction, NumberStyles.Any, CultureInfo.InvariantCulture, out float angle))
+            {
+                // パース成功。float型のデータをイベントで通知
+                OnDirectionReceived?.Invoke(angle);
+            }
+            else
+            {
+                Debug.LogError($"[JSInterface] Failed to parse direction data: '{direction}'");
+            }
+        }
+        #endregion
 
 
 
-    #region CSharp -> JS
-    /// <summary>
-    /// JavaScriptの特定の関数を呼び出す
-    /// </summary>
-    /// <param name="functionName">呼び出すJavaScriptの関数名</param>
-    /// <param name="message">JavaScript関数に渡す引数 (文字列)</param>
-    public static void SendToJS(string functionName, string message)
-    {
+        #region CSharp -> JS
+        /// <summary>
+        /// JavaScriptの特定の関数を呼び出す
+        /// </summary>
+        /// <param name="functionName">呼び出すJavaScriptの関数名</param>
+        /// <param name="message">JavaScript関数に渡す引数 (文字列)</param>
+        public static void SendToJS(string functionName, string message)
+        {
 #if UNITY_EDITOR
-        Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
+            Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
 #elif UNITY_WEBGL
         CallJavaScriptFunction(functionName, message);
 #else
         Debug.LogWarning($"[JSInterface] Not a WebGL build. Would call JS function '{functionName}' with message: '{message}'");
 #endif
-    }
+        }
 
 
-    /// <summary>
-    /// JavaScriptの特定の関数を引数なしで呼び出す
-    /// </summary>
-    /// <param name="functionName">呼び出すJavaScriptの関数名</param>
-    public static void SendToJS(string functionName)
-    {
+        /// <summary>
+        /// JavaScriptの特定の関数を引数なしで呼び出す
+        /// </summary>
+        /// <param name="functionName">呼び出すJavaScriptの関数名</param>
+        public static void SendToJS(string functionName)
+        {
 #if UNITY_EDITOR
-        Debug.Log($"[JSInterface] '{functionName}'");
+            Debug.Log($"[JSInterface] '{functionName}'");
 #elif UNITY_WEBGL
         CallJavaScriptFunctionNoArg(functionName);
 #else
         Debug.LogWarning($"[JSInterface] Not a WebGL build. Would call JS function '{functionName}' (no arguments).");
 #endif
+        }
     }
+    #endregion
 }
-#endregion

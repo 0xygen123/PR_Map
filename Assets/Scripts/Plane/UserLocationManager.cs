@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 
+using Assets.Scripts.Core;
 using Assets.Scripts.Plane.Road;
 
 namespace Assets.Scripts.Plane
@@ -9,7 +10,8 @@ namespace Assets.Scripts.Plane
     {
         [Header("Dependencies")]
         [SerializeField] RoadNetworkBuilder roadNetworkBuilder; // InspectorでRoadNetworkBuilderを持つオブジェクトをアサイン
-        [SerializeField] Transform userTransform; // Inspectorでユーザーを表すオブジェクトをアサイン
+        [SerializeField] Transform userTransform;
+        [SerializeField] GameObject userObject;
 
         [Header("Movement Settings")]
         [SerializeField] float moveSpeed = 1.5f; // スムーズ移動の速度
@@ -19,6 +21,14 @@ namespace Assets.Scripts.Plane
 
         Vector3 targetPosition; // 移動目標位置
         bool hasInitialPosition = false;
+
+        const int ErrorCapacity = 3;
+        int errorNumber = 0;
+
+        void Awake()
+        {
+            JSInterface.OnGeolocationStatusReceived += HandleGeolocationStatus;
+        }
 
         void Start()
         {
@@ -54,6 +64,47 @@ namespace Assets.Scripts.Plane
             JSInterface.OnDirectionReceived -= UpdateDirection;       
         }
 
+
+        /// <summary>
+        /// GeoLocationAPIステータスコードを処理
+        /// </summary>
+        /// <param name="statusCode"></param>
+        void HandleGeolocationStatus(int statusCode)
+        {
+            switch (statusCode)
+            {
+                case 1:
+                    // アクセス拒否
+                    userObject.SetActive(false);
+                    break;
+
+                case 2:
+                    // 位置情報取得エラー
+                    if (errorNumber < ErrorCapacity)
+                    {
+                        errorNumber++;
+                        break;
+                    }
+                    userObject.SetActive(false);
+                    break;
+
+                case 3:
+                    // タイムアウト
+                    if (errorNumber < ErrorCapacity)
+                    {
+                        errorNumber++;
+                        break;
+                    }
+                    userObject.SetActive(false);
+                    break;
+
+                default:
+                    userObject.SetActive(false);
+                    break;
+            }
+        }
+
+
         /// <summary>
         /// 位置情報の更新をするメソッド
         /// </summary>
@@ -61,8 +112,14 @@ namespace Assets.Scripts.Plane
         /// <param name="longitude">経度</param>
         void UpdateLocation(double latitude, double longitude)
         {
+            errorNumber = 0;
+            if (userObject != null && !userObject.activeSelf)
+            {
+                userObject.SetActive(true);
+            }
+
             // 緯度経度をUnityのワールド座標に変換
-            Vector3 rawUnityPosition = roadNetworkBuilder.ConvertLatLonToUnityPosition(latitude, longitude);
+                Vector3 rawUnityPosition = roadNetworkBuilder.ConvertLatLonToUnityPosition(latitude, longitude);
 
             // 最も近い道路上の点（スナップする座標）を見つける
             // Vector3 snappedPosition = FindNearestPointOnRoadNetwork(rawUnityPosition);
