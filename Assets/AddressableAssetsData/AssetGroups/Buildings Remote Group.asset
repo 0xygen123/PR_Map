@@ -33,6 +33,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60f66ce996aad1e4cb87dbd94dd2a62b
+    m_Address: Assets/AddressablesBuildingData/b8/BuildingData_b8.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7f1b31f39fe6984eab2f06e7f7e2ef0
+    m_Address: Assets/AddressablesBuildingData/b8/8Goukan.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4b5177ae67d446d4982fd62b2cddea68, type: 2}
   m_SchemaSet:

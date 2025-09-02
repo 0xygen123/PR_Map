@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dea69d41f90c6ea4fa55c27c1d60c145, type: 3}
-  m_Name: AddressableAssetGroupSortSettings
+  m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
+  m_Name: BuildingData_b8
   m_EditorClassIdentifier: 
-  sortOrder:
-  - 9d80954f3eb1ca448aec9cfe02fba49f
-  - 8867dfc81204c354ba4a66a7133b2179
-  - 3b1f4f995ec6f304d83e22ef7ca3e20e
+  rooms:
+  - roomKey: b103
+  - roomKey: b102
+  - roomKey: b101
+  - roomKey: 102
+  - roomKey: 101
+  - roomKey: 103
+  entrances:
+  - entranceKey: 8_S
+    outdoorNodeId: 22
