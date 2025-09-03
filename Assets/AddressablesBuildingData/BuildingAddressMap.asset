@@ -12,4 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123a76c842c98274c9d2542bbf530a01, type: 3}
   m_Name: BuildingAddressMap
   m_EditorClassIdentifier: 
-  buildingsMappings: []
+  buildingsMappings:
+  - buildigkey: student_hall
+    gameObjectReference:
+      m_AssetGUID: 16598d07aa8410c47bec513afe624b13
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: cd3a245f2ab874249b79ab450b107799
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

@@ -208,9 +208,9 @@ namespace Assets.Scripts.Core
             // 違う建物を探索する場合のみ、古いインスタンスを解放する
             if (cachedBuildingInstance != null)
             {
-                Destroy(cachedBuildingInstance);
-                cachedBuildingInstance = null;
+                // Destroy(cachedBuildingInstance);
                 assetLoader.ReleaseGameObject(cachedBuildingInstance);
+                cachedBuildingInstance = null;
             }
             cachedPathResult = null;
             cachedBuildingKey = null;

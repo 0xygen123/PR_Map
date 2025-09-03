@@ -94,7 +94,7 @@ namespace Assets.Scripts.Core
                 return;
             }
 
-            string[] keys = buildingAndRoom.Split(',');
+            string[] keys = buildingAndRoom.Split('-');
             if (keys.Length == 1)
             {
                 OnPathfindingRequested2D?.Invoke(keys[0]);
