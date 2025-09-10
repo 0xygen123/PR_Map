@@ -39,6 +39,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 366c31cf2666af7469be15e987955b96
+    m_Address: Assets/AddressablesBuildingData/zuiko/zuiko.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cd3a245f2ab874249b79ab450b107799
     m_Address: Assets/AddressablesBuildingData/student_hall/BuildingData_student_hall.asset
     m_ReadOnly: 0
