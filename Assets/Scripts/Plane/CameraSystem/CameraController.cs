@@ -167,7 +167,7 @@ namespace Assets.Scripts.Plane
         #region Private Camera Control Methods
         void HandleMove()
         {
-            transform.position -= new Vector3(moveInput.x, moveInput.y, 0) * moveSpeed * mainCamera.orthographicSize;
+            transform.position -= new Vector3(moveInput.x, moveInput.y, 0) * moveSpeed * mainCamera.orthographicSize / 100;
             ClampCameraPosition();
         }
 
@@ -260,6 +260,17 @@ namespace Assets.Scripts.Plane
         #endregion
 
         #region Public Control Methods
+
+        /// <summary>
+        /// カメラ操作のパラメータを設定する
+        /// </summary>
+        /// <param name="settings"></param>
+        public void SetParameters(CameraSensitivityData settings)
+        {
+            moveSpeed = settings.moveSpeed2D;
+            scrollZoomSpeed = settings.scrollZoomSpeed2D;
+            pinchZoomSpeed = settings.pinchZoomSpeed2D;
+        }
 
         /// <summary>
         /// JSの'現在地'ボタン押下時に呼び出されるメソッド

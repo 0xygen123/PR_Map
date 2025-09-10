@@ -1,8 +1,6 @@
 using UnityEngine;
-using System.Runtime.InteropServices;
 using System;
 using System.Globalization;
-using System.Collections.Generic;
 
 namespace Assets.Scripts.Core
 {
@@ -16,6 +14,9 @@ namespace Assets.Scripts.Core
         {
             public const string OnUnityLoaded = "onUnityLoaded";
         }
+
+        // ユーザデバイス名受信時に発行されるイベント
+        public static event Action<string> OnDeviceNameReceived;
 
         // JSのGeoLocationのステータスコード受信時に発行されるイベント
         public static event Action<int> OnGeolocationStatusReceived;
@@ -42,6 +43,19 @@ namespace Assets.Scripts.Core
 
 
         #region JS -> CSharp
+
+        public void SetUserDevice(string deviceName)
+        {
+            if (string.IsNullOrEmpty(deviceName))
+            {
+                Debug.Log("[JSinterface] SetUserDevice: Received null or empty string.");
+                SendToJS(JSFunction.OnShowError, "[JSinterface] SetUserDevice: Received null or empty string.");
+                return;
+            }
+
+            OnDeviceNameReceived?.Invoke(deviceName);
+        }
+
 
         /// <summary>
         /// 2Dマップへカメラを切り替えるメソッド

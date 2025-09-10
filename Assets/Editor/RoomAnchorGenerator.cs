@@ -50,7 +50,7 @@ namespace Assets.Editor
             GUI.enabled = true;
         }
 
-        private void GenerateAnchors()
+        void GenerateAnchors()
         {
             // プレハブのパスを取得し、編集用にロード
             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(buildingPrefab);

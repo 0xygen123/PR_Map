@@ -27,19 +27,19 @@ namespace Assets.Scripts.Solid
         [Tooltip("ズームできるOrthographic Sizeの範囲（最小, 最大）")]
         [SerializeField] Vector2 orthographicSizeMinMax = new Vector2(3f, 50f);
 
-        private CameraControls cameraControls;
-        private Camera mainCamera;
-        private Vector2 rotationInput;
+        CameraControls cameraControls;
+        Camera mainCamera;
+        Vector2 rotationInput;
 
         // --- 状態を管理する変数 ---
-        private bool isRotating = false;
-        private bool isPinching = false;
-        private Vector2 touchPosition1;
-        private Vector2 touchPosition2;
-        private float previousPinchDistance;
+        bool isRotating = false;
+        bool isPinching = false;
+        Vector2 touchPosition1;
+        Vector2 touchPosition2;
+        float previousPinchDistance;
 
-        private float yaw = 0.0f;
-        private float pitch = 20.0f;
+        float yaw = 0.0f;
+        float pitch = 20.0f;
 
         void Awake()
         {
@@ -88,6 +88,17 @@ namespace Assets.Scripts.Solid
             Vector3 targetOffset = new Vector3(0, 0, -rotationRadius);
             transform.position = target.position + rotation * targetOffset;
             transform.LookAt(target.position);
+        }
+
+        /// <summary>
+        /// カメラ操作のパラメータを設定する
+        /// </summary>
+        /// <param name="settings"></param>
+        public void SetParameters(CameraSensitivityData settings)
+        {
+            rotationSpeed = settings.rotationSpeed;
+            zoomSpeed = settings.zoomSpeed;
+            pinchZoomSensitivity = settings.pinchZoomSensitivity;
         }
 
         /// <summary>

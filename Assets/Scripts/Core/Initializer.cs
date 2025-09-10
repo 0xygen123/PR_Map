@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using System.Collections;
 namespace Assets.Scripts.Core
 {
     public class Initializer

@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 public class DEVUIController : MonoBehaviour, @DEVUIControls.IDEVUIControllerActions
 {
     // 自動生成されたInputActionクラスのインスタンス
-    private @DEVUIControls devUIControls;
+    @DEVUIControls devUIControls;
 
     // デバッグUIのGameObject（Inspectorから設定）
     public GameObject debugUIPanel;
-    private bool isDebugUIEnabled = false;
+    bool isDebugUIEnabled = false;
 
     void Awake()
     {

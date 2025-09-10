@@ -1,22 +1,39 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Core
 {
     public class ViewController : MonoBehaviour
     {
         [Header("Cameras")]
-        [SerializeField] private GameObject planeCamera;
-        [SerializeField] private GameObject solidCamera;
+        [SerializeField] GameObject planeCamera;
+        [SerializeField] GameObject solidCamera;
 
         [Header("Targets")]
-        [SerializeField] private Transform solidCameraTarget;
+        [SerializeField] Transform solidCameraTarget;
         public Transform SolidCameraTarget => solidCameraTarget;
 
-        private GameObject _currentBuilding;
+        [Header("Camera Settings")]
+        [SerializeField] List<CameraSensitivityData> cameraSensitivityDatas;
+
+        GameObject _currentBuilding;
 
         void Awake()
         {
+            JSInterface.OnDeviceNameReceived += ApplyCameraSettings;
+        }
 
+        void ApplyCameraSettings(string deviceName)
+        {
+            var settings = cameraSensitivityDatas.Find(s => s.deviceName == deviceName);
+            if (settings == null)
+            {
+                Debug.Log($"No preset found for device: {deviceName}. user default");
+                return;
+            }
+
+            planeCamera.GetComponent<Plane.CameraController>().SetParameters(settings);
+            solidCamera.GetComponent<Solid.CameraController>().SetParameters(settings);
         }
 
         public void SwitchToPlaneView()

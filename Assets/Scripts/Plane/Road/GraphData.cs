@@ -1,6 +1,4 @@
-using UnityEngine;
 using System.Collections.Generic;
-using Newtonsoft.Json; // Newtonsoft.Jsonを使用
 
 namespace Assets.Scripts.Plane.Road
 {

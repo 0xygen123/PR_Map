@@ -1,56 +1,3 @@
-// using UnityEngine;
-// using System.Collections.Generic;
-// using Assets.Scripts.Plane.Road;
-
-// namespace Assets.Scripts.Core
-// {
-//     public class PathRenderer : MonoBehaviour
-//     {
-//         // RoadNetworkBuilderを改名したものを参照
-//         [SerializeField] RoadNetworkBuilder roadNetworkBuilder;
-//         [SerializeField] LineRenderer indoorPathRenderer;
-
-//         public void DrawPath(PathfindingManager.PathResult result)
-//         {
-//             ClearAllPaths();
-
-//             // 屋外経路の描画
-//             if (result.OutdoorPath != null && result.OutdoorPath.Count > 0)
-//             {
-//                 roadNetworkBuilder.VisualizePathByChangingMaterial(result.OutdoorPath);
-//             }
-
-//             // 屋内経路の描画
-//             if (result.IndoorPathCoordinates != null && result.IndoorPathCoordinates.Count > 1)
-//             {
-//                 if (indoorPathRenderer == null)
-//                 {
-//                     Debug.Log("IndoorPathRenderer がアタッチされていません");
-//                     return;
-//                 }
-
-//                 // LineRenderer
-//                 indoorPathRenderer.gameObject.SetActive(true);
-//                 indoorPathRenderer.positionCount = result.IndoorPathCoordinates.Count;
-//                 indoorPathRenderer.SetPositions(result.IndoorPathCoordinates.ToArray());
-//                 indoorPathRenderer.enabled = true;
-//             }
-//         }
-
-//         public void ClearAllPaths()
-//         {
-//             // 屋外経路の表示リセット
-//             roadNetworkBuilder.ResetAllRoadMaterials();
-//             // 屋内経路を非表示に
-//             if (indoorPathRenderer != null)
-//             {
-//                 indoorPathRenderer.positionCount = 0;
-//                 indoorPathRenderer.enabled = false;
-//             }
-//         }
-//     }
-// }
-
 using UnityEngine;
 using System.Collections.Generic; // Listを使うために必要
 using Assets.Scripts.Plane.Road;
@@ -61,13 +8,13 @@ namespace Assets.Scripts.Core
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class PathRenderer : MonoBehaviour
     {
-        [SerializeField] private RoadNetworkBuilder roadNetworkBuilder;
-        [SerializeField] private float pathWidth = 0.5f; // 経路の帯の幅
+        [SerializeField] RoadNetworkBuilder roadNetworkBuilder;
+        [SerializeField] float pathWidth = 0.5f; // 経路の帯の幅
 
-        private MeshFilter pathMeshFilter;
-        private MeshRenderer pathMeshRenderer;
+        MeshFilter pathMeshFilter;
+        MeshRenderer pathMeshRenderer;
 
-        private void Awake()
+        void Awake()
         {
             // アタッチされているコンポーネントを自動で取得
             pathMeshFilter = GetComponent<MeshFilter>();
@@ -113,7 +60,7 @@ namespace Assets.Scripts.Core
         /// <summary>
         /// 経路座標リストから帯状のメッシュを生成する
         /// </summary>
-        private void GeneratePathMesh(List<Vector3> pathPoints)
+        void GeneratePathMesh(List<Vector3> pathPoints)
         {
             if (pathPoints.Count < 2) return;
 
