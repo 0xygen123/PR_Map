@@ -67,4 +67,6 @@
         "*.sln": "*.csproj"
     },
     "dotnet.defaultSolution": "PR_Map_Clone.sln",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.tabCompletion": "off"
 }

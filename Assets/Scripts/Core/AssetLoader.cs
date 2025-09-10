@@ -38,6 +38,7 @@ namespace Assets.Scripts.Core
             {
                 instance.transform.localPosition = Vector3.zero;
             }
+            Debug.Log(instance);
             return instance;
         }
 

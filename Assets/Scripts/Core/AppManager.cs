@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+using System.ComponentModel;
 using System;
 using System.Threading.Tasks;
 
-using Assets.Scripts.Core;
 using Assets.Scripts.Plane;
 using Assets.Scripts.Solid;
 using Assets.Scripts.Plane.Road;
@@ -26,9 +25,11 @@ namespace Assets.Scripts.Core
         [Header("UI")]
         [SerializeField] GameObject loadingUI;
 
+
         PathfindingManager.PathResult cachedPathResult = null;
-        GameObject cachedBuildingInstance = null;
-        string cachedBuildingKey = null;
+        [ReadOnly(true)] [SerializeField] GameObject cachedBuildingInstance = null;
+        [ReadOnly(true)] [SerializeField] string cachedBuildingKey = null;
+        [ReadOnly(true)][SerializeField] BuildingData cachedBuildingData = null;
 
         void OnEnable()
         {
@@ -57,31 +58,39 @@ namespace Assets.Scripts.Core
 
             try
             {
-                if (buildingKey != cachedBuildingKey)
+                if (buildingKey != cachedBuildingKey || cachedBuildingInstance == null)
                 {
                     ClearCache();
+                    BuildingInfo entry = buildingAddressMap.GetBuildingByKey(buildingKey);
+                    if (entry == null)
+                    {
+                        Debug.LogError($"BuildingAddressMapにキー '{buildingKey}' が見つかりません。");
+                        return;
+                    }
+
+                    // 必要なアセットを並行してロード
+                    Task<BuildingData> dataLoadTask = assetLoader.LoadDataAsync(entry.DataReference);
+                    Task<GameObject> instanceLoadTask = assetLoader.LoadGameObjectAsync(entry.GameObjectReference, viewController.SolidCameraTarget);
+                    await Task.WhenAll(dataLoadTask, instanceLoadTask);
+
+                    BuildingData buildingData = dataLoadTask.Result;
+                    GameObject buildingInstance = instanceLoadTask.Result;
+
+                    if (buildingData == null || buildingInstance == null)
+                    {
+                        Debug.LogError($"アセットのロードに失敗しました。Key: {buildingKey}");
+                        return;
+                    }
+
+                    await Task.Yield();
+
+                    cachedBuildingInstance = buildingInstance;
+                    cachedBuildingKey = buildingKey;
+                    cachedBuildingData = buildingData;
                 }
-
-                BuildingInfo entry = buildingAddressMap.GetBuildingByKey(buildingKey);
-                if (entry == null)
+                else
                 {
-                    Debug.LogError($"BuildingAddressMapにキー '{buildingKey}' が見つかりません。");
-                    return;
-                }
-
-                // 必要なアセットを並行してロード
-                Task<BuildingData> dataLoadTask = assetLoader.LoadDataAsync(entry.DataReference);
-                Task<GameObject> instanceLoadTask = assetLoader.LoadGameObjectAsync(entry.GameObjectReference, viewController.SolidCameraTarget);
-
-                await Task.WhenAll(dataLoadTask, instanceLoadTask);
-
-                BuildingData buildingData = dataLoadTask.Result;
-                GameObject buildingInstance = instanceLoadTask.Result;
-
-                if (buildingData == null || buildingInstance == null)
-                {
-                    Debug.LogError($"アセットのロードに失敗しました。Key: {buildingKey}");
-                    return;
+                    cachedBuildingInstance.SetActive(true);
                 }
 
                 RuntimeNode startNode = userLocation.GetStartNodeForPathfinding();
@@ -91,29 +100,24 @@ namespace Assets.Scripts.Core
                     return;
                 }
 
-                NavMeshController navMeshController = buildingInstance.GetComponent<NavMeshController>();
+                NavMeshController navMeshController = cachedBuildingInstance.GetComponent<NavMeshController>();
                 PathfindingManager.PathResult optimalPath = await pathfindingManager.FindOptimalPathAsync(
                     startNode.nodeId,
-                    buildingData,
+                    cachedBuildingData,
                     roomKey,
-                    buildingInstance,
+                    cachedBuildingInstance,
                     navMeshController
                 );
 
                 if (optimalPath != null)
                 {
-                    // cache
-                    cachedPathResult = optimalPath;
-                    cachedBuildingKey = buildingKey;
-                    cachedBuildingInstance = buildingInstance;
-
                     pathRenderer.DrawPath(optimalPath);
-                    viewController.SwitchToSolidView(buildingInstance);
+                    viewController.SwitchToSolidView(cachedBuildingInstance);
                 }
                 else
                 {
 #if UNITY_EDITOR
-                    viewController.SwitchToSolidView(buildingInstance);
+                    viewController.SwitchToSolidView(cachedBuildingInstance);
                     Debug.LogWarning("有効な経路が見つかりませんでした。");
 #endif
 #if UNITY_WEBGL
@@ -179,7 +183,7 @@ namespace Assets.Scripts.Core
                 {
                     cachedPathResult = optimalPath;
                     cachedBuildingKey = buildingKey;
-
+                    
                     pathRenderer.DrawPath(optimalPath);
                     viewController.SwitchToPlaneView();
                 }
@@ -214,6 +218,7 @@ namespace Assets.Scripts.Core
             }
             cachedPathResult = null;
             cachedBuildingKey = null;
+            cachedBuildingData = null;
         }
 
         /// <summary>

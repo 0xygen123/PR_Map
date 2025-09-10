@@ -10,23 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
-  m_Name: Automatica
+  m_Name: DEVstudent_hall
   m_EditorClassIdentifier: 
   rooms:
-  - roomKey: main_studio
-  - roomKey: studio_1
-  - roomKey: studio_2
-  - roomKey: studio_3
-  - roomKey: stage_hall
-  - roomKey: conference_a
-  - roomKey: student_work
-  - roomKey: information_center
-  - roomKey: assembly_corner
-  - roomKey: sekisyo
-  - roomKey: 3b
-  - roomKey: 3a
-  - roomKey: 2b
-  - roomKey: 2a
-  - roomKey: 1b
   - roomKey: 1a
-  entrances: []
+  - roomKey: 1b
+  entrances:
+  - entranceKey: student_N
+    outdoorNodeId: 19
+  - entranceKey: student_S
+    outdoorNodeId: 12
