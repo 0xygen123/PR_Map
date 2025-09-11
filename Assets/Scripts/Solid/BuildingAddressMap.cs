@@ -34,6 +34,10 @@ public class BuildingAddressMap : ScriptableObject
         {
             return null;
         }
+        foreach (var e in buildingsMappings)
+        {
+            Debug.Log($"BuildingKey: {e.BuildingKey}");
+        }
         return buildingsMappings.FirstOrDefault(e => e.BuildingKey == key);
     }
 }

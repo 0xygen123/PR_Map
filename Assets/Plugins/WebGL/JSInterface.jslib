@@ -8,14 +8,13 @@ mergeInto(LibraryManager.library, {
     const jsMessage = UTF8ToString(message);
     
     // カスタムイベントを作成
-    // detailプロパティにUnityから渡されたデータを含める
     const event = new CustomEvent('unity-message', { 
       detail: { 
         functionName: jsFunctionName, 
         message: jsMessage 
       } 
     });
-
+    
     window.dispatchEvent(event);
   },
 

@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1cb4eab48ca9016489a2f7d20a48d40a
+    m_Address: Assets/AddressablesBuildingData/BuildingAddressMap.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2be77117e6535e349b60a2d4770a76a5
     m_Address: Assets/Scripts/Core/Debug/student_hall.prefab
     m_ReadOnly: 0
@@ -42,7 +48,14 @@ MonoBehaviour:
   - m_GUID: 366c31cf2666af7469be15e987955b96
     m_Address: Assets/AddressablesBuildingData/zuiko/zuiko.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb95305fce22ef542b505f573ac7d1e3
+    m_Address: Assets/AddressablesBuildingData/zuiko/Building Data_zuiko.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cd3a245f2ab874249b79ab450b107799
     m_Address: Assets/AddressablesBuildingData/student_hall/BuildingData_student_hall.asset

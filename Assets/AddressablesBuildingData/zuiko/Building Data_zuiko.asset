@@ -32,4 +32,6 @@ MonoBehaviour:
   - roomKey: ev_2f
   - roomKey: image_handling
   - roomKey: database
-  entrances: []
+  entrances:
+  - entranceKey: zuikou_E
+    outdoorNodeId: 89

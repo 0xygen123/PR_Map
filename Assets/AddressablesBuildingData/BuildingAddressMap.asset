@@ -26,3 +26,16 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - buildigkey: zuiko
+    gameObjectReference:
+      m_AssetGUID: 366c31cf2666af7469be15e987955b96
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: cb95305fce22ef542b505f573ac7d1e3
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

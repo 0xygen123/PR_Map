@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 3b1f4f995ec6f304d83e22ef7ca3e20e
   m_currentHash:
     serializedVersion: 2
-    Hash: 1684142e97bf6c07f30103eb579383e7
+    Hash: c505325c154b0d5c48735aef7e4565e3
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -59,8 +59,9 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
-  - {fileID: 11400000, guid: be60ea7ec17031544a0a3100ab62463e, type: 2}
   - {fileID: 11400000, guid: eceea0627e297194aa6735b002ce2062, type: 2}
+  - {fileID: 11400000, guid: 60fdd39725f10634e95963700c9ae594, type: 2}
+  - {fileID: 11400000, guid: be60ea7ec17031544a0a3100ab62463e, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
     m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
@@ -80,6 +81,20 @@ MonoBehaviour:
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: f498148817773a940bd0d157c78ba658
         m_Value: 
+    - m_InheritedParent: 
+      m_Id: 29f6339dcac68eb42a69a2a23c0e9c89
+      m_ProfileName: Release
+      m_Values:
+      - m_Id: 1c68090099b88784a9a44bcb916e5462
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 9a635313903f9ea43b713ac97f7835ad
+        m_Value: 'C:\Users\asato\Desktop\PR_Map_Clone\PR_Release\ServerData\[BuildTarget]'
+      - m_Id: a5fd70ea57cd38a4ba791acd90cb6998
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: ab4f0c752ca25b54bb1ef7afb538ffc3
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: f498148817773a940bd0d157c78ba658
+        m_Value: 'https://r-navi.math.ryukoku.ac.jp/ServerData/[BuildTarget]'
     - m_InheritedParent: 
       m_Id: 86c8d08d96591b44aae318033c73d6a9
       m_ProfileName: Vitre
@@ -154,4 +169,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 01e3e0c109bf2c940ad415e1a2f20844, type: 2}
   - {fileID: 11400000, guid: 5762cdfa0d3dd094d8fef45e52b563f8, type: 2}
   - {fileID: 11400000, guid: 9afe62c30f999f148a1b58e9003c45c6, type: 2}
-  m_ActiveProfileId: 9a104989d1f3b8641b0fb9d5da987dfe
+  m_ActiveProfileId: 29f6339dcac68eb42a69a2a23c0e9c89
