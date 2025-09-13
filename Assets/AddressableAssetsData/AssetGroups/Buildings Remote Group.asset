@@ -27,18 +27,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2be77117e6535e349b60a2d4770a76a5
-    m_Address: Assets/Scripts/Core/Debug/student_hall.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2dc0816f5f474514b838a04286e6349f
-    m_Address: Assets/Scripts/Core/Debug/student_hall.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 31321ba15b8f8eb4c954353edc038b1d
     m_Address: Packages/com.unity.render-pipelines.universal/Runtime/Materials/Lit.mat
     m_ReadOnly: 0
@@ -47,6 +35,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 366c31cf2666af7469be15e987955b96
     m_Address: Assets/AddressablesBuildingData/zuiko/zuiko.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 950c8c5e21dc32946a1251a2c355d1e4
+    m_Address: Assets/AddressablesBuildingData/chiko/chiko.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ea4e6178a8884944b3e3eeb68a06f22
+    m_Address: Assets/AddressablesBuildingData/chiko/tikoukan_ver1.1 Variant.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

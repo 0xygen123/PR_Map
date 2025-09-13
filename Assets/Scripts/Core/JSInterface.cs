@@ -184,9 +184,8 @@ namespace Assets.Scripts.Core
 #if UNITY_EDITOR
             Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
 #elif UNITY_WEBGL
-        CallJavaScriptFunction(functionName, message);
-#else
-        Debug.LogWarning($"[JSInterface] Not a WebGL build. Would call JS function '{functionName}' with message: '{message}'");
+            // CallJavaScriptFunction(functionName, message);
+            Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
 #endif
         }
 
@@ -200,9 +199,8 @@ namespace Assets.Scripts.Core
 #if UNITY_EDITOR
             Debug.Log($"[JSInterface] '{functionName}'");
 #elif UNITY_WEBGL
-        CallJavaScriptFunctionNoArg(functionName);
-#else
-        Debug.LogWarning($"[JSInterface] Not a WebGL build. Would call JS function '{functionName}' (no arguments).");
+            Debug.Log($"[JSInterface] '{functionName}'");
+            // CallJavaScriptFunctionNoArg(functionName);
 #endif
         }
     }

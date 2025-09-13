@@ -39,3 +39,16 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - buildigkey: chiko
+    gameObjectReference:
+      m_AssetGUID: 9ea4e6178a8884944b3e3eeb68a06f22
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 950c8c5e21dc32946a1251a2c355d1e4
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

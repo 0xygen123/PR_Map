@@ -73,6 +73,7 @@ namespace Assets.Editor
             int updatedDataCount = 0;
             foreach (string key in roomKeys)
             {
+                Debug.Log(key);
                 // 既に同じキーが存在しないかチェック
                 if (!buildingData.rooms.Any(r => r.roomKey == key))
                 {
