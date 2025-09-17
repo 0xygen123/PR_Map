@@ -1923,6 +1923,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 198067564886901274, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198067564886901274, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 614644789097886494, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 614644789097886494, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1632310003358924250, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1930,6 +1946,14 @@ PrefabInstance:
     - target: {fileID: 1632310003358924250, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706428956073380227, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706428956073380227, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1811659487821820158, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
       propertyPath: m_Layer
@@ -2002,6 +2026,14 @@ PrefabInstance:
     - target: {fileID: 3021877406390092462, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258374350272755886, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258374350272755886, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418961912620113643, guid: b0a9f6fc93a8a0144920061729e3f392, type: 3}
       propertyPath: m_Layer

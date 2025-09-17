@@ -6937,9 +6937,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 623180274092703106, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 623180274092703106, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026459432271325028, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026459432271325028, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1954952052072879169, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415675227078660248, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415675227078660248, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3254467233915355515, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6981,9 +7005,57 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3982431152188742412, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982431152188742412, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4534889889240386182, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4534889889240386182, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4778364973212286442, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778364973212286442, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778364973212286442, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791450853839737815, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791450853839737815, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798761915280147664, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798761915280147664, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7167361168762171668, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7167361168762171668, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7697333356480584968, guid: e105e753ca16b844a8595b092e8342bf, type: 3}
       propertyPath: m_Name
