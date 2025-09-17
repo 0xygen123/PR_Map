@@ -52,3 +52,29 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - buildigkey: library
+    gameObjectReference:
+      m_AssetGUID: 
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: d49e3bbe7f489454aaa30cf00e8ca380
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: seishi
+    gameObjectReference:
+      m_AssetGUID: 6d6226be8445bbc4e84412c2943fa025
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 169f49aa0c49f564ba646af1cdd94f1f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

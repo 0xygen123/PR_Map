@@ -165,9 +165,15 @@ public class PathfindingDebuggerWindow : EditorWindow
         Transform endTransform = referenceProvider.GetReference(currentRoom.roomKey);
 
         // Transformが見つからない場合はエラーログを出して終了
-        if (startTransform == null || endTransform == null)
+        if (startTransform == null)
         {
-            Debug.LogError($"Transform not found for Entrance '{currentEntrance.entranceKey}' or Room '{currentRoom.roomKey}'.");
+            Debug.LogError($"Transform not found for Entrance '{currentEntrance.entranceKey}'.");
+            pathRenderer.ClearAllPaths();
+            return;
+        }
+        if (endTransform == null)
+        {
+            Debug.LogError($"Transform not found for Room '{currentRoom.roomKey}'.");
             pathRenderer.ClearAllPaths();
             return;
         }

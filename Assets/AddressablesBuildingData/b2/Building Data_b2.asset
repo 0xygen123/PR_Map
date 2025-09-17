@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
+  m_Name: Building Data_b2
+  m_EditorClassIdentifier: 
+  rooms:
+  - roomKey: 104
+  - roomKey: 103
+  - roomKey: restnest
+  - roomKey: 108
+  - roomKey: 109
+  - roomKey: 110
+  - roomKey: 111
+  - roomKey: 112
+  - roomKey: 102
+  - roomKey: 101
+  - roomKey: 120
+  - roomKey: 119
+  - roomKey: 113
+  - roomKey: 114_1
+  - roomKey: 114_2
+  - roomKey: multifunction_2
+  - roomKey: multifunction_1
+  - roomKey: 201
+  - roomKey: 202
+  - roomKey: 203
+  - roomKey: 204
+  - roomKey: 205
+  - roomKey: 206
+  - roomKey: 207
+  - roomKey: 208
+  - roomKey: 210
+  - roomKey: 211
+  - roomKey: 212
+  - roomKey: 213
+  - roomKey: 214
+  - roomKey: 215
+  - roomKey: 216
+  - roomKey: 217
+  - roomKey: 218
+  - roomKey: 219
+  - roomKey: 220
+  - roomKey: 300_1
+  - roomKey: 300_2
+  - roomKey: 300_3
+  - roomKey: 301
+  - roomKey: 302
+  - roomKey: 303
+  - roomKey: 304
+  - roomKey: 305
+  - roomKey: 306
+  - roomKey: 307
+  - roomKey: 308
+  - roomKey: 309
+  - roomKey: 310
+  - roomKey: 311
+  - roomKey: 312
+  - roomKey: 313
+  - roomKey: 314
+  - roomKey: 315
+  - roomKey: 316
+  - roomKey: 317
+  - roomKey: 318
+  - roomKey: 319
+  - roomKey: 320
+  - roomKey: 321
+  - roomKey: 322
+  - roomKey: 323
+  - roomKey: 324
+  - roomKey: 325
+  - roomKey: 326
+  - roomKey: 327
+  - roomKey: 328
+  - roomKey: 329
+  - roomKey: 330
+  - roomKey: 331
+  - roomKey: 332
+  - roomKey: 333
+  - roomKey: 334
+  - roomKey: 335
+  - roomKey: 336
+  - roomKey: 337
+  - roomKey: 338
+  - roomKey: 339
+  - roomKey: 340
+  - roomKey: 341
+  - roomKey: 343
+  entrances: []

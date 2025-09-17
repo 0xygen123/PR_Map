@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: iOS
   m_EditorClassIdentifier: 
   deviceName: iOS
-  moveSpeed2D: 0.1
-  scrollZoomSpeed2D: 6
-  pinchZoomSpeed2D: 2
-  rotationSpeed: 20
-  zoomSpeed: 50
-  pinchZoomSensitivity: 0.05
+  moveSpeed2D: 0.05
+  scrollZoomSpeed2D: 3
+  pinchZoomSpeed2D: 1
+  rotationSpeed: 10
+  zoomSpeed: 25
+  pinchZoomSensitivity: 0.02
