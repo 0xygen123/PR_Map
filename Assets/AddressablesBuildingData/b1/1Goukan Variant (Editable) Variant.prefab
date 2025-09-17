@@ -14615,8 +14615,128 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1211044647493961140, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211044647493961140, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734451735755614893, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734451735755614893, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998693669621239565, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998693669621239565, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168250410437783764, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168250410437783764, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406952398260038318, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406952398260038318, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331110977599963529, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331110977599963529, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509377680198169824, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509377680198169824, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584714699880371413, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584714699880371413, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888735126916514910, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888735126916514910, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325868221656479304, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325868221656479304, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5390941690812168242, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5390941690812168242, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558468142583070008, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558468142583070008, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696774673845895440, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696774673845895440, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5861043207253068963, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5861043207253068963, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6589860562167930478, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443803720475356245, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8443803720475356245, guid: 4643c24e34a10204bb285dd0daf3f11e, type: 3}
+      propertyPath: m_RayTracingMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
