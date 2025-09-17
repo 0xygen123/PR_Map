@@ -10,118 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
-  m_Name: Automatica
+  m_Name: BuildingData_b1
   m_EditorClassIdentifier: 
   rooms:
-  - roomKey: main_studio
-  - roomKey: studio_1
-  - roomKey: studio_2
-  - roomKey: studio_3
-  - roomKey: stage_hall
-  - roomKey: conference_a
-  - roomKey: student_work
-  - roomKey: information_center
-  - roomKey: assembly_corner
-  - roomKey: sekisyo
-  - roomKey: 3b
-  - roomKey: 3a
-  - roomKey: 2b
-  - roomKey: 2a
-  - roomKey: 1b
-  - roomKey: 1a
-  - roomKey: b107
-  - roomKey: b106
-  - roomKey: b105
-  - roomKey: electro
-  - roomKey: pump_1
-  - roomKey: archive
-  - roomKey: cleaning_management
-  - roomKey: pump_2
-  - roomKey: storage
-  - roomKey: b101
-  - roomKey: b102
   - roomKey: b103
+  - roomKey: b102
+  - roomKey: b101
   - roomKey: b104
-  - roomKey: curator_course_practice
-  - roomKey: ev_b1
-  - roomKey: 101
-  - roomKey: 102
-  - roomKey: 108
-  - roomKey: 107
-  - roomKey: 106
-  - roomKey: 103
-  - roomKey: 104
-  - roomKey: 105
-  - roomKey: director_office
-  - roomKey: research_1
-  - roomKey: research_2
-  - roomKey: research_3
-  - roomKey: learning_space_consultation
-  - roomKey: seta_academic_affairs
-  - roomKey: ev_1f
-  - roomKey: 201
-  - roomKey: 202
-  - roomKey: 203
-  - roomKey: 217
-  - roomKey: 216
-  - roomKey: 215
-  - roomKey: 214
-  - roomKey: 213
-  - roomKey: 212
-  - roomKey: 218
-  - roomKey: 219
-  - roomKey: 211
-  - roomKey: 210
-  - roomKey: 209
-  - roomKey: 204
-  - roomKey: 205
-  - roomKey: 206
-  - roomKey: 207
-  - roomKey: 208
-  - roomKey: ev_2f
-  - roomKey: 325
-  - roomKey: 324
-  - roomKey: 323
-  - roomKey: 322
-  - roomKey: 321
-  - roomKey: storage_1_3f
-  - roomKey: experiment_preparation
-  - roomKey: 327
-  - roomKey: storage_2_3f
-  - roomKey: satoyama_research_center
-  - roomKey: 320
-  - roomKey: 319
-  - roomKey: science_technology_joint_research_center
-  - roomKey: international_social_research_center
-  - roomKey: storage_3_3f
-  - roomKey: 316
-  - roomKey: career_seminar
-  - roomKey: copy
-  - roomKey: storage_4_3f
-  - roomKey: 303
-  - roomKey: 304
-  - roomKey: 305
-  - roomKey: 306
-  - roomKey: 307
-  - roomKey: 308
-  - roomKey: 309
-  - roomKey: 310
-  - roomKey: 311
-  - roomKey: 312
-  - roomKey: 313
-  - roomKey: 314
-  - roomKey: ev_3f
+  - roomKey: b105
   - roomKey: b106a
   - roomKey: b106b
-  - roomKey: ev3_b1
+  - roomKey: 107
   - roomKey: career_center
   - roomKey: research_seta
   - roomKey: seta_office
   - roomKey: research_support
   - roomKey: academic_affairs_science_engineering
-  - roomKey: ev1_1f
-  - roomKey: ev2_1f
-  - roomKey: ev3_1f
   - roomKey: 202a
   - roomKey: 204a
   - roomKey: 206a
@@ -141,15 +45,16 @@ MonoBehaviour:
   - roomKey: 240
   - roomKey: 241
   - roomKey: 242
-  - roomKey: ev1_2f
-  - roomKey: ev2_2f
-  - roomKey: ev3_2f
   - roomKey: 301a
   - roomKey: 302a
   - roomKey: 303a
   - roomKey: 304a
   - roomKey: 305a
   - roomKey: 306a
+  - roomKey: 307
+  - roomKey: 308
+  - roomKey: 309
+  - roomKey: 310
   - roomKey: 311a
   - roomKey: 312a
   - roomKey: 313a
@@ -158,6 +63,8 @@ MonoBehaviour:
   - roomKey: 316a
   - roomKey: 317
   - roomKey: 318
+  - roomKey: 319
+  - roomKey: 320
   - roomKey: 330
   - roomKey: 331
   - roomKey: 332
@@ -170,9 +77,6 @@ MonoBehaviour:
   - roomKey: 339
   - roomKey: 340
   - roomKey: 342
-  - roomKey: ev1_3f
-  - roomKey: ev2_3f
-  - roomKey: ev3_3f
   - roomKey: 401a
   - roomKey: 402a
   - roomKey: 403a
@@ -200,9 +104,6 @@ MonoBehaviour:
   - roomKey: 440
   - roomKey: 441
   - roomKey: 443
-  - roomKey: ev1_4f
-  - roomKey: ev2_4f
-  - roomKey: ev3_4f
   - roomKey: 501a
   - roomKey: 502a
   - roomKey: 503a
@@ -227,9 +128,6 @@ MonoBehaviour:
   - roomKey: 540
   - roomKey: 541
   - roomKey: 542
-  - roomKey: ev1_5f
-  - roomKey: ev2_5f
-  - roomKey: ev3_5f
   - roomKey: 601
   - roomKey: 602
   - roomKey: 603
@@ -245,7 +143,4 @@ MonoBehaviour:
   - roomKey: 617
   - roomKey: 618
   - roomKey: 619
-  - roomKey: ev1_6f
-  - roomKey: ev2_6f
-  - roomKey: ev3_6f
   entrances: []
