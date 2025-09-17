@@ -15,8 +15,20 @@ MonoBehaviour:
   m_GroupName: Buildings Remote Group
   m_GUID: 3b1f4f995ec6f304d83e22ef7ca3e20e
   m_SerializeEntries:
+  - m_GUID: 162ece7b1c35d3e4a8f302b9eae972db
+    m_Address: Assets/AddressablesBuildingData/b2/Building Data_b2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16598d07aa8410c47bec513afe624b13
     m_Address: Assets/AddressablesBuildingData/student_hall/student_hall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 169f49aa0c49f564ba646af1cdd94f1f
+    m_Address: Assets/AddressablesBuildingData/seishi/Building Data_seishi.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -35,6 +47,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 366c31cf2666af7469be15e987955b96
     m_Address: Assets/AddressablesBuildingData/zuiko/zuiko.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d6226be8445bbc4e84412c2943fa025
+    m_Address: Assets/AddressablesBuildingData/seishi/seishi.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -59,6 +77,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cd3a245f2ab874249b79ab450b107799
     m_Address: Assets/AddressablesBuildingData/student_hall/BuildingData_student_hall.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d49e3bbe7f489454aaa30cf00e8ca380
+    m_Address: Assets/AddressablesBuildingData/library/Building Data_library.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

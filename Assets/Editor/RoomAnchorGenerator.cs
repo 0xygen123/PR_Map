@@ -3,11 +3,13 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Solid;
+using System;
 
 namespace Assets.Editor
 {
     public class RoomAnchorGenerator : EditorWindow
     {
+        [Header("Generate Anchor GameObject")]
         BuildingData buildingData;
         GameObject buildingPrefab;
         string roomKeysText = "";
@@ -68,6 +70,13 @@ namespace Assets.Editor
                     .Distinct()
                     .ToList();
 
+            // "DEV" レイヤーのIDを取得
+            int devLayer = LayerMask.NameToLayer("DEV");
+            if (devLayer == -1)
+            {
+                Debug.LogError("The layer 'DEV' does not exist. Please create it in your Unity project.");
+                return; // レイヤーが存在しない場合は処理を中断
+            }
 
             int createdObjectCount = 0;
             int updatedDataCount = 0;
@@ -85,6 +94,14 @@ namespace Assets.Editor
                 if (roomsParent.Find(key) == null)
                 {
                     GameObject newAnchor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    Collider collider = newAnchor.GetComponent<Collider>();
+                    if (collider != null)
+                    {
+                        DestroyImmediate(collider);
+                    }
+
+                    newAnchor.layer = devLayer;
+
                     Undo.RegisterCreatedObjectUndo(newAnchor, "Create Anchor Cube");
                     newAnchor.name = key;
                     newAnchor.transform.SetParent(roomsParent);
