@@ -51,6 +51,21 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f9894ebc2b5aba4898649d441152142
+    m_Address: Assets/AddressablesBuildingData/b1/BuildingData_b1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55132c27482c488499c505d70a64121e
+    m_Address: Assets/AddressablesBuildingData/b1/1Goukan Variant (Editable) Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5555a8a81e693934da21217b9f4dcc54
+    m_Address: Assets/AddressablesBuildingData/b3/3Goukan (Editable) Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6d6226be8445bbc4e84412c2943fa025
     m_Address: Assets/AddressablesBuildingData/seishi/seishi.prefab
     m_ReadOnly: 0
@@ -68,6 +83,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8619785ccb3dab44bc133e0da81ca27
+    m_Address: Assets/AddressablesBuildingData/b4/Building Data_b4.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cb95305fce22ef542b505f573ac7d1e3
     m_Address: Assets/AddressablesBuildingData/zuiko/Building Data_zuiko.asset
