@@ -39,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 208922df63253c345a4abcf66463a81d
+    m_Address: Assets/AddressablesBuildingData/experiment/Experimental_ver1.1 (Editable)
+      Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 31321ba15b8f8eb4c954353edc038b1d
     m_Address: Packages/com.unity.render-pipelines.universal/Runtime/Materials/Lit.mat
     m_ReadOnly: 0
@@ -93,6 +99,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85f6b9b34e321fe45bf5d9fb7ddcc99e
+    m_Address: Assets/AddressablesBuildingData/rec/REC_ver1.1 (Editable) Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 950c8c5e21dc32946a1251a2c355d1e4
     m_Address: Assets/AddressablesBuildingData/chiko/chiko.asset
     m_ReadOnly: 0
@@ -127,6 +138,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1e34b33642585440adb174a5613c0d5
+    m_Address: Assets/AddressablesBuildingData/b9/9goukan_ver1.1 (Editable) Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4b5177ae67d446d4982fd62b2cddea68, type: 2}
