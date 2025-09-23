@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
+  m_Name: Building Data_rec
+  m_EditorClassIdentifier: 
+  rooms:
+  - roomKey: b101
+  - roomKey: b102
+  - roomKey: b103
+  - roomKey: b104
+  - roomKey: b105
+  - roomKey: 101
+  - roomKey: restaurant
+  - roomKey: rec_advisor
+  - roomKey: intellectual_property_center_office
+  - roomKey: rec_center_director
+  - roomKey: rec_office_shiga
+  - roomKey: party
+  - roomKey: hall_small
+  - roomKey: 201
+  - roomKey: 202a
+  - roomKey: 202b
+  - roomKey: 203
+  - roomKey: 204
+  - roomKey: 205
+  - roomKey: 206
+  - roomKey: 207
+  - roomKey: 208
+  - roomKey: 209
+  - roomKey: 210
+  - roomKey: 211
+  - roomKey: 212
+  - roomKey: 301
+  - roomKey: 302
+  - roomKey: 303
+  - roomKey: 304
+  - roomKey: 305
+  - roomKey: 306
+  - roomKey: 307
+  - roomKey: 308
+  - roomKey: 309
+  - roomKey: 310
+  - roomKey: 311
+  - roomKey: 312
+  - roomKey: 313
+  - roomKey: 314
+  - roomKey: 315
+  - roomKey: 316
+  - roomKey: 317
+  entrances: []
