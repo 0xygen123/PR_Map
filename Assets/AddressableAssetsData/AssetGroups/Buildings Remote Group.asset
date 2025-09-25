@@ -63,8 +63,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4359988ffa8520049805a29cb07e7722
+    m_Address: Assets/AddressablesBuildingData/seiun/seiunkan_ver1.2 Variant (Editable)
+      Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4f9894ebc2b5aba4898649d441152142
     m_Address: Assets/AddressablesBuildingData/b1/BuildingData_b1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5219d8c8e07a2ce428c2ca93c91c85aa
+    m_Address: Assets/AddressablesBuildingData/hrc/HRC_ver1.1 (Editable) Variant.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -77,6 +89,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5555a8a81e693934da21217b9f4dcc54
     m_Address: Assets/AddressablesBuildingData/b3/3Goukan (Editable) Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b376c9e0cb48d145a7f78d9997d4e60
+    m_Address: Assets/AddressablesBuildingData/b4/4Goukan (Editable) Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b376c9e0cb48d145a7f78d9997d4e60
+    m_Address: Assets/AddressablesBuildingData/b4/4Goukan (Editable) Variant.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

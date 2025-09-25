@@ -5555,6 +5555,14 @@ PrefabInstance:
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: bb4ae8e7c4bf24c40995f11ef659398a, type: 2}
+    - target: {fileID: 397152659938367338, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 397152659938367338, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 899834636429931784, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -5565,6 +5573,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2307052745484110591, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325686732801308582, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325686732801308582, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_RayTracingMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2742513611304537829, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
@@ -5615,9 +5631,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3846906811611896041, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846906811611896041, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5110989838102983344, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205873954537473272, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205873954537473272, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5546174764638084996, guid: 8af29000ff7b97f42bfaa7bd9e4af658, type: 3}
       propertyPath: m_Name
