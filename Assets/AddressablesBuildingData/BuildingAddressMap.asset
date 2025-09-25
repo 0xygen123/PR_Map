@@ -13,28 +13,54 @@ MonoBehaviour:
   m_Name: BuildingAddressMap
   m_EditorClassIdentifier: 
   buildingsMappings:
-  - buildigkey: student_hall
+  - buildigkey: b1
     gameObjectReference:
-      m_AssetGUID: 16598d07aa8410c47bec513afe624b13
+      m_AssetGUID: 55132c27482c488499c505d70a64121e
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     dataReference:
-      m_AssetGUID: cd3a245f2ab874249b79ab450b107799
+      m_AssetGUID: 4f9894ebc2b5aba4898649d441152142
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-  - buildigkey: zuiko
+  - buildigkey: b3
     gameObjectReference:
-      m_AssetGUID: 366c31cf2666af7469be15e987955b96
+      m_AssetGUID: 5555a8a81e693934da21217b9f4dcc54
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     dataReference:
-      m_AssetGUID: cb95305fce22ef542b505f573ac7d1e3
+      m_AssetGUID: 162be759ca04985418eb700b074dd7af
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: b4
+    gameObjectReference:
+      m_AssetGUID: 5b376c9e0cb48d145a7f78d9997d4e60
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: c8619785ccb3dab44bc133e0da81ca27
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: b7
+    gameObjectReference:
+      m_AssetGUID: 6d963f371a2292244b8c8434b2f26b07
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 166eda86fc53b2d47b3ad2b752794142
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
@@ -74,6 +100,32 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     dataReference:
       m_AssetGUID: 169f49aa0c49f564ba646af1cdd94f1f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: student_hall
+    gameObjectReference:
+      m_AssetGUID: 16598d07aa8410c47bec513afe624b13
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: cd3a245f2ab874249b79ab450b107799
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: zuiko
+    gameObjectReference:
+      m_AssetGUID: 366c31cf2666af7469be15e987955b96
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: cb95305fce22ef542b505f573ac7d1e3
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

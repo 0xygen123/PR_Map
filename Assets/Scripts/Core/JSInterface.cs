@@ -7,6 +7,8 @@ namespace Assets.Scripts.Core
 {
     public class JSInterface : MonoBehaviour
     {
+        float zoomLevel = 70;
+
         public static class JSFunction
         {
             public const string OnShowError = "showError";
@@ -15,6 +17,9 @@ namespace Assets.Scripts.Core
         {
             public const string OnUnityLoaded = "onUnityLoaded";
         }
+
+        // ユーザにフェードインするイベント
+        public static event Action<float> OnUserFollow;
 
         // ユーザデバイス名受信時に発行されるイベント
         public static event Action<string> OnDeviceNameReceived;
@@ -55,6 +60,14 @@ namespace Assets.Scripts.Core
             }
 
             OnDeviceNameReceived?.Invoke(deviceName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void FollowToUser()
+        {
+            OnUserFollow?.Invoke(zoomLevel);
         }
 
 

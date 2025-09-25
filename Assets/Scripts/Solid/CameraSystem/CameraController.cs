@@ -23,7 +23,7 @@ namespace Assets.Scripts.Solid
         [Tooltip("マウスホイールでのズーム速度")]
         [SerializeField] float zoomSpeed = 20.0f;
         [Tooltip("ピンチ操作でのズーム感度")]
-        [SerializeField] float pinchZoomSensitivity = 0.05f; // ピンチの感度を調整できます
+        [SerializeField] float pinchZoomSensitivity = 0.05f;
         [Tooltip("ズームできるOrthographic Sizeの範囲（最小, 最大）")]
         [SerializeField] Vector2 orthographicSizeMinMax = new Vector2(3f, 50f);
 

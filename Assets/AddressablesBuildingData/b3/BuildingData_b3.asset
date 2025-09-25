@@ -12,5 +12,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
   m_Name: BuildingData_b3
   m_EditorClassIdentifier: 
-  rooms: []
-  entrances: []
+  rooms:
+  - roomKey: b107
+  - roomKey: b106
+  - roomKey: b105
+  - roomKey: b101
+  - roomKey: b102
+  - roomKey: b103
+  - roomKey: b104
+  - roomKey: curator_course_practice
+  - roomKey: 101
+  - roomKey: 102
+  - roomKey: 108
+  - roomKey: 107
+  - roomKey: 106
+  - roomKey: 103
+  - roomKey: 104
+  - roomKey: 105
+  - roomKey: learning_space_consultation
+  - roomKey: seta_academic_affairs
+  - roomKey: 201
+  - roomKey: 202
+  - roomKey: 203
+  - roomKey: 217
+  - roomKey: 216
+  - roomKey: 215
+  - roomKey: 214
+  - roomKey: 213
+  - roomKey: 212
+  - roomKey: 218
+  - roomKey: 219
+  - roomKey: 211
+  - roomKey: 210
+  - roomKey: 209
+  - roomKey: 204
+  - roomKey: 205
+  - roomKey: 206
+  - roomKey: 207
+  - roomKey: 208
+  - roomKey: 325
+  - roomKey: 324
+  - roomKey: 323
+  - roomKey: 322
+  - roomKey: 321
+  - roomKey: experiment_preparation
+  - roomKey: 327
+  - roomKey: satoyama_research_center
+  - roomKey: 320
+  - roomKey: 319
+  - roomKey: science_technology_joint_research_center
+  - roomKey: international_social_research_center
+  - roomKey: 316
+  - roomKey: career_seminar
+  - roomKey: 303
+  - roomKey: 304
+  - roomKey: 305
+  - roomKey: 306
+  - roomKey: 307
+  - roomKey: 308
+  - roomKey: 309
+  - roomKey: 310
+  - roomKey: 311
+  - roomKey: 312
+  - roomKey: 313
+  - roomKey: 314
+  entrances:
+  - entranceKey: 3_S
+    outdoorNodeId: 51
+  - entranceKey: 3_M_S
+    outdoorNodeId: 62
+  - entranceKey: 3_M_N
+    outdoorNodeId: 63

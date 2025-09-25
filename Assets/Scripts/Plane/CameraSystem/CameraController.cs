@@ -59,6 +59,8 @@ namespace Assets.Scripts.Plane
             mainCamera = GetComponent<Camera>();
             cameraControls = new CameraControls();
             cameraControls.CameraControl.SetCallbacks(this);
+
+            JSInterface.OnUserFollow += CenterOnUserAndFollow;
         }
 
         void Start()
