@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
-  m_Name: Building Data_b4
+  m_Name: BuildingData_b4
   m_EditorClassIdentifier: 
   rooms:
   - roomKey: health_care_center
