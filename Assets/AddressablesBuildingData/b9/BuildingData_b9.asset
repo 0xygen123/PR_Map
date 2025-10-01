@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a437f5248b4c3fb49a933e1e73ba966e, type: 3}
+  m_Name: BuildingData_b9
+  m_EditorClassIdentifier: 
+  rooms:
+  - roomKey: 101
+  - roomKey: 102
+  - roomKey: 103
+  - roomKey: 104
+  - roomKey: 105
+  - roomKey: 101_lab
+  - roomKey: 102_lab
+  - roomKey: 106
+  - roomKey: cookery_practical
+  - roomKey: food_processing_practical
+  - roomKey: feeding_management_practical
+  - roomKey: assistant
+  - roomKey: subject_office_food_nutrition
+  - roomKey: leading_food_nutrition
+  - roomKey: base_lab_1
+  - roomKey: base_lab_2
+  - roomKey: open_kitchen
+  - roomKey: nutrition_education_practical
+  - roomKey: clinical_nutrition_training
+  - roomKey: base_lab_3
+  - roomKey: faculty_of_agriculture_educational_affairs
+  - roomKey: base_lab_4
+  - roomKey: animal_rearing
+  - roomKey: 201
+  - roomKey: 202
+  - roomKey: 203
+  - roomKey: 204
+  - roomKey: 205
+  - roomKey: 201_lab
+  - roomKey: 202_lab
+  - roomKey: 206
+  - roomKey: 207
+  - roomKey: 208
+  - roomKey: 209
+  - roomKey: 210
+  - roomKey: 203_lab
+  - roomKey: 204_lab
+  - roomKey: 211
+  - roomKey: 212
+  - roomKey: 213
+  - roomKey: 214
+  - roomKey: 215
+  - roomKey: 205_lab
+  - roomKey: 206_lab
+  - roomKey: 216
+  - roomKey: 217
+  - roomKey: 218
+  - roomKey: 219
+  - roomKey: 220
+  - roomKey: 207_lab
+  - roomKey: 208_lab
+  - roomKey: analysis_equipment
+  - roomKey: low_temperature
+  - roomKey: subject_office_life_science
+  - roomKey: 301
+  - roomKey: 302
+  - roomKey: 303
+  - roomKey: 304
+  - roomKey: 305
+  - roomKey: 301_lab
+  - roomKey: 302_lab
+  - roomKey: 306
+  - roomKey: 307
+  - roomKey: 308
+  - roomKey: 309
+  - roomKey: 310
+  - roomKey: 303_lab
+  - roomKey: 304_lab
+  - roomKey: 311
+  - roomKey: 312
+  - roomKey: 313
+  - roomKey: 314
+  - roomKey: 315
+  - roomKey: 305_lab
+  - roomKey: 306_lab
+  - roomKey: 316
+  - roomKey: 317
+  - roomKey: 318
+  - roomKey: 319
+  - roomKey: 320
+  - roomKey: 307_lab
+  - roomKey: 308_lab
+  - roomKey: p2_lab
+  - roomKey: human_metabolism_lab
+  - roomKey: interaction
+  - roomKey: plant_cultivation
+  - roomKey: microscope
+  - roomKey: subject_office_resourceo_rganisms
+  - roomKey: meeting_3f_1
+  - roomKey: assistant_3f
+  entrances: []
