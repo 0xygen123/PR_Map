@@ -16,4 +16,6 @@ MonoBehaviour:
   - roomKey: convenience
   - roomKey: cafeteria
   - roomKey: cafeteria_lounge
-  entrances: []
+  entrances:
+  - entranceKey: seiun_S
+    outdoorNodeId: 16

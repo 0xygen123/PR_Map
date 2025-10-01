@@ -39,4 +39,6 @@ MonoBehaviour:
   - roomKey: 206
   - roomKey: 207
   - roomKey: 208
-  entrances: []
+  entrances:
+  - entranceKey: hrc_N
+    outdoorNodeId: 88
