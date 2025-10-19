@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: BuildingData_gym
   m_EditorClassIdentifier: 
   rooms: []
-  entrances: []
+  entrances:
+  - entranceKey: gym_N
+    outdoorNodeId: 39

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4256642852758014281}
   - component: {fileID: 1230155012620173340}
   - component: {fileID: 2459994092427199873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: libB2F.floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 701636175938614741}
   - component: {fileID: 345437182885382670}
   - component: {fileID: 4640456298759314316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: libB1F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 6078461004888658416}
   - component: {fileID: 606112442591165687}
   - component: {fileID: 4093266341337613440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: libB2F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 6548434556016939289}
   - component: {fileID: 1012838286649953020}
   - component: {fileID: 4083140134351139696}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lib2F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 7032221638267610408}
   - component: {fileID: 4375983224111876700}
   - component: {fileID: 1775647206976785140}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: libB1F.floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 2940670184643551007}
   - component: {fileID: 6122788510550014023}
   - component: {fileID: 914718416836639655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lib1F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,6 +576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: miti-library_ver1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 082e35a877c062e4594be576d1ca7d5a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -676,7 +680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c63f9937fadb8244696eeb970c0d2c77, type: 3}
       propertyPath: m_Name
-      value: library_ver1.1
+      value: library
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c63f9937fadb8244696eeb970c0d2c77, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

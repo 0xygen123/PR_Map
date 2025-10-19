@@ -869,7 +869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 555932124092535397}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Entrances
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2767,6 +2767,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 837442789935036286, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1187347314705928050, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -2779,6 +2783,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: b6
       objectReference: {fileID: 0}
+    - target: {fileID: 1559477436497880158, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2319165997746584842, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -2786,6 +2794,26 @@ PrefabInstance:
     - target: {fileID: 2319165997746584842, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
       propertyPath: m_RayTracingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3502674930699317727, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675795266620253417, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923941017958815774, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5067642991274367635, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5512413326152153503, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6234357750789056699, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
       propertyPath: m_CastShadows
@@ -2802,6 +2830,10 @@ PrefabInstance:
     - target: {fileID: 6239477792314518080, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
       propertyPath: m_RayTracingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263523589773446196, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6869579551857883595, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
       propertyPath: m_CastShadows
@@ -2866,6 +2898,10 @@ PrefabInstance:
     - target: {fileID: 9030057474067385123, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
       propertyPath: m_RayTracingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9035264057084043822, guid: 57d1cb9f7fa30544ea52f295c73f63ae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

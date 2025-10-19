@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5966565559886764402}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 806964782008977066}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Entrances
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2419,6 +2419,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 853016045159665021, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687887802258070325, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4017872230981448768, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
       propertyPath: m_LocalPosition.x
       value: 217.25693
@@ -2463,6 +2471,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hrc
       objectReference: {fileID: 0}
+    - target: {fileID: 4362168541294522106, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5515368251748086990, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -2494,6 +2506,18 @@ PrefabInstance:
     - target: {fileID: 7138802975449160363, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
       propertyPath: m_RayTracingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346450159201769218, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568497570259193329, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8837009431945851014, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9023471783722976248, guid: 06c94e06e320bb04fb019cf3cb640306, type: 3}
       propertyPath: m_CastShadows

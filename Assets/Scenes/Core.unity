@@ -155,7 +155,6 @@ MonoBehaviour:
   userLocation: {fileID: 534069251}
   buildingAddressMap: {fileID: 11400000, guid: 1cb4eab48ca9016489a2f7d20a48d40a, type: 2}
   loadingUI: {fileID: 1744416198}
-  no3DMappingUI: {fileID: 0}
   cachedBuildingInstance: {fileID: 0}
   cachedBuildingKey: 
   cachedBuildingData: {fileID: 0}
@@ -576,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06d56fd41c8bcf44a7ede3b022ac7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getLocationUI: {fileID: 0}
 --- !u!4 &183535098
 Transform:
   m_ObjectHideFlags: 0
@@ -814,6 +814,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0aa326334f6d23447b60e79342138afb, type: 2}
   - {fileID: 11400000, guid: 1572c3b19d99e1546ae74939e1c283a7, type: 2}
   - {fileID: 11400000, guid: 24cef9c8a3437b144a02a3175f204565, type: 2}
+  canvas: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1557,7 @@ MonoBehaviour:
   roadNetwork: {fileID: 683442318}
   userLocation: {fileID: 534069251}
   IndoorCostMultiple: 3
+  no3DMappingUI: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

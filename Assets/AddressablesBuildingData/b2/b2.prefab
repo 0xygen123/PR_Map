@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7329995493802932206}
   - component: {fileID: 3377135480325264100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 6255301066161000253}
   - component: {fileID: 2103299479895103798}
   - component: {fileID: 701886865171846082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2g1F.062
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 7842300985908795676}
   - component: {fileID: 3018665892523365004}
   - component: {fileID: 1341241880180360459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2g1F.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,7 +990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 371139316234795831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2GoukanS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1547,7 +1547,7 @@ GameObject:
   - component: {fileID: 198670357025101257}
   - component: {fileID: 4576613579308085514}
   - component: {fileID: 6851558165525913925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2g2F.056
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2269,7 +2269,7 @@ GameObject:
   - component: {fileID: 6620154026465263013}
   - component: {fileID: 466328911101107796}
   - component: {fileID: 7987281893579138743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: b2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3826,7 +3826,7 @@ GameObject:
   - component: {fileID: 5231820600549612717}
   - component: {fileID: 619499406752140069}
   - component: {fileID: 8176808519753968082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2g3F.077
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5152,7 +5152,7 @@ GameObject:
   - component: {fileID: 4778667047269079775}
   - component: {fileID: 9069756105236225749}
   - component: {fileID: 3583351532667947169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2g2F.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6207,7 +6207,7 @@ GameObject:
   - component: {fileID: 8516701220150210637}
   - component: {fileID: 7740863422192815498}
   - component: {fileID: 213904111483701061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: umetate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6589,7 +6589,7 @@ GameObject:
   - component: {fileID: 7527689923169929360}
   - component: {fileID: 6906377296720676661}
   - component: {fileID: 8663965563083240447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2GRender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6682,7 +6682,7 @@ GameObject:
   - component: {fileID: 1820040349441110814}
   - component: {fileID: 3778212374214425719}
   - component: {fileID: 348953390522637863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2g3F
   m_TagString: Untagged
   m_Icon: {fileID: 0}

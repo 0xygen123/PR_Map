@@ -101,6 +101,32 @@ namespace Assets.Scripts.Core
                 }
 
                 NavMeshController navMeshController = cachedBuildingInstance.GetComponent<NavMeshController>();
+
+                // 3D案内に対応していない建物（NavMeshController が無い場合）は
+                // 3D経路探索を中止して、可能なら2D経路を計算して表示し
+                if (navMeshController == null)
+                {
+#if UNITY_WEBGL
+                    JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, "この建物は3D経路探索に対応していません。可能であれば2D経路を表示します。オブジェクトのみ表示される場合があります。");
+#endif
+                    // 2D経路を計算して表示する
+                    PathfindingManager.PathResult planePath = pathfindingManager.FindOptimalPath(startNode.nodeId, cachedBuildingData);
+                    if (planePath != null)
+                    {
+                        cachedPathResult = planePath;
+                        cachedBuildingKey = buildingKey;
+
+                        pathRenderer.DrawPath(planePath);
+                        viewController.SwitchToSolidView(cachedBuildingInstance);
+                    }
+                    else
+                    {
+#if UNITY_WEBGL
+                        JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, "有効な経路が見つかりません");
+#endif
+                    }  return;
+                }
+
                 PathfindingManager.PathResult optimalPath = null;
                 optimalPath = await pathfindingManager.FindOptimalPathAsync(
                     startNode.nodeId,
