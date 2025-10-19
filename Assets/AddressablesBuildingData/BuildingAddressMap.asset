@@ -26,6 +26,19 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - buildigkey: b2
+    gameObjectReference:
+      m_AssetGUID: efb9297c3257f11429122452383b16b6
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 162ece7b1c35d3e4a8f302b9eae972db
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - buildigkey: b3
     gameObjectReference:
       m_AssetGUID: 5555a8a81e693934da21217b9f4dcc54
@@ -48,6 +61,32 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     dataReference:
       m_AssetGUID: c8619785ccb3dab44bc133e0da81ca27
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: b5
+    gameObjectReference:
+      m_AssetGUID: 2577efeaf324a6849a3216ed7e35aee5
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: c5e5ad6b7ffe6df48a48f2abf8b23503
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: b6
+    gameObjectReference:
+      m_AssetGUID: a97d90aa94babb449afba48b64662746
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 9881f101b9ff41f4ca2abdc21eae17ad
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
@@ -78,6 +117,45 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - buildigkey: experiment
+    gameObjectReference:
+      m_AssetGUID: 208922df63253c345a4abcf66463a81d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: e05bcd913013a654da4f79f945d1777d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: gym
+    gameObjectReference:
+      m_AssetGUID: d1d85a6210199154a98f74f38eb1881b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: a991d9710467c3043887dc76fb7196ca
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: hrc
+    gameObjectReference:
+      m_AssetGUID: 5219d8c8e07a2ce428c2ca93c91c85aa
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 8357c5d2797975044b3f93323983090b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - buildigkey: library
     gameObjectReference:
       m_AssetGUID: 
@@ -91,6 +169,19 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - buildigkey: rec
+    gameObjectReference:
+      m_AssetGUID: 85f6b9b34e321fe45bf5d9fb7ddcc99e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: f1250810d0b052b4abad4fa1bc53236a
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - buildigkey: seishi
     gameObjectReference:
       m_AssetGUID: 6d6226be8445bbc4e84412c2943fa025
@@ -100,6 +191,19 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     dataReference:
       m_AssetGUID: 169f49aa0c49f564ba646af1cdd94f1f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - buildigkey: deiun
+    gameObjectReference:
+      m_AssetGUID: 4359988ffa8520049805a29cb07e7722
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    dataReference:
+      m_AssetGUID: 25a695c01081fa04cad36d883fa242c8
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

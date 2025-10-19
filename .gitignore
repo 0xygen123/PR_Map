@@ -86,3 +86,6 @@ crashlytics-build.properties
 
 # VScode
 */.vscode/
+
+# Font
+Assets/NotoSansJP-Regular_SDF.asset

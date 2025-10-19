@@ -7,6 +7,10 @@ namespace Assets.Scripts.Core
 {
     public class JSInterface : MonoBehaviour
     {
+
+        [SerializeField] GameObject getLocationUI;
+
+
         float zoomLevel = 70;
 
         public static class JSFunction
@@ -104,6 +108,7 @@ namespace Assets.Scripts.Core
             {
                 // パース成功。int型のデータをイベントで通知
                 OnGeolocationStatusReceived?.Invoke(state);
+                getLocationUI.SetActive(false);
             }
             else
             {
@@ -187,6 +192,14 @@ namespace Assets.Scripts.Core
 
 
         #region CSharp -> JS
+
+        public static void NotifyUnityLoaded()
+        {
+#if UNITY_WEBGL
+            SendToJS(JSFunctionNoArg.OnUnityLoaded);
+#endif
+        }
+
         /// <summary>
         /// JavaScriptの特定の関数を呼び出す
         /// </summary>
@@ -201,7 +214,6 @@ namespace Assets.Scripts.Core
             Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
 #endif
         }
-
 
         /// <summary>
         /// JavaScriptの特定の関数を引数なしで呼び出す

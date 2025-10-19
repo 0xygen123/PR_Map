@@ -103,4 +103,6 @@ MonoBehaviour:
   - roomKey: subject_office_resourceo_rganisms
   - roomKey: meeting_3f_1
   - roomKey: assistant_3f
-  entrances: []
+  entrances:
+  - entranceKey: 9_W
+    outdoorNodeId: 1

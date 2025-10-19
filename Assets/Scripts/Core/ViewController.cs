@@ -16,6 +16,9 @@ namespace Assets.Scripts.Core
         [Header("Camera Settings")]
         [SerializeField] List<CameraSensitivityData> cameraSensitivityDatas;
 
+        [Header("Canvas")]
+        [SerializeField] GameObject canvas;
+
         GameObject _currentBuilding;
 
         void Awake()
@@ -41,6 +44,7 @@ namespace Assets.Scripts.Core
             if (_currentBuilding != null) _currentBuilding.SetActive(false);
             planeCamera.SetActive(true);
             solidCamera.SetActive(false);
+            canvas.SetActive(false);
         }
 
         public void SwitchToSolidView(GameObject buildingInstance)
@@ -49,6 +53,7 @@ namespace Assets.Scripts.Core
             if (_currentBuilding != null) _currentBuilding.SetActive(true);
             planeCamera.SetActive(false);
             solidCamera.SetActive(true);
+            canvas.SetActive(true);
         }
     }
 }
