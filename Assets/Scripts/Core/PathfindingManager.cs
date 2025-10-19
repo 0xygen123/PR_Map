@@ -15,6 +15,9 @@ namespace Assets.Scripts.Core
         [SerializeField] UserLocationManager userLocation;
         [SerializeField] int IndoorCostMultiple = 3;
 
+        [Header("UI")]
+        [SerializeField] TMPro.TMP_Text no3DMappingUI;
+
         // 計算結果を格納するクラス
         public class PathResult
         {
@@ -30,6 +33,7 @@ namespace Assets.Scripts.Core
         //public async Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
         public Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
         {
+            no3DMappingUI.enabled = false;
             RoomInfo destinationRoom = buildingData.GetRoomByKey(roomKey);
             if (destinationRoom == null)
             {
@@ -38,7 +42,7 @@ namespace Assets.Scripts.Core
             }
             if (navMeshController == null)
             {
-                Debug.LogError("NavMeshControllerが見つかりません");
+                no3DMappingUI.enabled = true;
                 return null;
             }
             if (buildingInstance == null)

@@ -21,4 +21,6 @@ MonoBehaviour:
   - roomKey: 202
   - roomKey: 203
   - roomKey: 204
-  entrances: []
+  entrances:
+  - entranceKey: 5_N
+    outdoorNodeId: 5

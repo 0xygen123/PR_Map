@@ -101,7 +101,8 @@ namespace Assets.Scripts.Core
                 }
 
                 NavMeshController navMeshController = cachedBuildingInstance.GetComponent<NavMeshController>();
-                PathfindingManager.PathResult optimalPath = await pathfindingManager.FindOptimalPathAsync(
+                PathfindingManager.PathResult optimalPath = null;
+                optimalPath = await pathfindingManager.FindOptimalPathAsync(
                     startNode.nodeId,
                     cachedBuildingData,
                     roomKey,

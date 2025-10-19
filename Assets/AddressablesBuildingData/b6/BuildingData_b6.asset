@@ -42,4 +42,8 @@ MonoBehaviour:
   - roomKey: 210
   - roomKey: 212
   - roomKey: seta_campus_promotion
-  entrances: []
+  entrances:
+  - entranceKey: 6_N
+    outdoorNodeId: 28
+  - entranceKey: 6_S
+    outdoorNodeId: 32

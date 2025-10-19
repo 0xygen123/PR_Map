@@ -1539,10 +1539,47 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1096334357827158484, guid: 25e16210e646d094ea7f8bef3a292967, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5703462014842057294}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 323457520409009006, guid: 25e16210e646d094ea7f8bef3a292967, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4764168502126331596}
+    - targetCorrespondingSourceObject: {fileID: 323457520409009006, guid: 25e16210e646d094ea7f8bef3a292967, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3411765751742196077}
   m_SourcePrefab: {fileID: 100100000, guid: 25e16210e646d094ea7f8bef3a292967, type: 3}
 --- !u!4 &3571307003439312015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1096334357827158484, guid: 25e16210e646d094ea7f8bef3a292967, type: 3}
   m_PrefabInstance: {fileID: 4519681662019530075}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4234514363512075829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 323457520409009006, guid: 25e16210e646d094ea7f8bef3a292967, type: 3}
+  m_PrefabInstance: {fileID: 4519681662019530075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-4764168502126331596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234514363512075829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5c97ec74a9d8e47800954d7683dfa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3411765751742196077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234514363512075829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d386b14deb0f9742a750e643b53e070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entrancesParent: {fileID: 0}
+  roomsParent: {fileID: 0}

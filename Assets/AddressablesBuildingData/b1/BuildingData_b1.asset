@@ -149,7 +149,7 @@ MonoBehaviour:
   - entranceKey: 1_M_E_N
     outdoorNodeId: 41
   - entranceKey: 1_M_E_S
-    outdoorNodeId: 45
+    outdoorNodeId: 42
   - entranceKey: 1_M_W_N
     outdoorNodeId: 45
   - entranceKey: 1_M_W_S
