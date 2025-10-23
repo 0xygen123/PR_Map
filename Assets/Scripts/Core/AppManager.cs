@@ -70,7 +70,9 @@ namespace Assets.Scripts.Core
 
                     // 必要なアセットを並行してロード
                     Task<BuildingData> dataLoadTask = assetLoader.LoadDataAsync(entry.DataReference);
-                    Task<GameObject> instanceLoadTask = assetLoader.LoadGameObjectAsync(entry.GameObjectReference, viewController.SolidCameraTarget);
+                    // viewController.SolidCameraTarget を直接参照すると viewController が null の時に NRE になるため、事前に参照を取得
+                    var solidCameraTarget = viewController.SolidCameraTarget;
+                    Task<GameObject> instanceLoadTask = assetLoader.LoadGameObjectAsync(entry.GameObjectReference, solidCameraTarget);
                     await Task.WhenAll(dataLoadTask, instanceLoadTask);
 
                     BuildingData buildingData = dataLoadTask.Result;
@@ -79,6 +81,12 @@ namespace Assets.Scripts.Core
                     if (buildingData == null || buildingInstance == null)
                     {
                         Debug.LogError($"アセットのロードに失敗しました。Key: {buildingKey}");
+                        return;
+                    }
+
+                    if (buildingInstance == null)
+                    {
+                        Debug.LogError($"ロード済みの建物インスタンスが null です。Key: {buildingKey}");
                         return;
                     }
 
@@ -155,7 +163,7 @@ namespace Assets.Scripts.Core
             catch (Exception e)
             {
 #if UNITY_EDITOR
-                Debug.LogError($"経路探索プロセスでエラーが発生しました: {e.Message}");
+                Debug.LogError($"経路探索プロセスでエラーが発生しました: {e.Message}\n{e.StackTrace}");
 #endif
 #if UNITY_WEBGL
                 JSInterface.SendToJS(JSInterface.JSFunction.OnShowError, $"経路探索プロセスでエラーが発生しました: {e.Message}");
