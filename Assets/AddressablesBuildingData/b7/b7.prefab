@@ -4137,7 +4137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4066933802103237075}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Entrances
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5287,7 +5287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100888978540218857}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7380,7 +7380,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 963091618771722142, guid: cf668ba39cee8ed4cb02f6d4e764d7cf, type: 3}
       propertyPath: m_Name
-      value: 7Goukan (Editable) Variant
+      value: b7
+      objectReference: {fileID: 0}
+    - target: {fileID: 963091618771722142, guid: cf668ba39cee8ed4cb02f6d4e764d7cf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438991327161946271, guid: cf668ba39cee8ed4cb02f6d4e764d7cf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2219324526021462158, guid: cf668ba39cee8ed4cb02f6d4e764d7cf, type: 3}
       propertyPath: m_CastShadows
@@ -7417,6 +7425,10 @@ PrefabInstance:
     - target: {fileID: 6229083647105353073, guid: cf668ba39cee8ed4cb02f6d4e764d7cf, type: 3}
       propertyPath: m_RayTracingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621331195116818962, guid: cf668ba39cee8ed4cb02f6d4e764d7cf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7252140094647262070, guid: cf668ba39cee8ed4cb02f6d4e764d7cf, type: 3}
       propertyPath: m_CastShadows

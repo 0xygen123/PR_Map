@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1873665765193984337}
   - component: {fileID: 6177155235814414778}
   - component: {fileID: 2269647776046920255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tikoukan2F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 2418768644887148163}
   - component: {fileID: 5638268508544920564}
   - component: {fileID: 6351341714291451850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tikoukanBF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 7482027764954571712}
   - component: {fileID: 5613458444234792698}
   - component: {fileID: 8760267941691138454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tikoukan1F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4054644738304802692}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Entrances
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1552,6 +1552,10 @@ PrefabInstance:
     - target: {fileID: 406446254461161251, guid: a06712aa378f2784e9e757f1bf753cd1, type: 3}
       propertyPath: m_Name
       value: chiko
+      objectReference: {fileID: 0}
+    - target: {fileID: 406446254461161251, guid: a06712aa378f2784e9e757f1bf753cd1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1074157008082589081, guid: a06712aa378f2784e9e757f1bf753cd1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1599,7 +1603,7 @@ PrefabInstance:
       objectReference: {fileID: 23800000, guid: b3eb0d16b4ea3de4b9ccab04e089bbab, type: 2}
     - target: {fileID: 2941440961524531082, guid: a06712aa378f2784e9e757f1bf753cd1, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3734298315452079711, guid: a06712aa378f2784e9e757f1bf753cd1, type: 3}
       propertyPath: m_Enabled

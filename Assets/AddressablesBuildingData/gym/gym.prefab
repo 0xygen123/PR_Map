@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4302866293479770164}
   - component: {fileID: 8778264862848447445}
   - component: {fileID: 2481082667592027140}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GymBF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7654171745624864646}
   - component: {fileID: 3365680076297155401}
   - component: {fileID: 7276415907770576064}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gym1F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2f54e35302792d74ba95ddfe4478b30b, type: 3}
       propertyPath: m_Name
-      value: Gym_ver1.1
+      value: gym
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f54e35302792d74ba95ddfe4478b30b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -302,6 +306,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 897ad23a6a985334eadaf7bcaedf0a20, type: 3}
       propertyPath: m_Name
       value: miti-Gym_ver1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 897ad23a6a985334eadaf7bcaedf0a20, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

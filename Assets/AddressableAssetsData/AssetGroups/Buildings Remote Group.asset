@@ -117,6 +117,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60f66ce996aad1e4cb87dbd94dd2a62b
+    m_Address: Assets/AddressablesBuildingData/b8/BuildingData_b8.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6183e8cb7da31bf4ebc493541e57ddcd
     m_Address: Assets/AddressablesBuildingData/b9/BuildingData_b9.asset
     m_ReadOnly: 0
@@ -178,7 +184,7 @@ MonoBehaviour:
     - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c5e5ad6b7ffe6df48a48f2abf8b23503
-    m_Address: Assets/AddressablesBuildingData/b5/Building Data_b5.asset
+    m_Address: Assets/AddressablesBuildingData/b5/BuildingData_b5.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -215,6 +221,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d49e3bbe7f489454aaa30cf00e8ca380
     m_Address: Assets/AddressablesBuildingData/library/BuildingData_library.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7f1b31f39fe6984eab2f06e7f7e2ef0
+    m_Address: Assets/AddressablesBuildingData/b8/b8.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default

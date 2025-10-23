@@ -29,4 +29,6 @@ MonoBehaviour:
   - roomKey: 204
   - roomKey: 205
   - roomKey: 206
-  entrances: []
+  entrances:
+  - entranceKey: ex1_N
+    outdoorNodeId: 49
