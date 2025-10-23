@@ -9,6 +9,8 @@ namespace Assets.Scripts.Core
     {
 
         [SerializeField] GameObject getLocationUI;
+        static bool isInitialized = false;
+        static bool isFirstLocationReceived = false;
 
 
         float zoomLevel = 70;
@@ -108,7 +110,6 @@ namespace Assets.Scripts.Core
             {
                 // パース成功。int型のデータをイベントで通知
                 OnGeolocationStatusReceived?.Invoke(state);
-                getLocationUI.SetActive(false);
             }
             else
             {
@@ -158,6 +159,12 @@ namespace Assets.Scripts.Core
             )
             {
                 OnLocationReceived?.Invoke(latitude, longitude);
+                if (!isFirstLocationReceived)
+                {
+                    getLocationUI.SetActive(false);
+                    FollowToUser();
+                    isFirstLocationReceived = true;
+                }
             }
             else
             {
@@ -197,6 +204,7 @@ namespace Assets.Scripts.Core
         {
 #if UNITY_WEBGL
             SendToJS(JSFunctionNoArg.OnUnityLoaded);
+            isInitialized = true;
 #endif
         }
 

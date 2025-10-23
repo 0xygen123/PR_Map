@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Windows
   m_EditorClassIdentifier: 
   deviceName: Windows
-  moveSpeed2D: 0.5
+  moveSpeed2D: 0.3
   scrollZoomSpeed2D: 6
   pinchZoomSpeed2D: 2
-  rotationSpeed: 20
+  rotationSpeed: 10
   zoomSpeed: 50
   pinchZoomSensitivity: 0.05
