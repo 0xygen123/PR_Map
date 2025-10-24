@@ -3,17 +3,8 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using Assets.Scripts.Solid;
-using Assets.Scripts.Core; // PathRenderer を見つけるために必要
+using Assets.Scripts.Core;
 
-/// <summary>
-/// 3D経路探索をデバッグするためのUnityエディタ拡張ウィンドウです。
-/// このスクリプトは "Assets" フォルダ内の "Editor" フォルダに配置する必要があります。
-/// 使用方法：
-/// 1. Unityメニューの [Window] > [Pathfinding Debugger] からウィンドウを開きます。
-/// 2. "Building Data" にテストしたい建物の BuildingData アセットをアサインします。
-/// 3. "Building Instance" にシーン内に配置されている建物のGameObjectをアサインします。
-/// 4. ウィンドウ内のボタンをクリックして、経路を一つずつテストします。
-/// </summary>
 public class PathfindingDebuggerWindow : EditorWindow
 {
     // --- Private Fields ---

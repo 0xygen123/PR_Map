@@ -53,6 +53,7 @@ namespace Assets.Scripts.Plane
         // --- カメラの状態を管理する変数 ---
         [SerializeField] bool isFollowingUser = false; // ユーザー追従モードか
         bool isForceMoving = false;   // 強制移動中か
+    Coroutine moveCoroutine = null;
 
         void Awake()
         {
@@ -81,7 +82,11 @@ namespace Assets.Scripts.Plane
         void Update()
         {
             // 強制移動中は、ユーザーの操作を一切受け付けない
-            if (isForceMoving) return;
+            if (isForceMoving)
+            {
+                // ここは毎フレームログを出さない（無駄にコンソールが汚れるため）
+                return;
+            }
 
             // ユーザーがカメラを操作したら、追従モードを解除する
             // if ((isPrimaryContact || isPinching) && isFollowingUser)
@@ -118,13 +123,18 @@ namespace Assets.Scripts.Plane
         #region ICampusMapActions Interface Implementations
         public void OnMove(InputAction.CallbackContext context)
         {
-            if (isForceMoving) return; // 強制移動中は無効
+            if (isForceMoving)
+            {
+                return;
+            }
             moveInput = context.ReadValue<Vector2>();
         }
 
         public void OnPrimaryContact(InputAction.CallbackContext context)
         {
-            if (isForceMoving) return; // 強制移動中は無効
+            if (isForceMoving){
+                return;
+            }
             isPrimaryContact = context.ReadValueAsButton();
         }
 
@@ -164,6 +174,44 @@ namespace Assets.Scripts.Plane
 
         public void OnPoint(InputAction.CallbackContext context) { }
         public void OnSecondaryPoint(InputAction.CallbackContext context) { }
+        #endregion
+
+        #region Application lifecycle handlers (helpful for WebGL resume)
+        // WebGL のページ遷移などでアプリが一時停止→復帰する際にコルーチンが中断され
+        // isForceMoving が true のまま残る事があるため、復帰時に状態をリセットします。
+        void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus)
+            {
+                // 復帰時に未完の移動を強制終了してフラグをリセット
+                if (moveCoroutine != null)
+                {
+                    try { StopCoroutine(moveCoroutine); } catch { }
+                    moveCoroutine = null;
+                }
+                isForceMoving = false;
+                isPinching = false;
+                isPrimaryContact = false;
+                Debug.Log("[CameraController] Application regained focus - reset force move and input flags");
+            }
+        }
+
+        void OnApplicationPause(bool paused)
+        {
+            if (!paused)
+            {
+                // pause 解除時の復帰処理は OnApplicationFocus と同様に行う
+                if (moveCoroutine != null)
+                {
+                    try { StopCoroutine(moveCoroutine); } catch { }
+                    moveCoroutine = null;
+                }
+                isForceMoving = false;
+                isPinching = false;
+                isPrimaryContact = false;
+                Debug.Log("[CameraController] Application resumed from pause - reset force move and input flags");
+            }
+        }
         #endregion
 
         #region Private Camera Control Methods
@@ -252,11 +300,6 @@ namespace Assets.Scripts.Plane
                 float newScale = userBaseScale * normalizedZoom;
                 float clampedScale = Mathf.Lerp(minUserScale, maxUserScale, Mathf.Clamp01(normalizedZoom));
                 userObject.transform.localScale = new Vector3(clampedScale, clampedScale, userObject.transform.localScale.z);
-                // --- デバッグ用のログ出力 ---
-                //     Debug.Log($"カメラ倍率: {mainCamera.orthographicSize}, " +
-                //         $"計算スケール: {newScale}, " +
-                //         $"最終スケール (クランプ後): {clampedScale}"
-                //     );
             }
         }
         #endregion
@@ -320,8 +363,8 @@ namespace Assets.Scripts.Plane
             if (!isForceMoving)
             {
                 Vector3 targetPos = new Vector3(userObject.transform.position.x, userObject.transform.position.y, transform.position.z);
-                // 以前のコルーチンの代わりに、新しいコルーチンを呼び出す
-                StartCoroutine(MoveLikeGoogleEarthCoroutine(targetPos, targetZoom, true));
+                // MoveLikeGoogleEarthCoroutine の参照を保持しておく
+                moveCoroutine = StartCoroutine(MoveLikeGoogleEarthCoroutine(targetPos, targetZoom, true));
             }
         }
 
@@ -347,6 +390,7 @@ namespace Assets.Scripts.Plane
         IEnumerator MoveLikeGoogleEarthCoroutine(Vector3 targetPosition, float targetZoom, bool followAfterMove)
         {
             isForceMoving = true;
+            Debug.Log("[CameraController] Entering force move");
             isFollowingUser = false;
 
             float startZoom = mainCamera.orthographicSize;
@@ -398,6 +442,9 @@ namespace Assets.Scripts.Plane
             ClampCameraPosition();
 
             isForceMoving = false;
+            Debug.Log("[CameraController] Exiting force move");
+            // コルーチン参照をクリア
+            moveCoroutine = null;
             if (followAfterMove)
             {
                 isFollowingUser = true;

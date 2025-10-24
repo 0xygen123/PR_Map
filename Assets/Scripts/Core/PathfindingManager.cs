@@ -33,24 +33,39 @@ namespace Assets.Scripts.Core
         //public async Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
         public Task<PathResult> FindOptimalPathAsync(int startNodeId, BuildingData buildingData, string roomKey, GameObject buildingInstance, NavMeshController navMeshController)
         {
-            no3DMappingUI.enabled = false;
+            // 目的の部屋情報を取得
             RoomInfo destinationRoom = buildingData.GetRoomByKey(roomKey);
             if (destinationRoom == null)
             {
                 Debug.LogError($"部屋が見つかりません: {roomKey}");
                 return null;
             }
-            if (navMeshController == null)
-            {
-                no3DMappingUI.enabled = true;
-                return null;
-            }
+
+            // buildingInstance が渡されていない場合は 3D 表示を要求していないと見なす
+            // → このケースでは "3D未対応" UI を表示しない
             if (buildingInstance == null)
             {
 #if UNITY_EDITOR
                 Debug.LogError("建物オブジェクトのインスタンス化に失敗しました");
 #endif
                 return null;
+            }
+
+            // buildingInstance が存在する（＝3D案内が要求されている）が NavMeshController が無ければ
+            // 3D案内未対応として no3DMappingUI を表示する
+            if (navMeshController == null)
+            {
+                if (no3DMappingUI != null)
+                {
+                    no3DMappingUI.enabled = true;
+                }
+                return null;
+            }
+
+            // NavMeshController がある場合は 3D 表示のエラーメッセージを非表示にする
+            if (no3DMappingUI != null)
+            {
+                no3DMappingUI.enabled = false;
             }
 
             // 建物インスタンスから参照管理コンポーネントを取得
@@ -139,7 +154,10 @@ namespace Assets.Scripts.Core
             foreach (EntranceInfo entrance in buildingData.entrances)
             {
                 List<RuntimeNode> outdoorPathNodes = AStarFinder.FindPath(roadNetwork, startNodeId, entrance.outdoorNodeId);
-                if (outdoorPathNodes == null || outdoorPathNodes.Count == 0) { continue; }
+                if (outdoorPathNodes == null || outdoorPathNodes.Count == 0)
+                {
+                    continue;
+                }
 
                 float outdoorCost = (float)outdoorPathNodes.Last().gCost;
 

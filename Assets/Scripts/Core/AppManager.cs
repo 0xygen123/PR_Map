@@ -151,8 +151,8 @@ namespace Assets.Scripts.Core
                 }
                 else
                 {
-#if UNITY_EDITOR
                     viewController.SwitchToSolidView(cachedBuildingInstance);
+#if UNITY_EDITOR
                     Debug.LogWarning("有効な経路が見つかりませんでした。");
 #endif
 #if UNITY_WEBGL

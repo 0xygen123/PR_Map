@@ -6,7 +6,7 @@ using System.Linq;
 using Assets.Scripts.Core;
 using Assets.Scripts.Plane.Road;
 
-#if UNITY_EDITOR || UNITY_WEBGL
+
 public class DEVLocationGenerator : MonoBehaviour
 {
     [Header("Dependencies")]
@@ -24,7 +24,7 @@ public class DEVLocationGenerator : MonoBehaviour
     // 実行中のコルーチンを保存する変数
     Coroutine _generatorCoroutine;
     RuntimeNode currentNode;
-
+#if UNITY_EDITOR
     public void SwitchSimulateLocation()
     {
         executeGeneration = !executeGeneration;
@@ -99,5 +99,5 @@ public class DEVLocationGenerator : MonoBehaviour
             yield return new WaitForSeconds(updateInterval);
         }
     }
-}
 #endif
+}

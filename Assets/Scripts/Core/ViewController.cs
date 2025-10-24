@@ -44,7 +44,11 @@ namespace Assets.Scripts.Core
             if (_currentBuilding != null) _currentBuilding.SetActive(false);
             planeCamera.SetActive(true);
             solidCamera.SetActive(false);
-            canvas.SetActive(false);
+            if (canvas != null)
+            {
+                canvas.SetActive(false);
+            }
+            Debug.Log("Switched to Plane View");
         }
 
         public void SwitchToSolidView(GameObject buildingInstance)
@@ -53,7 +57,11 @@ namespace Assets.Scripts.Core
             if (_currentBuilding != null) _currentBuilding.SetActive(true);
             planeCamera.SetActive(false);
             solidCamera.SetActive(true);
-            canvas.SetActive(true);
+            if (canvas != null)
+            {
+                canvas.SetActive(true);
+            }
+            Debug.Log("Switched to Solid View");
         }
     }
 }

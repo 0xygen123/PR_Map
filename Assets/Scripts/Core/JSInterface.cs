@@ -162,7 +162,7 @@ namespace Assets.Scripts.Core
                 if (!isFirstLocationReceived)
                 {
                     getLocationUI.SetActive(false);
-                    FollowToUser();
+                    // FollowToUser();
                     isFirstLocationReceived = true;
                 }
             }
@@ -218,7 +218,7 @@ namespace Assets.Scripts.Core
 #if UNITY_EDITOR
             Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
 #elif UNITY_WEBGL
-            // CallJavaScriptFunction(functionName, message);
+            CallJavaScriptFunction(functionName, message);
             Debug.Log($"[JSInterface] '{functionName}', message'{message}'");
 #endif
         }
@@ -233,7 +233,7 @@ namespace Assets.Scripts.Core
             Debug.Log($"[JSInterface] '{functionName}'");
 #elif UNITY_WEBGL
             Debug.Log($"[JSInterface] '{functionName}'");
-            // CallJavaScriptFunctionNoArg(functionName);
+            CallJavaScriptFunctionNoArg(functionName);
 #endif
         }
     }
